@@ -1,0 +1,26 @@
+package br.com.dantonio.constantesSistema;
+
+/**
+ * @author dantonio
+ *
+ */
+public class Constantes {
+	
+	/* ID's Empresas */
+	public static int TODAS_EMPRESAS = 0;
+	public static int CAERN = 1;
+	public static int CASAL = 2;
+	public static int CAERR = 3;
+	public static int SAAE_JUA = 4;
+	public static int CAEMA = 5;
+	public static int DESO = 6;
+	public static int CAERD = 6;
+	public static int MANAM = 7;
+	public static int SOROCABA = 8;
+	public static int CAGEPA = 9;
+	public static int OPERACAO_PROCENGE = 10;
+	
+	/* Links externos */
+	public static String LINK_EXTERNO_JENKINS = "http://www.consensotec.com.br:8130/";
+	public static String LINK_EXTERNO_FTP = "ftp://ftp.consensotec.com.br/";
+}
