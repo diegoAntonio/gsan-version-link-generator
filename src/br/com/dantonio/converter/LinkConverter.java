@@ -1,4 +1,4 @@
-package br.com.dantonio.Converter;
+package br.com.dantonio.converter;
 
 import br.com.dantonio.constantesSistema.Constantes;
 
@@ -8,12 +8,16 @@ public class LinkConverter {
 		StringBuilder linkExterno = new StringBuilder();
 		
 		linkExterno.append(Constantes.LINK_EXTERNO_JENKINS);
-		
+		 
 		if(linkInternoJenkins != null && !linkInternoJenkins.trim().isEmpty()) {
 			int posicao1 = linkInternoJenkins.indexOf("job");
 			int tamanhoTotal = linkInternoJenkins.length();
-			
-			linkExterno.append(linkInternoJenkins.substring(posicao1, tamanhoTotal));
+
+			if(posicao1 > -1) {
+				linkExterno.append(linkInternoJenkins.substring(posicao1, tamanhoTotal));
+			} else {
+				linkExterno.append("Link Incorreto ou formatado errado!");
+			}
 		}
 		
 		return linkExterno.toString();

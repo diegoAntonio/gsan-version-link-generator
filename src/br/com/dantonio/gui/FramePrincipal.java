@@ -1,257 +1,141 @@
 package br.com.dantonio.gui;
 
-import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.HeadlessException;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
+import br.com.dantonio.converter.LinkConverter;
 import br.com.dantonio.email.EmailsClientes;
 
-public class FramePrincipal extends Frame {
-	/**
-	 * 
-	 */
+public class FramePrincipal extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel pnPanel0;
-	private JLabel lbLabel0;
-	private JTextField tfText0;
-	private JButton btBut0;
-	private JTextArea taArea0;
-	private JLabel lbLabel4;
-	private JLabel lbLabel5;
-	private JTextArea taArea1;
-	private JComboBox<EmailsClientes> cmbCombo0;
-	private JButton btBut1;
+	private JPanel contentPane;
+	private JTextField textLinkJenkins;
+	private JTextField textLinkFTP;
+	private JTextField resultadoLinkVersao;
+	private JTextArea textAreaEmailClientes;
+	private ButtonGroup grupoBotao;
 
-	public FramePrincipal() throws HeadlessException {
-		super();
-		this.iniciarComponentes();
+	/**
+	 * Create the frame.
+	 */
+	public FramePrincipal() {
+		setTitle("GSAN Link/Email Generator");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 560, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(null);
+		setContentPane(contentPane);
+		createFrame();
 	}
 
-	public FramePrincipal(GraphicsConfiguration gc) {
-		super(gc);
-		this.iniciarComponentes();
-	}
+	private void createFrame() {
+		textLinkJenkins = new JTextField();
+		textLinkJenkins.setBounds(150, 11, 350, 20);
+		contentPane.add(textLinkJenkins);
+		textLinkJenkins.setColumns(10);
 
-	public FramePrincipal(String title, GraphicsConfiguration gc) {
-		super(title, gc);
-		this.iniciarComponentes();
-	}
+		textLinkFTP = new JTextField();
+		textLinkFTP.setBounds(140, 60, 350, 20);
+		textLinkFTP.setColumns(10);
+		textLinkFTP.setEditable(Boolean.FALSE);
+		contentPane.add(textLinkFTP);
 
-	public FramePrincipal(String title) throws HeadlessException {
-		super(title);
-		this.iniciarComponentes();
+		JLabel lblLinkInternoJenkins = new JLabel("Link Interno Jenkins");
+		lblLinkInternoJenkins.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblLinkInternoJenkins.setBounds(21, 11, 600, 14);
+		contentPane.add(lblLinkInternoJenkins);
+
+		JLabel lblLinkInternoFTP = new JLabel("Link Interno FTP:");
+		lblLinkInternoFTP.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblLinkInternoFTP.setBounds(21, 60, 200, 14);
+		lblLinkInternoFTP.setEnabled(Boolean.FALSE);
+		contentPane.add(lblLinkInternoFTP);
+		
+		JButton lblBotaoGerarLink = new JButton();
+		lblBotaoGerarLink.setAction(null);
+		lblBotaoGerarLink.setBounds(20, 90, 200, 23);
+		lblBotaoGerarLink.setText("Gerar Link da Versão:");
+		lblBotaoGerarLink.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblBotaoGerarLink.addActionListener(new BotaoListener());
+		contentPane.add(lblBotaoGerarLink);
+		
+		JLabel lblresultadoLinkVersao = new JLabel("Resultado Link Versão:");
+		lblresultadoLinkVersao.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblresultadoLinkVersao.setBounds(20, 130, 200, 23);
+		contentPane.add(lblresultadoLinkVersao);
+		
+		resultadoLinkVersao = new JTextField();
+		resultadoLinkVersao.setBounds(20,150,450,23);
+		contentPane.add(resultadoLinkVersao);
+		
+		JLabel lblEmailClientes = new JLabel("Escolha o(s) Cliente(s): ");
+		lblEmailClientes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEmailClientes.setBounds(20,190,200,23);
+		contentPane.add(lblEmailClientes);
+		
+		int i = 210;
+		grupoBotao = new ButtonGroup();
+		for (EmailsClientes emailCliente : EmailsClientes.values()) {
+			JRadioButton botao = new JRadioButton();
+			botao.setText(emailCliente.getNomeEmpresa());
+			botao.setActionCommand(String.valueOf(emailCliente.getIdCliente()));
+			botao.setBounds(21,i,150,10);
+			botao.addActionListener(new RadioButtonHandler());
+			contentPane.add(botao);
+			grupoBotao.add(botao);
+			i+=20;
+		}
+		
+		textAreaEmailClientes = new JTextArea();
+		textAreaEmailClientes.setBounds(21,i,500,80);
+		textAreaEmailClientes.setLineWrap(Boolean.TRUE);
+		contentPane.add(textAreaEmailClientes);
 	}
 	
-	private void iniciarComponentes() {
-		this.setSize(800, 600);
-		
-		pnPanel0 = new JPanel();
-		GridBagLayout gbPanel0 = new GridBagLayout();
-		GridBagConstraints gbcPanel0 = new GridBagConstraints();
-		pnPanel0.setLayout( gbPanel0 );
+	
+	private class RadioButtonHandler implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Integer valorEscolhido = new Integer(e.getActionCommand());
+			textAreaEmailClientes.setText("");
+			String emails =  "";
+			
+			switch(valorEscolhido.intValue()) {
+				case 0:
+					emails = EmailsClientes.getEmailClientesGsan();
+				break;
 
-		lbLabel0 = new JLabel( "Link Jenkins"  );
-		gbcPanel0.gridx = 0;
-		gbcPanel0.gridy = 1;
-		gbcPanel0.gridwidth = 1;
-		gbcPanel0.gridheight = 2;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 1;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( lbLabel0, gbcPanel0 );
-		pnPanel0.add( lbLabel0 );
+				default:
+					emails = EmailsClientes.getEmailClientes(valorEscolhido.intValue());
+				break;
+			}
+			
+			textAreaEmailClientes.setText(emails);
+		}
 
-		tfText0 = new JTextField( );
-		gbcPanel0.gridx = 4;
-		gbcPanel0.gridy = 1;
-		gbcPanel0.gridwidth = 14;
-		gbcPanel0.gridheight = 2;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 0;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( tfText0, gbcPanel0 );
-		pnPanel0.add( tfText0 );
-
-		btBut0 = new JButton( "Gerar Link Jenkins"  );
-		gbcPanel0.gridx = 0;
-		gbcPanel0.gridy = 7;
-		gbcPanel0.gridwidth = 1;
-		gbcPanel0.gridheight = 1;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 0;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( btBut0, gbcPanel0 );
-		//btBut0.addActionListener(new ActionListener);
-		pnPanel0.add( btBut0 );
-
-		taArea0 = new JTextArea(2,10);
-		gbcPanel0.gridx = 2;
-		gbcPanel0.gridy = 4;
-		gbcPanel0.gridwidth = 16;
-		gbcPanel0.gridheight = 4;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 1;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( taArea0, gbcPanel0 );
-		pnPanel0.add( taArea0 );
-
-		lbLabel4 = new JLabel( "Resultado:"  );
-		gbcPanel0.gridx = 0;
-		gbcPanel0.gridy = 4;
-		gbcPanel0.gridwidth = 1;
-		gbcPanel0.gridheight = 2;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 1;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( lbLabel4, gbcPanel0 );
-		pnPanel0.add( lbLabel4 );
-
-		lbLabel5 = new JLabel( "Email Clientes:"  );
-		gbcPanel0.gridx = 0;
-		gbcPanel0.gridy = 9;
-		gbcPanel0.gridwidth = 4;
-		gbcPanel0.gridheight = 2;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 1;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( lbLabel5, gbcPanel0 );
-		pnPanel0.add( lbLabel5 );
-
-		taArea1 = new JTextArea(2,10);
-		gbcPanel0.gridx = 0;
-		gbcPanel0.gridy = 12;
-		gbcPanel0.gridwidth = 7;
-		gbcPanel0.gridheight = 4;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 1;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( taArea1, gbcPanel0 );
-		pnPanel0.add( taArea1 );
-
-		String []dataCombo0 = {"CAERN", "CAERR", "CASAL" };
-		cmbCombo0 = new JComboBox( dataCombo0 );
-		gbcPanel0.gridx = 5;
-		gbcPanel0.gridy = 9;
-		gbcPanel0.gridwidth = 9;
-		gbcPanel0.gridheight = 2;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 0;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( cmbCombo0, gbcPanel0 );
-		pnPanel0.add( cmbCombo0 );
-
-		btBut1 = new JButton( "Obter Endere�o Clientes"  );
-		gbcPanel0.gridx = 0;
-		gbcPanel0.gridy = 16;
-		gbcPanel0.gridwidth = 1;
-		gbcPanel0.gridheight = 1;
-		gbcPanel0.fill = GridBagConstraints.BOTH;
-		gbcPanel0.weightx = 1;
-		gbcPanel0.weighty = 0;
-		gbcPanel0.anchor = GridBagConstraints.NORTH;
-		gbPanel0.setConstraints( btBut1, gbcPanel0 );
-		pnPanel0.add( btBut1 );
-		
-		this.add(pnPanel0);
-		this.setVisible(true);
 	}
+	
+	private class BotaoListener implements ActionListener {
 
-	public JPanel getPnPanel0() {
-		return pnPanel0;
-	}
-
-	public void setPnPanel0(JPanel pnPanel0) {
-		this.pnPanel0 = pnPanel0;
-	}
-
-	public JLabel getLbLabel0() {
-		return lbLabel0;
-	}
-
-	public void setLbLabel0(JLabel lbLabel0) {
-		this.lbLabel0 = lbLabel0;
-	}
-
-	public JTextField getTfText0() {
-		return tfText0;
-	}
-
-	public void setTfText0(JTextField tfText0) {
-		this.tfText0 = tfText0;
-	}
-
-	public JButton getBtBut0() {
-		return btBut0;
-	}
-
-	public void setBtBut0(JButton btBut0) {
-		this.btBut0 = btBut0;
-	}
-
-	public JTextArea getTaArea0() {
-		return taArea0;
-	}
-
-	public void setTaArea0(JTextArea taArea0) {
-		this.taArea0 = taArea0;
-	}
-
-	public JLabel getLbLabel4() {
-		return lbLabel4;
-	}
-
-	public void setLbLabel4(JLabel lbLabel4) {
-		this.lbLabel4 = lbLabel4;
-	}
-
-	public JLabel getLbLabel5() {
-		return lbLabel5;
-	}
-
-	public void setLbLabel5(JLabel lbLabel5) {
-		this.lbLabel5 = lbLabel5;
-	}
-
-	public JTextArea getTaArea1() {
-		return taArea1;
-	}
-
-	public void setTaArea1(JTextArea taArea1) {
-		this.taArea1 = taArea1;
-	}
-
-	public JComboBox getCmbCombo0() {
-		return cmbCombo0;
-	}
-
-	public void setCmbCombo0(JComboBox cmbCombo0) {
-		this.cmbCombo0 = cmbCombo0;
-	}
-
-	public JButton getBtBut1() {
-		return btBut1;
-	}
-
-	public void setBtBut1(JButton btBut1) {
-		this.btBut1 = btBut1;
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			resultadoLinkVersao.setText("");
+			if (textLinkJenkins != null && !textLinkJenkins.getText().trim().isEmpty()) {
+				resultadoLinkVersao.setText(LinkConverter.formatarLinkExternoJenkins(textLinkJenkins.getText()));
+			}
+		}
 	}
 }
