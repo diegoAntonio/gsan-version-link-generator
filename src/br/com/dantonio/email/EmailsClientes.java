@@ -18,7 +18,7 @@ public enum EmailsClientes {
 	CAERD(Constantes.CAERD,"CAERD","jander@caerd-ro.com.br"), 
 	MANAM(Constantes.MANAM,"MANAM", "estevao.carvalho@manausambiental.com.br, luana.magalhaes@procenge.com.br,luis.camara@procenge.com.br"), 
 	SOROCABA(Constantes.SOROCABA,"SOROCABA", "Alexandre.Venturine@procenge.com.br,Adelmo.Cabral@procenge.com.br,joaomarcos@saaesorocaba.sp.gov.br,fabiocacace@saaesorocaba.sp.gov.br"), 
-	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br,Erick@cagepa.pb.gov.br,ILKASOUSA@cagepa.pb.gov.br,isaias@cagepa.pb.gov.br"),
+	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br,Erick@cagepa.pb.gov.br,ILKASOUSA@cagepa.pb.gov.br,isaias@cagepa.pb.gov.br,ricardo@cagepa.pb.gov.br"),
 	OperacaoProcenge(Constantes.OPERACAO_PROCENGE,"OP. PROCENGE","operacaoal@procenge.com.br");
 
 	private int idCliente;
