@@ -50,7 +50,6 @@ public class FramePrincipal extends JFrame{
 		textLinkFTP = new JTextField();
 		textLinkFTP.setBounds(140, 60, 350, 20);
 		textLinkFTP.setColumns(10);
-		textLinkFTP.setEditable(Boolean.FALSE);
 		contentPane.add(textLinkFTP);
 
 		JLabel lblLinkInternoJenkins = new JLabel("Link Interno Jenkins");
@@ -61,7 +60,6 @@ public class FramePrincipal extends JFrame{
 		JLabel lblLinkInternoFTP = new JLabel("Link Interno FTP:");
 		lblLinkInternoFTP.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblLinkInternoFTP.setBounds(21, 60, 200, 14);
-		lblLinkInternoFTP.setEnabled(Boolean.FALSE);
 		contentPane.add(lblLinkInternoFTP);
 		
 		JButton lblBotaoGerarLink = new JButton();
@@ -136,6 +134,13 @@ public class FramePrincipal extends JFrame{
 			if (textLinkJenkins != null && !textLinkJenkins.getText().trim().isEmpty()) {
 				resultadoLinkVersao.setText(LinkConverter.formatarLinkExternoJenkins(textLinkJenkins.getText()));
 			}
+			
+			if(textLinkFTP != null && !textLinkFTP.getText().trim().isEmpty()) {
+				resultadoLinkVersao.setText(LinkConverter.formatarLinkExternoFTP(textLinkFTP.getText()));
+			}
+			
+			textLinkFTP.setText("");
+			textLinkJenkins.setText("");
 		}
 	}
 }

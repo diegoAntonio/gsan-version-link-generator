@@ -22,5 +22,5 @@ public class Constantes {
 	
 	/* Links externos */
 	public static String LINK_EXTERNO_JENKINS = "http://www.consensotec.com.br:8130/";
-	public static String LINK_EXTERNO_FTP = "ftp://ftp.consensotec.com.br/";
+	public static String LINK_EXTERNO_FTP = "ftp://ftp.consensotec.com.br";
 }

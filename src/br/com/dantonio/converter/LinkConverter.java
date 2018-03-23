@@ -30,15 +30,26 @@ public class LinkConverter {
 		linkExterno.append(Constantes.LINK_EXTERNO_FTP);
 		
 		if(linkInternoFTP != null && !linkInternoFTP.trim().isEmpty()) {
-			int posicao1 = linkInternoFTP.indexOf("ear");
-			int tamanhoTotal = linkInternoFTP.length();
+			String[] temp = linkInternoFTP.replace("\\", "//").split("//");
+			boolean encontrou = false;
+			int index = 0;
 			
-			linkInternoFTP = linkInternoFTP.replace("\\", "//");
-			
-			linkExterno.append(linkInternoFTP.substring(posicao1, tamanhoTotal));
+			while(index < temp.length) {
+				String aux = temp[index];
+				
+				if(!encontrou && aux.equalsIgnoreCase("ear")) {
+					encontrou = true;
+				}
+				
+				
+				if(encontrou) {
+					linkExterno.append("//");
+					linkExterno.append(aux);
+				}
+				index++;
+			}
 		}
-		
-		
+
 		return linkExterno.toString();
 	}
 
