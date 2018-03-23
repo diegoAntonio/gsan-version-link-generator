@@ -90,7 +90,7 @@ public class FramePrincipal extends JFrame{
 			JRadioButton botao = new JRadioButton();
 			botao.setText(emailCliente.getNomeEmpresa());
 			botao.setActionCommand(String.valueOf(emailCliente.getIdCliente()));
-			botao.setBounds(21,i,150,10);
+			botao.setBounds(21,i,180,10);
 			botao.addActionListener(new RadioButtonHandler());
 			contentPane.add(botao);
 			grupoBotao.add(botao);
