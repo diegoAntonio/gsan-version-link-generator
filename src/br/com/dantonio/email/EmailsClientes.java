@@ -13,7 +13,6 @@ public enum EmailsClientes {
 	CASAL(Constantes.CASAL,"CASAL", "diogo.fonseca@casal.al.gov.br, cleiton.hardy@casal.al.gov.br, suporte.getin@casal.al.gov.br,guilherme.oliveira@procenge.com.br"), 
 	CAERR(Constantes.CAERR,"CAERR", "laurencelamare@gmail.com,tony@caer.com.br,wagmedrado@gmail.com"), 
 	SAAE_JUA(Constantes.SAAE_JUA, "SAAE-JUAZEIRO", "hegira.saae@gmail.com,ti@saaejuazeiro.com.br"), 
-	CAEMA(Constantes.CAEMA,"CAEMA", "manoelpaulo@caema.ma.gov.br,tadeusal@gmail.com"), 
 	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br,gsanhelp@deso-se.com.br,brunomenezes@deso-se.com.br"), 
 	CAERD(Constantes.CAERD,"CAERD","jander@caerd-ro.com.br"), 
 	MANAM(Constantes.MANAM,"MANAM", "estevao.carvalho@manausambiental.com.br, luana.magalhaes@procenge.com.br,luis.camara@procenge.com.br"), 
