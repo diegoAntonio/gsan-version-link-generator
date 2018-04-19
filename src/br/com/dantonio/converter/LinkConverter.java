@@ -43,7 +43,7 @@ public class LinkConverter {
 				
 				
 				if(encontrou) {
-					linkExterno.append("//");
+					linkExterno.append("/");
 					linkExterno.append(aux);
 				}
 				index++;

@@ -115,6 +115,14 @@ public class FramePrincipal extends JFrame{
 				case 0:
 					emails = EmailsClientes.getEmailClientesGsan();
 				break;
+				
+				case 12:
+					emails = EmailsClientes.getEmailsClientesFTP();
+				break;
+				
+				case 13:
+					emails = EmailsClientes.getEmailsClientesJenkins();
+				break;
 
 				default:
 					emails = EmailsClientes.getEmailClientes(valorEscolhido.intValue());

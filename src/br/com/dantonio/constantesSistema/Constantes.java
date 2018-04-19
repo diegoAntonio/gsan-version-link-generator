@@ -19,6 +19,8 @@ public class Constantes {
 	public static int SOROCABA = 9;
 	public static int CAGEPA = 10;
 	public static int OPERACAO_PROCENGE = 11;
+	public static int CLIENTES_FTP = 12;
+	public static int CLIENTES_JENKINS = 13;
 	
 	/* Links externos */
 	public static String LINK_EXTERNO_JENKINS = "http://www.consensotec.com.br:8130/";
