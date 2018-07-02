@@ -23,6 +23,6 @@ public class Constantes {
 	public static int CLIENTES_JENKINS = 13;
 	
 	/* Links externos */
-	public static String LINK_EXTERNO_JENKINS = "http://www.consensotec.com.br:8130/";
+	public static String LINK_EXTERNO_JENKINS = "http://jenkins.consensotec.com.br/";
 	public static String LINK_EXTERNO_FTP = "ftp://ftp.consensotec.com.br";
 }
