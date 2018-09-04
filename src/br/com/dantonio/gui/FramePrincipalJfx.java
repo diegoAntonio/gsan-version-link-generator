@@ -1,17 +1,38 @@
 package br.com.dantonio.gui;
 
-import br.com.dantonio.constantesSistema.Constantes;
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import br.com.dantonio.constantesSistema.Constantes;
+import br.com.dantonio.converter.LinkConverter;
+import br.com.dantonio.email.EmailsClientes;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
+	private TextField inputLink;
+	private TextField resultadoLink;
+	private TextArea resultadoEmails;
 	
 	public FramePrincipalJfx(Stage primaryStage) {
 		super();
@@ -52,9 +73,44 @@ public class FramePrincipalJfx {
 	}
 	
 	private Tab gerarAbaEmailClientes() {
-		Tab abaEmailsClientes = this.gerarAba("Emails dos Clientes");
-		HBox frame = new HBox(5);
-		frame.getChildren().addAll(new Label("Name:"), new Text("teste"));
+		Tab abaEmailsClientes;
+		VBox frame;
+		Border borda;
+		Label labelLink;
+		Label labelResultadoLink;
+		Label labelListaEmails;
+		Button botaoGerarLink;
+		ToggleGroup grupoEmail;
+		
+		abaEmailsClientes = this.gerarAba("Emails dos Clientes");
+		frame = new VBox(20);
+		borda = new Border(new BorderStroke(Color.BLACK,
+				BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+				BorderWidths.DEFAULT));
+		botaoGerarLink = new Button("Gerar Link da Versão");
+		frame.setBorder(borda);
+		frame.setPadding(new Insets(15, 12, 15, 12));
+		
+		//Link Interno FTP
+		labelLink = new Label("Link Interno FTP:");
+		this.inputLink = new TextField();
+		botaoGerarLink.setOnAction(new ButtonHandler());
+		frame.getChildren().addAll(labelLink,this.inputLink);
+		frame.getChildren().addAll(botaoGerarLink);
+		
+		//Resultado Link da Versao FTP
+		labelResultadoLink = new Label("Resultado link da versão: ");
+		this.resultadoLink = new TextField();
+		frame.getChildren().addAll(labelResultadoLink,this.resultadoLink);
+		
+		//Lista de emails
+		grupoEmail = new ToggleGroup();
+		grupoEmail.getToggles().addAll(this.gerarRadioButtonsEmails());
+		
+		//Saida Lista de emails
+		this.resultadoEmails = new TextArea();
+		labelListaEmails = new Label("Lista Emails: ");
+		frame.getChildren().addAll(labelListaEmails, this.resultadoEmails);
 		
 		abaEmailsClientes.setContent(frame);
 		
@@ -67,4 +123,26 @@ public class FramePrincipalJfx {
 		return abaTextoEmail;
 	}
 	
+	private List<ToggleButton> gerarRadioButtonsEmails(){
+		List<ToggleButton> emails = new ArrayList<ToggleButton>();
+		
+		for (EmailsClientes email : EmailsClientes.values()) {
+			ToggleButton temp = new ToggleButton(email.getNomeEmpresa());
+			emails.add(temp);
+		}
+		
+		return emails;
+	}
+	
+	private class ButtonHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			resultadoLink.setText("Nao trocou!!");
+			if(inputLink != null && !inputLink.getText().trim().isEmpty()){
+				resultadoLink.setText(LinkConverter.formatarLinkExternoFTP(inputLink.getText().trim()));
+			}
+		}
+		
+	};
 }
