@@ -25,4 +25,8 @@ public class Constantes {
 	/* Links externos */
 	public static String LINK_EXTERNO_JENKINS = "http://jenkins.consensotec.com.br/";
 	public static String LINK_EXTERNO_FTP = "ftp://ftp.consensotec.com.br";
+	
+	public static double ALTURA_PADRAO = 700;
+	public static double LARGURA_PADRAO = 900;
+	
 }
