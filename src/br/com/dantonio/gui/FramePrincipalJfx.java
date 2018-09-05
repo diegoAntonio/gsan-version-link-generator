@@ -3,30 +3,32 @@ package br.com.dantonio.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.dantonio.constantesSistema.Constantes;
+import br.com.dantonio.converter.LinkConverter;
+import br.com.dantonio.email.EmailsClientes;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import br.com.dantonio.constantesSistema.Constantes;
-import br.com.dantonio.converter.LinkConverter;
-import br.com.dantonio.email.EmailsClientes;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
@@ -56,6 +58,7 @@ public class FramePrincipalJfx {
 		TabPane painel = new TabPane();
 		painel.getTabs().add(this.gerarAbaEmailClientes());
 		painel.getTabs().add(this.gerarAbaTextoEmail());
+		painel.getTabs().add(this.gerarAbaEnvioEmail());
 		
 		return painel;
 	}
@@ -80,7 +83,8 @@ public class FramePrincipalJfx {
 		Label labelResultadoLink;
 		Label labelListaEmails;
 		Button botaoGerarLink;
-		ToggleGroup grupoEmail;
+		ToggleGroup grupoRadio;
+		GridPane frameRadioButtons;
 		
 		abaEmailsClientes = this.gerarAba("Emails dos Clientes");
 		frame = new VBox(20);
@@ -104,11 +108,13 @@ public class FramePrincipalJfx {
 		frame.getChildren().addAll(labelResultadoLink,this.resultadoLink);
 		
 		//Lista de emails
-		grupoEmail = new ToggleGroup();
-		grupoEmail.getToggles().addAll(this.gerarRadioButtonsEmails());
 		
 		//Saida Lista de emails
+		frameRadioButtons = new GridPane();
+		grupoRadio = new ToggleGroup();
 		this.resultadoEmails = new TextArea();
+		frameRadioButtons.getChildren().addAll(this.gerarRadioButtonsEmails(grupoRadio));
+		frame.getChildren().add(frameRadioButtons);
 		labelListaEmails = new Label("Lista Emails: ");
 		frame.getChildren().addAll(labelListaEmails, this.resultadoEmails);
 		
@@ -123,16 +129,35 @@ public class FramePrincipalJfx {
 		return abaTextoEmail;
 	}
 	
-	private List<ToggleButton> gerarRadioButtonsEmails(){
-		List<ToggleButton> emails = new ArrayList<ToggleButton>();
+	private Tab gerarAbaEnvioEmail() {
+		Tab abaTextoEmail = this.gerarAba("Envio Email");
+		
+		return abaTextoEmail;
+	}
+	
+	private List<RadioButton> gerarRadioButtonsEmails(ToggleGroup grupo){
+		List<RadioButton> emails = new ArrayList<RadioButton>();
 		
 		for (EmailsClientes email : EmailsClientes.values()) {
-			ToggleButton temp = new ToggleButton(email.getNomeEmpresa());
+			RadioButton temp = new RadioButton(email.getNomeEmpresa());
+			temp.setOnAction(new RadioButtonHandler());
+			temp.setToggleGroup(grupo);
 			emails.add(temp);
 		}
 		
 		return emails;
 	}
+	
+	
+	private class RadioButtonHandler implements EventHandler<ActionEvent>{
+
+		@Override
+		public void handle(ActionEvent event) {
+			System.out.println("Maoe");
+			
+		}
+		
+	};
 	
 	private class ButtonHandler implements EventHandler<ActionEvent> {
 
