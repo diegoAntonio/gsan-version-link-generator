@@ -1,6 +1,0 @@
-#criando o que sera ignorado nos commits
-
-*.class
-.settings
-*.classpath
-bin/*
