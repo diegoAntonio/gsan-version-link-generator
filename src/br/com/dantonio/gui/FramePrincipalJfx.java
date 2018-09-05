@@ -104,6 +104,7 @@ public class FramePrincipalJfx {
 		//Resultado Link da Versao FTP
 		labelResultadoLink = new Label("Resultado link da versão: ");
 		this.resultadoLink = new TextField();
+		this.resultadoLink.setEditable(false);
 		frame.getChildren().addAll(labelResultadoLink,this.resultadoLink);
 		
 		//Lista de emails
