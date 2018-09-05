@@ -75,7 +75,9 @@ public enum EmailsClientes {
 		StringBuilder listaEmails = new StringBuilder();
 		List<EmailsClientes> clientesGsan = Arrays.asList(EmailsClientes.values()).stream()
 				.filter(s -> s.getIdCliente() != Constantes.MANAM && s.getIdCliente() != Constantes.SOROCABA
-				&& s.getIdCliente() != Constantes.TODAS_EMPRESAS)
+				&& s.getIdCliente() != Constantes.TODAS_EMPRESAS
+				&& s.getIdCliente() != Constantes.CLIENTES_FTP
+				&& s.getIdCliente() != Constantes.CLIENTES_JENKINS)
 				.collect(Collectors.toList());
 
 		for (EmailsClientes emailsClientes : clientesGsan) {

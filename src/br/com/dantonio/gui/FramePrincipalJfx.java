@@ -21,7 +21,6 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -160,9 +159,29 @@ public class FramePrincipalJfx {
 			RadioButton escolhido = (RadioButton) event.getTarget();
 			resultadoEmails.setText(" ");
 			
-			if(escolhido != null){
+			if (escolhido != null) {
 				Integer valor = new Integer(escolhido.getId());
-				resultadoEmails.setText(EmailsClientes.getEmailClientes(valor));
+				String emails = "";
+
+				switch (valor.intValue()) {
+				case 0:
+					emails = EmailsClientes.getEmailClientesGsan();
+					break;
+
+				case 12:
+					emails = EmailsClientes.getEmailsClientesFTP();
+					break;
+
+				case 13:
+					emails = EmailsClientes.getEmailsClientesJenkins();
+					break;
+
+				default:
+					emails = EmailsClientes.getEmailClientes(valor.intValue());
+					break;
+				}
+
+				resultadoEmails.setText(emails);
 			}
 			
 		}
