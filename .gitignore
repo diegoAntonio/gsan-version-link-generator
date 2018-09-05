@@ -2,3 +2,5 @@
 
 *.class
 .settings
+*.classpath
+bin/*
