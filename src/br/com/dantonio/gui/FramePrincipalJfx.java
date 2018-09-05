@@ -108,8 +108,6 @@ public class FramePrincipalJfx {
 		frame.getChildren().addAll(labelResultadoLink,this.resultadoLink);
 		
 		//Lista de emails
-		
-		//Saida Lista de emails
 		frameRadioButtons = new FlowPane();
 		frameRadioButtons.setHgap(20);
 		grupoRadio = new ToggleGroup();
@@ -193,7 +191,7 @@ public class FramePrincipalJfx {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			resultadoLink.setText("Nao trocou!!");
+			resultadoLink.setText(" ");
 			if(inputLink != null && !inputLink.getText().trim().isEmpty()){
 				resultadoLink.setText(LinkConverter.formatarLinkExternoFTP(inputLink.getText().trim()));
 			}
