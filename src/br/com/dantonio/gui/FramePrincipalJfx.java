@@ -3,9 +3,6 @@ package br.com.dantonio.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.dantonio.constantesSistema.Constantes;
-import br.com.dantonio.converter.LinkConverter;
-import br.com.dantonio.email.EmailsClientes;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,12 +20,15 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import br.com.dantonio.constantesSistema.Constantes;
+import br.com.dantonio.converter.LinkConverter;
+import br.com.dantonio.email.EmailsClientes;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
@@ -84,7 +84,7 @@ public class FramePrincipalJfx {
 		Label labelListaEmails;
 		Button botaoGerarLink;
 		ToggleGroup grupoRadio;
-		GridPane frameRadioButtons;
+		FlowPane frameRadioButtons;
 		
 		abaEmailsClientes = this.gerarAba("Emails dos Clientes");
 		frame = new VBox(20);
@@ -110,9 +110,12 @@ public class FramePrincipalJfx {
 		//Lista de emails
 		
 		//Saida Lista de emails
-		frameRadioButtons = new GridPane();
+		frameRadioButtons = new FlowPane();
+		frameRadioButtons.setHgap(20);
 		grupoRadio = new ToggleGroup();
 		this.resultadoEmails = new TextArea();
+		this.resultadoEmails.setEditable(false);
+		this.resultadoEmails.setWrapText(true);
 		frameRadioButtons.getChildren().addAll(this.gerarRadioButtonsEmails(grupoRadio));
 		frame.getChildren().add(frameRadioButtons);
 		labelListaEmails = new Label("Lista Emails: ");
@@ -142,6 +145,7 @@ public class FramePrincipalJfx {
 			RadioButton temp = new RadioButton(email.getNomeEmpresa());
 			temp.setOnAction(new RadioButtonHandler());
 			temp.setToggleGroup(grupo);
+			temp.setId(String.valueOf(email.getIdCliente()));
 			emails.add(temp);
 		}
 		
@@ -153,7 +157,13 @@ public class FramePrincipalJfx {
 
 		@Override
 		public void handle(ActionEvent event) {
-			System.out.println("Maoe");
+			RadioButton escolhido = (RadioButton) event.getTarget();
+			resultadoEmails.setText(" ");
+			
+			if(escolhido != null){
+				Integer valor = new Integer(escolhido.getId());
+				resultadoEmails.setText(EmailsClientes.getEmailClientes(valor));
+			}
 			
 		}
 		
