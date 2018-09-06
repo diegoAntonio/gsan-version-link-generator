@@ -77,7 +77,6 @@ public class FramePrincipalJfx {
 	private Tab gerarAbaEmailClientes() {
 		Tab abaEmailsClientes;
 		VBox frame;
-		Border borda;
 		Label labelLink;
 		Label labelResultadoLink;
 		Label labelListaEmails;
@@ -85,14 +84,9 @@ public class FramePrincipalJfx {
 		ToggleGroup grupoRadio;
 		FlowPane frameRadioButtons;
 		
+		frame = this.gerarFramePrincipal();
 		abaEmailsClientes = this.gerarAba("Emails dos Clientes");
-		frame = new VBox(20);
-		borda = new Border(new BorderStroke(Color.BLACK,
-				BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
-				BorderWidths.DEFAULT));
 		botaoGerarLink = new Button("Gerar Link da Versão");
-		frame.setBorder(borda);
-		frame.setPadding(new Insets(15, 12, 15, 12));
 		
 		//Link Interno FTP
 		labelLink = new Label("Link Interno FTP:");
@@ -126,13 +120,19 @@ public class FramePrincipalJfx {
 
 	private Tab gerarAbaTextoEmail() {
 		Tab abaTextoEmail = this.gerarAba("Texto do Email");
+		VBox framePrincipal = this.gerarFramePrincipal();
 		
+		
+		
+		abaTextoEmail.setContent(framePrincipal);
 		return abaTextoEmail;
 	}
 	
 	private Tab gerarAbaEnvioEmail() {
 		Tab abaTextoEmail = this.gerarAba("Envio Email");
+		VBox framePrincipal = this.gerarFramePrincipal();
 		
+		abaTextoEmail.setContent(framePrincipal);
 		return abaTextoEmail;
 	}
 	
@@ -150,6 +150,20 @@ public class FramePrincipalJfx {
 		return emails;
 	}
 	
+	
+	private VBox gerarFramePrincipal() {
+		VBox frameGerado;
+		Border borda;
+		
+		frameGerado = new VBox(20);
+		borda = new Border(new BorderStroke(Color.BLACK,
+				BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+				BorderWidths.DEFAULT));
+		frameGerado.setBorder(borda);
+		frameGerado.setPadding(new Insets(15, 12, 15, 12));
+		
+		return frameGerado;
+	}
 	
 	private class RadioButtonHandler implements EventHandler<ActionEvent>{
 
