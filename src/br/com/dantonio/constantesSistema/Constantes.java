@@ -6,7 +6,7 @@ package br.com.dantonio.constantesSistema;
  */
 public class Constantes {
 	
-	/* ID's Empresas */
+	/* ID's Empresas/Produtos */
 	public static int TODAS_EMPRESAS = 0;
 	public static int CAERN = 1;
 	public static int CASAL = 2;
@@ -21,6 +21,7 @@ public class Constantes {
 	public static int OPERACAO_PROCENGE = 11;
 	public static int CLIENTES_FTP = 12;
 	public static int CLIENTES_JENKINS = 13;
+	public static int MOBILE = 14;
 	
 	/* Links externos */
 	public static String LINK_EXTERNO_JENKINS = "http://jenkins.consensotec.com.br/";
@@ -28,5 +29,7 @@ public class Constantes {
 	
 	public static double ALTURA_PADRAO = 700;
 	public static double LARGURA_PADRAO = 900;
+	
+	public static String RODAPE_EMAIL = "<p></p>";
 	
 }

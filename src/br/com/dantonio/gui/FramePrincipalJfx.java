@@ -34,6 +34,7 @@ public class FramePrincipalJfx {
 	private TextField inputLink;
 	private TextField resultadoLink;
 	private TextArea resultadoEmails;
+	private TextField textoVersao;
 	
 	public FramePrincipalJfx(Stage primaryStage) {
 		super();
