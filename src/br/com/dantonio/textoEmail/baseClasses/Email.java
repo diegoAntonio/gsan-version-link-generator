@@ -1,4 +1,4 @@
-package br.com.dantonio.textoEmail;
+package br.com.dantonio.textoEmail.baseClasses;
 
 /**
  * Classe que representa um Email que sera enviado.

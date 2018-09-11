@@ -1,4 +1,6 @@
-package br.com.dantonio.textoEmail;
+package br.com.dantonio.textoEmail.decorators;
+
+import br.com.dantonio.textoEmail.baseClasses.Email;
 
 public class EmailDecorator extends Email{
 	private Email email;
