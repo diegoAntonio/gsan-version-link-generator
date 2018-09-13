@@ -32,4 +32,6 @@ public class Constantes {
 	
 	public static String RODAPE_EMAIL = "<p></p>";
 	
+	public static final int TAM_VETOR_EMAIL = 4;
+	
 }

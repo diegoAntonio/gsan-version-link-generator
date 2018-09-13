@@ -2,8 +2,8 @@ package br.com.dantonio.textoEmail.decorators;
 
 import br.com.dantonio.textoEmail.baseClasses.Email;
 
-public class EmailDecorator extends Email{
-	private Email email;
+public abstract class EmailDecorator extends Email{
+	protected Email email;
 
 	public EmailDecorator(Email email) {
 		super();
@@ -11,9 +11,7 @@ public class EmailDecorator extends Email{
 	}
 	
 	@Override
-	public String[] gerarEmailVersao() {
-		return null;
-	}
+	public abstract String[] gerarEmailVersao();
 
 	public Email getEmail() {
 		return email;

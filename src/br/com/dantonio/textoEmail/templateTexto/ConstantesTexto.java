@@ -12,6 +12,7 @@ public class ConstantesTexto {
 	public static String CORPO_EMAIL_VERSAO_MANAM = inicializaValorCorpoEmailManam();
 	public static String RODAPE_EMAIL = inicializarValorRodape();
 	public static String AVISO_SCRIPTS = inicializarAvisoScripts();
+	public static String AVISO_EMERGENCIAL = "EMERGENCIAL: ";
 	public static String REGEX_LINK_VERSAO = "%Link_Version%";
 	public static String REGEX_NOME_VERSAO = "%NAME_Version%";
 	public static String REGEX_SCRIPT_VERSAO = "%SCRIPT_Version%";
@@ -24,7 +25,10 @@ public class ConstantesTexto {
 		sb.append("(" + REGEX_NOME_VERSAO + ")");
 		sb.append("para a base Postgres.");
 		sb.append("A versão pode ser obtida através do Link:</br></br> ");
+		sb.append("<a href=\"");
 		sb.append(REGEX_LINK_VERSAO);
+		sb.append("\"> ");
+		sb.append(REGEX_NOME_VERSAO);
 		sb.append("</br><p>O arquivo único deve ser utilizado para os ");
 		sb.append("servidores <b><font color=\"red\">BATCH e ONLINE</font>.</b></p></br>");
 
@@ -54,7 +58,11 @@ public class ConstantesTexto {
 		sb.append("<p>Para isso, é necessário baixar a nova versão, ");
 		sb.append("que pode ser obtida através do link:</p></br>");
 		sb.append("<p>Versão ");
-		sb.append(ConstantesTexto.REGEX_LINK_VERSAO);
+		sb.append("<a href=\"");
+		sb.append(REGEX_LINK_VERSAO);
+		sb.append("\"> ");
+		sb.append(REGEX_NOME_VERSAO);
+		sb.append("</a>");
 		sb.append("</p></br>");
 		
 		return sb.toString();
@@ -83,7 +91,14 @@ public class ConstantesTexto {
 		sb.append("ocasionando erro em caso do procedimento não ser feito. ");
 		sb.append("Seguem os links:");
 		sb.append("</p></b>");
-		sb.append("<p>" + REGEX_SCRIPT_VERSAO + "</p>");
+		sb.append("<p>");
+		sb.append("<a href=\"");
+		sb.append(REGEX_SCRIPT_VERSAO);
+		sb.append(" > ");
+		sb.append("Scripts Versão ");
+		sb.append(REGEX_NOME_VERSAO);
+		sb.append("</a>");
+		sb.append("</p>");
 		
 		return sb.toString();
 	}

@@ -1,5 +1,9 @@
 package br.com.dantonio.textoEmail.baseClasses;
 
+import java.util.Date;
+
+import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
+
 /**
  * Classe que representa um Email que sera enviado.
  * 
@@ -7,22 +11,34 @@ package br.com.dantonio.textoEmail.baseClasses;
  *
  */
 public abstract class Email {
-	private String assunto;
-	private String corpo;
-	private String observacoes;
-	private String rodape;
+	protected String versao;
+	protected String corpo;
+	protected String observacoes;
+	protected String rodape;
+	protected String linkVersao;
+	protected String produto;
+	protected String linkScripts;
 	
 	public Email() {
 		super();
 	}
+	
+	public Email(String versao, String linkVersao, String produto,
+			String linkScripts) {
+		super();
+		this.versao = versao;
+		this.linkVersao = linkVersao;
+		this.produto = produto;
+		this.linkScripts = linkScripts;
+	}
 
 
-	public String getAssunto() {
-		return assunto;
+	public String getVersao() {
+		return versao;
 	}
 	
-	public void setAssunto(String assunto) {
-		this.assunto = assunto;
+	public void setVersao(String versao) {
+		this.versao = versao;
 	}
 
 	public String getCorpo() {
@@ -50,6 +66,51 @@ public abstract class Email {
 	}
 
 
-	public abstract String[] gerarEmailVersao();
+	public String getLinkVersao() {
+		return linkVersao;
+	}
 
+	public void setLinkVersao(String linkVersao) {
+		this.linkVersao = linkVersao;
+	}
+
+	public String getProduto() {
+		return produto;
+	}
+
+	public void setProduto(String produto) {
+		this.produto = produto;
+	}
+
+	public String getLinkScripts() {
+		return linkScripts;
+	}
+
+	public void setLinkScripts(String linkScripts) {
+		this.linkScripts = linkScripts;
+	}
+
+	public abstract String[] gerarEmailVersao();
+	
+	protected String gerarAssunto() {
+		StringBuilder sb = new StringBuilder();
+		Date dataAtual = new Date();
+		
+		sb.append("Versão ");
+		sb.append(this.versao);
+		sb.append(" ");
+		sb.append(this.versao);
+		sb.append(" publicada ");
+		sb.append(dataAtual.toString());
+		
+		return sb.toString();
+	}
+	
+	protected String alterarConstantesTexto(String textoVersao) {
+		textoVersao.replace(ConstantesTexto.REGEX_LINK_VERSAO, this.linkVersao);
+		textoVersao.replace(ConstantesTexto.REGEX_NOME_VERSAO, this.versao);
+		textoVersao.replace(ConstantesTexto.REGEX_SCRIPT_VERSAO, this.linkScripts);
+		
+		return textoVersao.toString();
+	}
 }

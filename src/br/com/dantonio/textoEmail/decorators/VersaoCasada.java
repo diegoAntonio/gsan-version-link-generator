@@ -8,4 +8,9 @@ public class VersaoCasada extends EmailDecorator {
 		super(email);
 	}
 
+	@Override
+	public String[] gerarEmailVersao() {
+		throw new UnsupportedOperationException("ERRO!");
+	}
+
 }
