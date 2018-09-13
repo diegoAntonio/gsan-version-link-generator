@@ -1,5 +1,6 @@
 package br.com.dantonio.textoEmail.baseClasses;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
@@ -95,13 +96,14 @@ public abstract class Email {
 	protected String gerarAssunto() {
 		StringBuilder sb = new StringBuilder();
 		Date dataAtual = new Date();
+		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
 		
 		sb.append("Versão ");
-		sb.append(this.versao);
+		sb.append(this.produto);
 		sb.append(" ");
 		sb.append(this.versao);
 		sb.append(" publicada ");
-		sb.append(dataAtual.toString());
+		sb.append(formatador.format(dataAtual));
 		
 		return sb.toString();
 	}
