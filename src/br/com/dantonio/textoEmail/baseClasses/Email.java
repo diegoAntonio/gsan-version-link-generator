@@ -6,7 +6,7 @@ import java.util.Date;
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
 
 /**
- * Classe que representa um Email que sera enviado.
+ * Classe que representa um Email de vers&aacute;o que ser&aacute; enviado.
  * 
  * @author Diego.Ferreira
  *
@@ -91,8 +91,25 @@ public abstract class Email {
 		this.linkScripts = linkScripts;
 	}
 
+	/**
+	 *  M&eacute;todo que realiza o processo de gerar o {@link Email} da vers&atilde;o.
+	 *  Retorna um Vetor de String contendo o conte&uacute;do completo do email
+	 *  na seguinte ordem: <br/>
+	 *  posicao[0] = Assunto do {@link Email}.<br/>
+	 *  posicao[1] = Corpo do {@link Email} preenchido.<br/>
+	 *  posicao[2] = Observa&ccedil;&otilde;es do {@link Email} (se houverem).<br/>
+	 *  posicao[3] = Rodap&eacute; do {@link Email}.<br/>
+	 *  
+	 * @return Vetor de Strings com o conteudo total e preenchido do email.
+	 */
 	public abstract String[] gerarEmailVersao();
 	
+	/**
+	 *  M&eacute;todo que gera o assunto do {@link Email}, concatena os valores
+	 *  do produto, vers&atilde;o e data atual.
+	 *  
+	 * @return {@link String} contendo o assunto do {@link Email}.
+	 */
 	protected String gerarAssunto() {
 		StringBuilder sb = new StringBuilder();
 		Date dataAtual = new Date();
@@ -108,6 +125,13 @@ public abstract class Email {
 		return sb.toString();
 	}
 	
+	/**
+	 *  M&eacute;todo que preenche no texto do email os valores referentes
+	 *  a Link, Nome da Vers&atilde;o e Script da Vers&atilde;o.
+	 *  
+	 * @param textoVersao - Texto que ser&aacute; preenchido.
+	 * @return {@link String} contendo o texto preenchido.
+	 */
 	protected String alterarConstantesTexto(String textoVersao) {
 		String temp;
 		temp = textoVersao.replace(ConstantesTexto.REGEX_LINK_VERSAO, this.linkVersao);

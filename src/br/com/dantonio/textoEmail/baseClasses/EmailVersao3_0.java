@@ -3,6 +3,13 @@ package br.com.dantonio.textoEmail.baseClasses;
 import br.com.dantonio.constantesSistema.Constantes;
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
 
+/**
+ *  Classe que representa o {@link Email} que &eacute; disponibilizado
+ *  para as empresas da vers&atilde;o 3.0
+ *  
+ * @author Diego.Ferreira
+ *
+ */
 public class EmailVersao3_0 extends Email {
 	
 	public EmailVersao3_0() {

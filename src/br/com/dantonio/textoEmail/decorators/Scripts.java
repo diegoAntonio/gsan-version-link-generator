@@ -3,6 +3,13 @@ package br.com.dantonio.textoEmail.decorators;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
 
+/**
+ * Classe que representa uma modifica&ccedil;&atilde;o
+ * gerada por uma vers&atilde;o que contenha Scripts.
+ * 
+ * @author Diego.Ferreira
+ *
+ */
 public class Scripts extends EmailDecorator {
 
 	public Scripts(Email email) {

@@ -1,5 +1,6 @@
 package br.com.dantonio.main;
 
+import br.com.dantonio.constantesSistema.ProdutosMobile;
 import br.com.dantonio.email.EmailsClientes;
 import br.com.dantonio.gui.FramePrincipalJfx;
 import br.com.dantonio.textoEmail.baseClasses.Email;
@@ -124,12 +125,13 @@ public class MainJavaFx extends Application {
 		StringBuilder emailFinal = new StringBuilder();
 		String linkVersao = "";
 		String nomeVersao = "6.2.09.3";
-		String produto = "Impressão Simultânea de Contas (ISC)";
+		String produto = ProdutosMobile.ISC.getNomeAppAbreviado();
 		String linkScripts = "";
 		String empresa = EmailsClientes.CAERN.getNomeEmpresa();
 		Email email;
 		
-		email = new EmailVersaoMobile(nomeVersao, linkVersao, produto, linkScripts, empresa);
+		email = new EmailVersaoMobile(nomeVersao, linkVersao, produto, linkScripts, empresa,
+				ProdutosMobile.ISC.getId());
 		
 		for (String temp : email.gerarEmailVersao()) {
 			emailFinal.append(temp.toString() + " <br/>\n");

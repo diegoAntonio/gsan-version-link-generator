@@ -2,9 +2,17 @@ package br.com.dantonio.textoEmail.decorators;
 
 import br.com.dantonio.textoEmail.baseClasses.Email;
 
-public class VersaoCasadaISC extends EmailDecorator {
+/**
+ *  Classe que repsenta uma altera&ccedil;&atilde;o
+ *  proveniente de uma vers&atilde;o Casada com um Produto
+ *  Mobile.
+ *  
+ * @author Diego.Ferreira
+ *
+ */
+public class VersaoCasada extends EmailDecorator {
 
-	public VersaoCasadaISC(Email email) {
+	public VersaoCasada(Email email) {
 		super(email);
 		this.linkScripts = email.getLinkScripts();
 		this.linkVersao = email.getLinkVersao();

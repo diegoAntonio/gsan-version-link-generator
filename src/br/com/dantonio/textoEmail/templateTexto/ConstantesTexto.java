@@ -1,7 +1,7 @@
 package br.com.dantonio.textoEmail.templateTexto;
 
 /**
- * Classe que guarda o texto formatado das versoes.
+ * Classe que guarda o texto formatado das vers&otilde;es.
  * 
  * @author Diego.Ferreira
  *
@@ -16,6 +16,7 @@ public class ConstantesTexto {
 	public static String REGEX_LINK_VERSAO = "%Link_Version%";
 	public static String REGEX_NOME_VERSAO = "%NAME_Version%";
 	public static String REGEX_SCRIPT_VERSAO = "%Link_Script_Version%";
+	public static String REGEX_NOME_PRODUTO_MOBILE = "%Name_Product_Mobile%";
 	
 	private static String inicializarValorCorpoEmailVersao3_0() {
 		StringBuilder sb = new StringBuilder();
@@ -38,6 +39,8 @@ public class ConstantesTexto {
 	private static String inicializaValorCorpoEmailVersaoMobile() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<p>Foi liberado hoje uma versão ");
+		sb.append(gerarRegexNomeProdutoMobile());
+		sb.append(" ");
 		sb.append(gerarRegexNomeVersao());
 		sb.append(". Segue em anexo, a versão   ");
 		sb.append("(APK) em conjunto com o documento Release Notes ");
@@ -113,5 +116,9 @@ public class ConstantesTexto {
 	
 	private static String gerarRegexLinkVersao() {
 			return "%Link_Version%";
+	}
+	
+	private static String gerarRegexNomeProdutoMobile() {
+		return "%Name_Product_Mobile%";
 	}
 }

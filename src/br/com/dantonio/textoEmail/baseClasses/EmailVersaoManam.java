@@ -3,6 +3,13 @@ package br.com.dantonio.textoEmail.baseClasses;
 import br.com.dantonio.constantesSistema.Constantes;
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
 
+/**
+ *  Classe que representa o {@link Email} que &eacute; disponibilizado
+ *  para a empresa MANAM.
+ *  
+ * @author Diego.Ferreira.
+ *
+ */
 public class EmailVersaoManam extends Email {
 	public EmailVersaoManam() {
 		super();
