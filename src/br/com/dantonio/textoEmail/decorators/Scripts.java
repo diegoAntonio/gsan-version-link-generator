@@ -8,6 +8,8 @@ public class Scripts extends EmailDecorator {
 	public Scripts(Email email) {
 		super(email);
 		this.linkScripts = email.getLinkScripts();
+		this.linkVersao = email.getLinkVersao();
+		this.versao = email.getVersao();
 	}
 
 	@Override
@@ -20,8 +22,5 @@ public class Scripts extends EmailDecorator {
 		email[posicaoObservacoes] = observacoesScripts.toString();
 		
 		return email;
-	}
-	
-	
-
+	}	
 }

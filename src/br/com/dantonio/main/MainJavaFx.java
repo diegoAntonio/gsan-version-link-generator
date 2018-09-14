@@ -3,8 +3,10 @@ package br.com.dantonio.main;
 import br.com.dantonio.gui.FramePrincipalJfx;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersao3_0;
+import br.com.dantonio.textoEmail.baseClasses.EmailVersaoManam;
 import br.com.dantonio.textoEmail.decorators.EmailDecorator;
 import br.com.dantonio.textoEmail.decorators.Emergencial;
+import br.com.dantonio.textoEmail.decorators.Scripts;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,8 +15,8 @@ public class MainJavaFx extends Application {
 	public static void main(String[] args) {
 		//launch(args);
 		//System.out.println(testeEmailVersao3_0());
-		System.out.println(testeEmailVersao3_0Emergencial());
-//		System.out.println(testeEmailVersao3_0ComScripts());
+		//System.out.println(testeEmailVersao3_0Emergencial());
+		System.out.println(testeEmailVersao3_0ComScripts());
 //		System.out.println(testeEmailVersaoManam());
 //		System.out.println(testeEmailVersaoMobile());
 		
@@ -43,13 +45,22 @@ public class MainJavaFx extends Application {
 	}
 	
 	private static String testeEmailVersao3_0ComScripts() {
-		String linkVersao;
-		String nomeVersao;
-		String produto;
-		String linkScripts;
+		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";;
+		String nomeVersao = "3.33.0.2";
+		String produto = "GSAN";
+		String linkScripts = "http://ftp.consensotec.com.br/banco/postgres/versao_db_comercial_20180910.rar";
+		Email email;
+		EmailDecorator decorator;
+		StringBuilder emailFinal = new StringBuilder();
 		
+		email = new EmailVersao3_0(nomeVersao, linkVersao, produto, linkScripts);
+		decorator = new Scripts(email);
 		
-		return null;
+		for (String temp : decorator.gerarEmailVersao()) {
+			emailFinal.append(temp.toString() + " <br/>");
+		}
+		
+		return emailFinal.toString();
 	}
 	
 	private static String testeEmailVersao3_0Emergencial() {

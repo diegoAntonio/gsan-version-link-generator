@@ -15,21 +15,21 @@ public class ConstantesTexto {
 	public static String AVISO_EMERGENCIAL = "EMERGENCIAL: ";
 	public static String REGEX_LINK_VERSAO = "%Link_Version%";
 	public static String REGEX_NOME_VERSAO = "%NAME_Version%";
-	public static String REGEX_SCRIPT_VERSAO = "%SCRIPT_Version%";
+	public static String REGEX_SCRIPT_VERSAO = "%Link_Script_Version%";
 	
 	private static String inicializarValorCorpoEmailVersao3_0() {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("<p> Prezados(as), </p></br>");
 		sb.append("<p>Foi liberado hoje uma Versão GSAN  ");
-		sb.append("(" + REGEX_NOME_VERSAO + ")");
+		sb.append("(" + gerarRegexNomeVersao() + ") ");
 		sb.append("para a base Postgres.");
 		sb.append("A versão pode ser obtida através do Link:</br></br> ");
 		sb.append("<a href=\"");
-		sb.append(REGEX_LINK_VERSAO);
+		sb.append(gerarRegexLinkVersao());
 		sb.append("\"> ");
-		sb.append(REGEX_NOME_VERSAO);
-		sb.append("</br><p>O arquivo único deve ser utilizado para os ");
+		sb.append(gerarRegexNomeVersao());
+		sb.append("</a></br><p>O arquivo único deve ser utilizado para os ");
 		sb.append("servidores <b><font color=\"red\">BATCH e ONLINE</font>.</b></p></br>");
 
 		return sb.toString();
@@ -38,7 +38,7 @@ public class ConstantesTexto {
 	private static String inicializaValorCorpoEmailVersaoMobile() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<p>Foi liberado hoje uma versão ");
-		sb.append(REGEX_NOME_VERSAO);
+		sb.append(gerarRegexNomeVersao());
 		sb.append(". Segue em anexo, a versão   ");
 		sb.append("(APK) em conjunto com o documento Release Notes ");
 		sb.append("que representa todas as alterações atendidas nessa versão. ");
@@ -59,9 +59,9 @@ public class ConstantesTexto {
 		sb.append("que pode ser obtida através do link:</p></br>");
 		sb.append("<p>Versão ");
 		sb.append("<a href=\"");
-		sb.append(REGEX_LINK_VERSAO);
+		sb.append(gerarRegexLinkVersao());
 		sb.append("\"> ");
-		sb.append(REGEX_NOME_VERSAO);
+		sb.append(gerarRegexNomeVersao());
 		sb.append("</a>");
 		sb.append("</p></br>");
 		
@@ -93,13 +93,25 @@ public class ConstantesTexto {
 		sb.append("</p></b>");
 		sb.append("<p>");
 		sb.append("<a href=\"");
-		sb.append(REGEX_SCRIPT_VERSAO);
-		sb.append(" > ");
+		sb.append(gerarRegexScriptsVersao());
+		sb.append(" \"> ");
 		sb.append("Scripts Versão ");
-		sb.append(REGEX_NOME_VERSAO);
+		sb.append(gerarRegexNomeVersao());
 		sb.append("</a>");
 		sb.append("</p>");
 		
 		return sb.toString();
+	}
+	
+	private static String gerarRegexNomeVersao() {
+		return "%NAME_Version%";
+	}
+	
+	private static String gerarRegexScriptsVersao() {
+		return "%Link_Script_Version%";
+	}
+	
+	private static String gerarRegexLinkVersao() {
+			return "%Link_Version%";
 	}
 }

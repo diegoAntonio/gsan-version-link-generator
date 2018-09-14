@@ -109,10 +109,11 @@ public abstract class Email {
 	}
 	
 	protected String alterarConstantesTexto(String textoVersao) {
-		textoVersao.replace(ConstantesTexto.REGEX_LINK_VERSAO, this.linkVersao);
-		textoVersao.replace(ConstantesTexto.REGEX_NOME_VERSAO, this.versao);
-		textoVersao.replace(ConstantesTexto.REGEX_SCRIPT_VERSAO, this.linkScripts);
+		String temp;
+		temp = textoVersao.replace(ConstantesTexto.REGEX_LINK_VERSAO, this.linkVersao);
+		temp = temp.replace(ConstantesTexto.REGEX_NOME_VERSAO, this.versao);
+		temp = temp.replace(ConstantesTexto.REGEX_SCRIPT_VERSAO, this.linkScripts);
 		
-		return textoVersao.toString();
+		return temp.toString();
 	}
 }
