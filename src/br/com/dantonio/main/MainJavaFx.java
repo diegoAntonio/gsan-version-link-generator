@@ -1,7 +1,10 @@
 package br.com.dantonio.main;
 
+import java.io.File;
+
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.email.EmailsClientes;
+import br.com.dantonio.emailService.EmailService;
 import br.com.dantonio.gui.FramePrincipalJfx;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersao3_0;
@@ -13,6 +16,7 @@ import br.com.dantonio.textoEmail.decorators.Scripts;
 import br.com.dantonio.textoEmail.decorators.VersaoCasada;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import sun.font.Script;
 
 public class MainJavaFx extends Application {
 
@@ -24,8 +28,13 @@ public class MainJavaFx extends Application {
 		//System.out.println(testeEmailVersaoManam());
 		//System.out.println(testeEmailVersaoManamComScripts());
 		//System.out.println(testeEmailVersaoMobile());
-		System.out.println(testeEmailVersaoCasada());
+		//System.out.println(testeEmailVersaoCasada());
 		
+		System.out.println("Antes do envio email");
+		testeEnvioEmailDeVersaoMobileComAnexo();
+		System.out.println("Depois do Envio do email");
+		
+		System.exit(0);
 	}
 
 	@Override
@@ -183,5 +192,35 @@ public class MainJavaFx extends Application {
 		}
 		
 		return emailFinal.toString();
+	}
+	
+	private static void testeEnvioEmailDeVersaoComAnexo(){
+		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";
+		String nomeVersao = "3.33.0.2";
+		String produto = "GSAN";
+		File anexo = new File("/home/dantonio/Downloads/Release_Notes_3.33.0.2.pdf");
+		
+		Email email = new EmailVersao3_0(nomeVersao, linkVersao, produto, "");
+		
+		EmailService servico = new EmailService("daf@a.recife.ifpe.edu.br", "0Blackops1");
+		
+		servico.enviarEmailVersao("dantonio808@gmail.com", email.gerarEmailVersao(), anexo);
+	}
+	
+	private static void testeEnvioEmailDeVersaoMobileComAnexo() {
+		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";
+		String nomeVersao = "3.33.0.2";
+		String produto = "GSAN";
+		String linkScripts = "http://ftp.consensotec.com.br/banco/postgres/versao_db_comercial_20180910.rar";
+		File releaseNotes = new File("/home/dantonio/Downloads/Release_Notes_3.33.0.2.pdf");
+		File apk = new File("/home/dantonio/Downloads/isc-saae-6.2.09.2.rar");
+		
+		Email email = new EmailVersao3_0(nomeVersao, linkVersao, produto, linkScripts);
+		EmailDecorator decorator1 = new Scripts(email);
+		EmailDecorator decorador2 = new VersaoCasada(decorator1, ProdutosConsenso.ISC.getId());
+		
+		EmailService servico = new EmailService("daf@a.recife.ifpe.edu.br", "0Blackops1");
+		
+		servico.enviarEmailVersaoMobile("dantonio808@gmail.com", decorador2.gerarEmailVersao(), releaseNotes,apk);
 	}
 }

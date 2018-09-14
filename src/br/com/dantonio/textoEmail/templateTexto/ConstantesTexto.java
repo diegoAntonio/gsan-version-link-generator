@@ -26,12 +26,13 @@ public class ConstantesTexto {
 		sb.append("<p>Foi liberado hoje uma Versão GSAN  ");
 		sb.append("(" + gerarRegexNomeVersao() + ") ");
 		sb.append("para a base Postgres.");
-		sb.append("A versão pode ser obtida através do Link:</br></br> ");
-		sb.append("<a href=\"");
+		sb.append("A versão pode ser obtida através do Link:</p></br> ");
+		sb.append("<p><a href=\"");
 		sb.append(gerarRegexLinkVersao());
 		sb.append("\"> ");
+		sb.append(" Versão ");
 		sb.append(gerarRegexNomeVersao());
-		sb.append("</a></br><p>O arquivo único deve ser utilizado para os ");
+		sb.append("</a></p></br><p>O arquivo único deve ser utilizado para os ");
 		sb.append("servidores <b><font color=\"red\">BATCH e ONLINE</font>.</b></p></br>");
 
 		return sb.toString();
