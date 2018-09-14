@@ -10,6 +10,7 @@ import br.com.dantonio.textoEmail.baseClasses.EmailVersaoMobile;
 import br.com.dantonio.textoEmail.decorators.EmailDecorator;
 import br.com.dantonio.textoEmail.decorators.Emergencial;
 import br.com.dantonio.textoEmail.decorators.Scripts;
+import br.com.dantonio.textoEmail.decorators.VersaoCasada;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -22,7 +23,8 @@ public class MainJavaFx extends Application {
 		//System.out.println(testeEmailVersao3_0ComScripts());
 		//System.out.println(testeEmailVersaoManam());
 		//System.out.println(testeEmailVersaoManamComScripts());
-		System.out.println(testeEmailVersaoMobile());
+		//System.out.println(testeEmailVersaoMobile());
+		System.out.println(testeEmailVersaoCasada());
 		
 	}
 
@@ -135,6 +137,49 @@ public class MainJavaFx extends Application {
 		
 		for (String temp : email.gerarEmailVersao()) {
 			emailFinal.append(temp.toString() + " <br/>\n");
+		}
+		
+		return emailFinal.toString();
+	}
+	
+	private static String testeEmailVersaoCasada() {
+		StringBuilder emailFinal = new StringBuilder();
+		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";
+		String nomeVersao = "3.34.0.0";
+		Integer produtoMobile = ProdutosMobile.ISC.getId();
+		String produto = "GSAN";
+		Email email;
+		EmailDecorator decorator;
+		
+		email = new EmailVersao3_0(nomeVersao, linkVersao, produto, "");
+		decorator = new VersaoCasada(email, produtoMobile);
+		
+		
+		for (String temp : decorator.gerarEmailVersao()) {
+			emailFinal.append(temp.toString() + "\n");
+		}
+		
+		return emailFinal.toString();
+	}
+	
+	private static String testeEmailVersaoComScriptsECasada() {
+		StringBuilder emailFinal = new StringBuilder();
+		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";
+		String nomeVersao = "3.34.0.0";
+		Integer produtoMobile = ProdutosMobile.ISC.getId();
+		String linkScripts = "http://ftp.consensotec.com.br/banco/postgres/versao_db_comercial_20180910.rar";
+		String produto = "GSAN";
+		Email email;
+		EmailDecorator decorator;
+		EmailDecorator scripts;
+		
+		email = new EmailVersao3_0(nomeVersao, linkVersao, produto, linkScripts);
+		scripts = new Scripts(email);
+		decorator = new VersaoCasada(scripts, produtoMobile);
+		
+		
+		for (String temp : decorator.gerarEmailVersao()) {
+			emailFinal.append(temp.toString() + "\n");
 		}
 		
 		return emailFinal.toString();

@@ -12,6 +12,7 @@ public class ConstantesTexto {
 	public static String CORPO_EMAIL_VERSAO_MANAM = inicializaValorCorpoEmailManam();
 	public static String RODAPE_EMAIL = inicializarValorRodape();
 	public static String AVISO_SCRIPTS = inicializarAvisoScripts();
+	public static String AVISO_VERSAO_CASADA = inicializarAvisoVersaoCasada();
 	public static String AVISO_EMERGENCIAL = "EMERGENCIAL: ";
 	public static String REGEX_LINK_VERSAO = "%Link_Version%";
 	public static String REGEX_NOME_VERSAO = "%NAME_Version%";
@@ -103,6 +104,20 @@ public class ConstantesTexto {
 		sb.append("</a>");
 		sb.append("</p>");
 		
+		return sb.toString();
+	}
+	
+	private static String inicializarAvisoVersaoCasada() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("</br><b><p><font color=\"red\">Atenção</font>:");
+		sb.append(" Em anexo estão as apk(s) do ");
+		sb.append(gerarRegexNomeProdutoMobile());
+		sb.append(" que deve ser disponibilizada ");
+		sb.append("<font color=\"red\">CASADA</font>");
+		sb.append(" com a versão do GSAN ");
+		sb.append("ocasionando erro em caso do procedimento não ser feito. ");
+		sb.append("</p></b> </br>");
 		return sb.toString();
 	}
 	
