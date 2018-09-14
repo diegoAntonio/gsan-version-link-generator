@@ -52,15 +52,15 @@ public class ConstantesTexto {
 		
 		sb.append("<p>Prezados(as), </p></br>");
 		sb.append("<p>Foi liberado hoje uma Versão MANAM (");
-		sb.append(ConstantesTexto.REGEX_NOME_VERSAO);
+		sb.append(gerarRegexNomeVersao());
 		sb.append(") ,contemplando as seguintes Rm(s)" );
 		sb.append("que se encontram no release notes em anexo:</p> ");
 		sb.append("<p>Para isso, é necessário baixar a nova versão, ");
 		sb.append("que pode ser obtida através do link:</p></br>");
-		sb.append("<p>Versão ");
-		sb.append("<a href=\"");
+		sb.append("<p><a href=\" >");
 		sb.append(gerarRegexLinkVersao());
 		sb.append("\"> ");
+		sb.append("Versão ");
 		sb.append(gerarRegexNomeVersao());
 		sb.append("</a>");
 		sb.append("</p></br>");
