@@ -1,9 +1,11 @@
 package br.com.dantonio.main;
 
+import br.com.dantonio.email.EmailsClientes;
 import br.com.dantonio.gui.FramePrincipalJfx;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersao3_0;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersaoManam;
+import br.com.dantonio.textoEmail.baseClasses.EmailVersaoMobile;
 import br.com.dantonio.textoEmail.decorators.EmailDecorator;
 import br.com.dantonio.textoEmail.decorators.Emergencial;
 import br.com.dantonio.textoEmail.decorators.Scripts;
@@ -18,8 +20,8 @@ public class MainJavaFx extends Application {
 		//System.out.println(testeEmailVersao3_0Emergencial());
 		//System.out.println(testeEmailVersao3_0ComScripts());
 		//System.out.println(testeEmailVersaoManam());
-		System.out.println(testeEmailVersaoManamComScripts());
-//		System.out.println(testeEmailVersaoMobile());
+		//System.out.println(testeEmailVersaoManamComScripts());
+		System.out.println(testeEmailVersaoMobile());
 		
 	}
 
@@ -119,10 +121,20 @@ public class MainJavaFx extends Application {
 	}
 	
 	private static String testeEmailVersaoMobile() {
-		String linkVersao;
-		String nomeVersao;
-		String produto;
-		String linkScripts;
-		return null;
+		StringBuilder emailFinal = new StringBuilder();
+		String linkVersao = "";
+		String nomeVersao = "6.2.09.3";
+		String produto = "Impressão Simultânea de Contas (ISC)";
+		String linkScripts = "";
+		String empresa = EmailsClientes.CAERN.getNomeEmpresa();
+		Email email;
+		
+		email = new EmailVersaoMobile(nomeVersao, linkVersao, produto, linkScripts, empresa);
+		
+		for (String temp : email.gerarEmailVersao()) {
+			emailFinal.append(temp.toString() + " <br/>\n");
+		}
+		
+		return emailFinal.toString();
 	}
 }
