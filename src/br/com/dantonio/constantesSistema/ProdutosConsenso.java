@@ -9,17 +9,19 @@ import java.util.Arrays;
  * @author Diego.Ferreira
  *
  */
-public enum ProdutosMobile {
+public enum ProdutosConsenso {
 	ISC(0, "ISC", "Impressão Simultânea de Contas (ISC)"),
 	GSANAS(1, "GSANAS", "Acompanhamento de Ordens de Serviço"),
 	GSANEOS(2,"GSANEOS", "Execução de Ordem de Serviço"),
-	GSANAC(3,"GSANAC", "Atualização Cadastral");
+	GSANAC(3,"GSANAC", "Atualização Cadastral"),
+	GSAN(4,"Gsan", "Gestão de Saneamento Básico"),
+	MANAM(5,"MANAM", "MANAM");
 	
 	private Integer id;
 	private String nomeAppAbreviado;
 	private String nomeAppExtenso;
 
-	private ProdutosMobile(Integer id, String nomeAppAbreviado, String nomeAppExtenso) {
+	private ProdutosConsenso(Integer id, String nomeAppAbreviado, String nomeAppExtenso) {
 		this.id = id;
 		this.nomeAppAbreviado = nomeAppAbreviado;
 		this.nomeAppExtenso = nomeAppExtenso;
@@ -49,43 +51,43 @@ public enum ProdutosMobile {
 	}
 	
 	/**
-	 *  Recupera o nome extenso de um {@link ProdutosMobile} atraves de um
+	 *  Recupera o nome extenso de um {@link ProdutosConsenso} atraves de um
 	 *  codigo passado por parametro.
 	 *  
-	 * @param codigoProduto - Codigo do {@link ProdutosMobile} a ser encontrado.
+	 * @param codigoProduto - Codigo do {@link ProdutosConsenso} a ser encontrado.
 	 * @return {@link String} contendo o nome por Extenso.
 	 * @throws IllegalArgumentException - Caso o codigo do produto informado nao exista.
 	 */
 	public static String getNomeProdutoExtenso(int codigoProduto) {
-		ProdutosMobile produto = getById(new Integer(codigoProduto));
+		ProdutosConsenso produto = getById(new Integer(codigoProduto));
 		
 		return produto.getNomeAppExtenso();
 	}
 	
 	/**
-	 *  Recupera o nome abreviado de um {@link ProdutosMobile} atraves de um
+	 *  Recupera o nome abreviado de um {@link ProdutosConsenso} atraves de um
 	 *  codigo passado por parametro.
 	 *  
-	 * @param codigoProduto - Codigo do {@link ProdutosMobile} a ser encontrado.
+	 * @param codigoProduto - Codigo do {@link ProdutosConsenso} a ser encontrado.
 	 * @return {@link String} contendo o nome por Extenso.
 	 * @throws IllegalArgumentException - Caso o codigo do produto informado nao exista.
 	 */
 	public static String getNomeProdutoAbreviado(int codigoProduto) {
-		ProdutosMobile produto = getById(new Integer(codigoProduto));
+		ProdutosConsenso produto = getById(new Integer(codigoProduto));
 		
 		return produto.getNomeAppAbreviado();
 	}
 	
 	/**
-	 *  Recupera o nome extenso de um {@link ProdutosMobile} atraves de um
+	 *  Recupera o nome extenso de um {@link ProdutosConsenso} atraves de um
 	 *  id passado por parametro.
 	 *  
-	 * @param id - Id do {@link ProdutosMobile} a ser encontrado.
-	 * @return {@link ProdutosMobile}.
+	 * @param id - Id do {@link ProdutosConsenso} a ser encontrado.
+	 * @return {@link ProdutosConsenso}.
 	 * @throws IllegalArgumentException - Caso o codigo do produto informado nao exista.
 	 */
-	private static ProdutosMobile getById(Integer id) {
-		ProdutosMobile temp = Arrays.asList(ProdutosMobile.values()).stream()
+	private static ProdutosConsenso getById(Integer id) {
+		ProdutosConsenso temp = Arrays.asList(ProdutosConsenso.values()).stream()
 				.filter(p -> p.getId().intValue() == id.intValue()).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException());
 		

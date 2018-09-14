@@ -1,6 +1,6 @@
 package br.com.dantonio.main;
 
-import br.com.dantonio.constantesSistema.ProdutosMobile;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.email.EmailsClientes;
 import br.com.dantonio.gui.FramePrincipalJfx;
 import br.com.dantonio.textoEmail.baseClasses.Email;
@@ -127,13 +127,13 @@ public class MainJavaFx extends Application {
 		StringBuilder emailFinal = new StringBuilder();
 		String linkVersao = "";
 		String nomeVersao = "6.2.09.3";
-		String produto = ProdutosMobile.ISC.getNomeAppAbreviado();
+		String produto = ProdutosConsenso.ISC.getNomeAppAbreviado();
 		String linkScripts = "";
 		String empresa = EmailsClientes.CAERN.getNomeEmpresa();
 		Email email;
 		
 		email = new EmailVersaoMobile(nomeVersao, linkVersao, produto, linkScripts, empresa,
-				ProdutosMobile.ISC.getId());
+				ProdutosConsenso.ISC.getId());
 		
 		for (String temp : email.gerarEmailVersao()) {
 			emailFinal.append(temp.toString() + " <br/>\n");
@@ -146,7 +146,7 @@ public class MainJavaFx extends Application {
 		StringBuilder emailFinal = new StringBuilder();
 		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";
 		String nomeVersao = "3.34.0.0";
-		Integer produtoMobile = ProdutosMobile.ISC.getId();
+		Integer produtoMobile = ProdutosConsenso.ISC.getId();
 		String produto = "GSAN";
 		Email email;
 		EmailDecorator decorator;
@@ -166,7 +166,7 @@ public class MainJavaFx extends Application {
 		StringBuilder emailFinal = new StringBuilder();
 		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";
 		String nomeVersao = "3.34.0.0";
-		Integer produtoMobile = ProdutosMobile.ISC.getId();
+		Integer produtoMobile = ProdutosConsenso.ISC.getId();
 		String linkScripts = "http://ftp.consensotec.com.br/banco/postgres/versao_db_comercial_20180910.rar";
 		String produto = "GSAN";
 		Email email;

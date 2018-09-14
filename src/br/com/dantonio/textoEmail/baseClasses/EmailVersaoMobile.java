@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.dantonio.constantesSistema.Constantes;
-import br.com.dantonio.constantesSistema.ProdutosMobile;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
 
 /**
@@ -31,8 +31,8 @@ public class EmailVersaoMobile extends Email {
 		this.linkScripts = linkScripts;
 		this.produto = produto;
 		this.linkVersao = linkVersao;
-		this.nomeProdutoAbreviado = ProdutosMobile.getNomeProdutoAbreviado(codigoProduto);
-		this.nomeProdutoExtenso = ProdutosMobile.getNomeProdutoExtenso(codigoProduto);
+		this.nomeProdutoAbreviado = ProdutosConsenso.getNomeProdutoAbreviado(codigoProduto);
+		this.nomeProdutoExtenso = ProdutosConsenso.getNomeProdutoExtenso(codigoProduto);
 	}
 
 	@Override

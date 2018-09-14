@@ -1,7 +1,7 @@
 package br.com.dantonio.textoEmail.decorators;
 
 import br.com.dantonio.constantesSistema.Constantes;
-import br.com.dantonio.constantesSistema.ProdutosMobile;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
 
@@ -21,7 +21,7 @@ public class VersaoCasada extends EmailDecorator {
 		this.linkScripts = email.getLinkScripts();
 		this.linkVersao = email.getLinkVersao();
 		this.versao = email.getVersao();
-		this.nomeProdutoMobile = ProdutosMobile.getNomeProdutoAbreviado(codigoProdutoMobile);
+		this.nomeProdutoMobile = ProdutosConsenso.getNomeProdutoAbreviado(codigoProdutoMobile);
 	}
 
 	@Override
