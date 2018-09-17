@@ -6,8 +6,10 @@ import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -21,11 +23,14 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import br.com.dantonio.constantesSistema.Constantes;
+import br.com.dantonio.constantesSistema.OpcoesVersao;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.converter.LinkConverter;
 import br.com.dantonio.email.EmailsClientes;
 
@@ -34,7 +39,9 @@ public class FramePrincipalJfx {
 	private TextField inputLink;
 	private TextField resultadoLink;
 	private TextArea resultadoEmails;
-	private TextField textoVersao;
+	private ToggleGroup tipoVersao;
+	private ToggleGroup opcoesVersao;
+	
 	
 	public FramePrincipalJfx(Stage primaryStage) {
 		super();
@@ -120,15 +127,25 @@ public class FramePrincipalJfx {
 	}
 
 	private Tab gerarAbaTextoEmail() {
-		Tab abaTextoEmail = this.gerarAba("Texto do Email");
+		Tab abaTextoEmail = this.gerarAba("Tipo do Email");
 		VBox framePrincipal = this.gerarFramePrincipal();
+		HBox boxBotoes = new HBox();
+		Label labelBotoes = new Label("Escolha o Produto:");
+		Label labelOpcoes = new Label("Escolha as Opções:");
+		HBox boxOpcoes = new HBox();
 		
+		boxBotoes.getChildren().add(labelBotoes);
+		boxBotoes.getChildren().addAll(this.gerarRadioButtonsTiposProdutos());
+		framePrincipal.getChildren().add(boxBotoes);
 		
+		boxOpcoes.getChildren().add(labelOpcoes);
+		boxOpcoes.getChildren().addAll(this.gerarOpcoesEmail());
+		framePrincipal.getChildren().add(boxOpcoes);
 		
 		abaTextoEmail.setContent(framePrincipal);
 		return abaTextoEmail;
 	}
-	
+
 	private Tab gerarAbaEnvioEmail() {
 		Tab abaTextoEmail = this.gerarAba("Envio Email");
 		VBox framePrincipal = this.gerarFramePrincipal();
@@ -151,6 +168,34 @@ public class FramePrincipalJfx {
 		return emails;
 	}
 	
+	private List<RadioButton> gerarRadioButtonsTiposProdutos() {
+		List<RadioButton> botoesProduto = new ArrayList<RadioButton>();
+		this.tipoVersao = new ToggleGroup();
+		
+		for (ProdutosConsenso temp: ProdutosConsenso.values()) {
+			RadioButton botao = new RadioButton(temp.getNomeAppAbreviado());
+			botao.setToggleGroup(this.tipoVersao);
+			botao.setId(temp.getId().toString());
+			botao.setPadding(new Insets(0,10,0,10));
+			botoesProduto.add(botao);
+		}
+		
+		return botoesProduto;
+	}
+	
+	private List<CheckBox> gerarOpcoesEmail() {
+		List<CheckBox> listaChecks = new ArrayList<CheckBox>();
+		
+		for (OpcoesVersao temp : OpcoesVersao.values()) {
+			CheckBox checkbox = new CheckBox(temp.getDescricao());
+			checkbox.setId(temp.getId().toString());
+			checkbox.setPadding(new Insets(0,10,0,10));
+			checkbox.setOnAction(new CheckboxHandler());
+			listaChecks.add(checkbox);
+		}
+		
+		return listaChecks;
+	}
 	
 	private VBox gerarFramePrincipal() {
 		VBox frameGerado;
@@ -194,7 +239,7 @@ public class FramePrincipalJfx {
 					emails = EmailsClientes.getEmailClientes(valor.intValue());
 					break;
 				}
-
+				
 				resultadoEmails.setText(emails);
 			}
 			
@@ -212,5 +257,29 @@ public class FramePrincipalJfx {
 			}
 		}
 		
+	};
+	
+	private class CheckboxHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			CheckBox checkboxSelecionado = (CheckBox) arg0.getTarget();
+			
+			if(checkboxSelecionado != null){
+				Integer idSelecionado = new Integer(checkboxSelecionado.getId());
+				
+				switch(idSelecionado) {
+				//PossuiScripts
+				case 1:
+				break;
+				//Versao CASADA/ISC
+				case 2:
+					
+				break;
+				}
+			}
+			
+		}
+	
 	};
 }

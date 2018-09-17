@@ -16,25 +16,11 @@ import br.com.dantonio.textoEmail.decorators.Scripts;
 import br.com.dantonio.textoEmail.decorators.VersaoCasada;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import sun.font.Script;
 
 public class MainJavaFx extends Application {
 
 	public static void main(String[] args) {
-		//launch(args);
-		//System.out.println(testeEmailVersao3_0());
-		//System.out.println(testeEmailVersao3_0Emergencial());
-		//System.out.println(testeEmailVersao3_0ComScripts());
-		//System.out.println(testeEmailVersaoManam());
-		//System.out.println(testeEmailVersaoManamComScripts());
-		//System.out.println(testeEmailVersaoMobile());
-		//System.out.println(testeEmailVersaoCasada());
-		
-		System.out.println("Antes do envio email");
-		testeEnvioEmailDeVersaoMobileComAnexo();
-		System.out.println("Depois do Envio do email");
-		
-		System.exit(0);
+		launch(args);
 	}
 
 	@Override

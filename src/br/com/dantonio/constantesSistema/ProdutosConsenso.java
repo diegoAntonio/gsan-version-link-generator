@@ -14,7 +14,7 @@ public enum ProdutosConsenso {
 	GSANAS(1, "GSANAS", "Acompanhamento de Ordens de Serviço"),
 	GSANEOS(2,"GSANEOS", "Execução de Ordem de Serviço"),
 	GSANAC(3,"GSANAC", "Atualização Cadastral"),
-	GSAN(4,"Gsan", "Gestão de Saneamento Básico"),
+	GSAN(4,"GSAN", "Gestão de Saneamento Básico"),
 	MANAM(5,"MANAM", "MANAM");
 	
 	private Integer id;
