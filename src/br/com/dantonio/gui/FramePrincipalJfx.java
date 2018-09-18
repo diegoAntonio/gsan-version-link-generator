@@ -1,12 +1,17 @@
 package br.com.dantonio.gui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.dantonio.constantesSistema.Constantes;
+import br.com.dantonio.constantesSistema.OpcoesVersao;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
+import br.com.dantonio.converter.LinkConverter;
+import br.com.dantonio.email.EmailsClientes;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -28,11 +33,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import br.com.dantonio.constantesSistema.Constantes;
-import br.com.dantonio.constantesSistema.OpcoesVersao;
-import br.com.dantonio.constantesSistema.ProdutosConsenso;
-import br.com.dantonio.converter.LinkConverter;
-import br.com.dantonio.email.EmailsClientes;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
@@ -41,6 +41,10 @@ public class FramePrincipalJfx {
 	private TextArea resultadoEmails;
 	private ToggleGroup tipoVersao;
 	private ToggleGroup opcoesVersao;
+	private FlowPane testeEsconde;
+	private String linkScripts;
+	private File releaseNotes;
+	private File apk;
 	
 	
 	public FramePrincipalJfx(Stage primaryStage) {
@@ -132,7 +136,9 @@ public class FramePrincipalJfx {
 		HBox boxBotoes = new HBox();
 		Label labelBotoes = new Label("Escolha o Produto:");
 		Label labelOpcoes = new Label("Escolha as Opções:");
+		Label labelTeste = new Label("Isso vai sumir");		
 		HBox boxOpcoes = new HBox();
+		
 		
 		boxBotoes.getChildren().add(labelBotoes);
 		boxBotoes.getChildren().addAll(this.gerarRadioButtonsTiposProdutos());
@@ -141,6 +147,11 @@ public class FramePrincipalJfx {
 		boxOpcoes.getChildren().add(labelOpcoes);
 		boxOpcoes.getChildren().addAll(this.gerarOpcoesEmail());
 		framePrincipal.getChildren().add(boxOpcoes);
+		
+		this.testeEsconde = new FlowPane();
+		this.testeEsconde.getChildren().add(labelTeste);
+		this.testeEsconde.setVisible(false);
+		framePrincipal.getChildren().add(this.testeEsconde);
 		
 		abaTextoEmail.setContent(framePrincipal);
 		return abaTextoEmail;
@@ -271,6 +282,7 @@ public class FramePrincipalJfx {
 				switch(idSelecionado) {
 				//PossuiScripts
 				case 1:
+					testeEsconde.setVisible(!testeEsconde.isVisible());
 				break;
 				//Versao CASADA/ISC
 				case 2:
