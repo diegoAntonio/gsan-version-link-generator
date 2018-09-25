@@ -10,6 +10,7 @@ import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersao3_0;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersaoManam;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersaoMobile;
+import br.com.dantonio.textoEmail.baseClasses.EmailVersaoMunicipal;
 import br.com.dantonio.textoEmail.decorators.EmailDecorator;
 import br.com.dantonio.textoEmail.decorators.Emergencial;
 import br.com.dantonio.textoEmail.decorators.Scripts;
@@ -20,7 +21,11 @@ import javafx.stage.Stage;
 public class MainJavaFx extends Application {
 
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
+		System.out.println("Antes Envio");
+		testeEnvioEmailDeVersaoSorocaba();
+		System.out.println("Depois Envio");
+		System.exit(0);
 	}
 
 	@Override
@@ -208,5 +213,19 @@ public class MainJavaFx extends Application {
 		EmailService servico = new EmailService("daf@a.recife.ifpe.edu.br", "0Blackops1");
 		
 		servico.enviarEmailVersaoMobile("dantonio808@gmail.com", decorador2.gerarEmailVersao(), releaseNotes,apk);
+	}
+	
+	private static void testeEnvioEmailDeVersaoSorocaba() {
+		String linkVersao = "http://ftp.consensotec.com.br/ear/2018/Consenso/9-Setembro/Versao-3.33.0.2-13-09-2018/gsan_v3.33.0.2.rar";
+		String nomeVersao = "3.33.0.2";
+		String produto = "GSAN";
+		String linkScripts = "http://ftp.consensotec.com.br/banco/postgres/versao_db_comercial_20180910.rar";
+		String path = "C:\\Users\\gsan\\Downloads\\Release_Notes_3.34.1.0.pdf";
+		File releaseNotes = new File(path);
+		
+		Email email = new EmailVersaoMunicipal(nomeVersao, linkVersao, produto, linkScripts);
+		EmailService servico = new EmailService("daf@a.recife.ifpe.edu.br", "0Blackops1");
+		
+		servico.enviarEmailVersao("dantonio808@gmail.com", email.gerarEmailVersao(), releaseNotes);//("dantonio808@gmail.com", decorador2.gerarEmailVersao(), ;
 	}
 }

@@ -8,6 +8,7 @@ package br.com.dantonio.textoEmail.templateTexto;
  */
 public class ConstantesTexto {
 	public static String CORPO_EMAIL_VERSAO_3_0 = inicializarValorCorpoEmailVersao3_0();
+	public static String CORPO_EMAIL_VERSAO_MUNICIPAL = inicializarValorCorpoEmailVersaoMunicipal();
 	public static String CORPO_EMAIL_VERSAO_MOBILE = inicializaValorCorpoEmailVersaoMobile();
 	public static String CORPO_EMAIL_VERSAO_MANAM = inicializaValorCorpoEmailManam();
 	public static String RODAPE_EMAIL = inicializarValorRodape();
@@ -119,6 +120,25 @@ public class ConstantesTexto {
 		sb.append(" com a versão do GSAN ");
 		sb.append("ocasionando erro em caso do procedimento não ser feito. ");
 		sb.append("</p></b> </br>");
+		return sb.toString();
+	}
+	
+	private static String inicializarValorCorpoEmailVersaoMunicipal() {
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<p> Prezados(as), </p></br>");
+		sb.append("<p>Foi liberado hoje uma Versão  ");
+		sb.append("(" + gerarRegexNomeVersao() + ") ");
+		sb.append("para a versão Municipal do GSAN.");
+		sb.append("A versão pode ser obtida através do Link:</p></br> ");
+		sb.append("<p><a href=\"");
+		sb.append(gerarRegexLinkVersao());
+		sb.append("\"> ");
+		sb.append(" Versão ");
+		sb.append(gerarRegexNomeVersao());
+		sb.append("</a></p></br><p>O arquivo único deve ser utilizado para os ");
+		sb.append("servidores <b><font color=\"red\">BATCH e ONLINE</font>.</b></p></br>");
+		
 		return sb.toString();
 	}
 	
