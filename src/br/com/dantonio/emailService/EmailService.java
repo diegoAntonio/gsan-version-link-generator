@@ -78,6 +78,8 @@ public class EmailService {
 				multipart.addBodyPart(bodyPart2);
 				message.setContent(multipart);
 				Transport.send(message);
+			} else {
+				throw new UnsupportedOperationException("Nao é possível enviar versão sem Release Notes");
 			}
 			
 		} catch (MessagingException e) {
