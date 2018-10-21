@@ -44,10 +44,14 @@ public class ConstantesTexto {
 		sb.append(gerarRegexNomeProdutoMobile());
 		sb.append(" ");
 		sb.append(gerarRegexNomeVersao());
-		sb.append(". Segue em anexo, a versão   ");
+		sb.append(". Segue o link da versão ");
 		sb.append("(APK) em conjunto com o documento Release Notes ");
 		sb.append("que representa todas as alterações atendidas nessa versão. ");
 		sb.append("</p> ");
+		sb.append("<br/><p> ");
+		sb.append(gerarRegexLinkVersao());
+		sb.append("</p>");
+		
 		
 		return sb.toString();
 	}

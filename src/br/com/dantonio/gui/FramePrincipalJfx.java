@@ -43,8 +43,8 @@ public class FramePrincipalJfx {
 	private ToggleGroup opcoesVersao;
 	private FlowPane testeEsconde;
 	private String linkScripts;
+	private String linkVersaoMobile;
 	private File releaseNotes;
-	private File apk;
 	
 	
 	public FramePrincipalJfx(Stage primaryStage) {
