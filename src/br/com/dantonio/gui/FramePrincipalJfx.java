@@ -40,12 +40,15 @@ public class FramePrincipalJfx {
 	private TextField resultadoLink;
 	private TextField linkScripts;
 	private TextField linkVersaoMobile;
+	private TextField linkVersaoGsan;
 	private TextField[] linkVersoesMobileCasada;
 	private TextArea resultadoEmails;
 	private ToggleGroup tipoVersao;
 	private ToggleGroup opcoesVersao;
 	private VBox panelVersaoScript;
 	private VBox panelVersaoCasadaMobile;
+	private VBox panelParametrosVersaoGsan;
+	private VBox panelParametrosVersaoMobile;
 	private File releaseNotes;
 	
 	
@@ -141,13 +144,28 @@ public class FramePrincipalJfx {
 		Label labelVersaoCasadaGsaneos = new Label("Link Versão Gsaneos:");
 		Label labelVersaoCasadaGsanas = new Label("Link Versão Gsanas:");
 		Label labelVersaoCasadaAC = new Label("Link Versão Atualização Cadastral:");
+		Label labelTextoVersaoGsan = new Label("Link da Versão do Gsan");
+		Label labelTextoVersaoMobile = new Label("Informe o link para o APK");
 		HBox boxOpcoes = new HBox();
-		this.linkScripts = new TextField();
-		
+		this.linkScripts = new TextField();		
 		
 		boxBotoes.getChildren().add(labelBotoes);
 		boxBotoes.getChildren().addAll(this.gerarRadioButtonsTiposProdutos());
 		framePrincipal.getChildren().add(boxBotoes);
+		
+		this.linkVersaoGsan = new TextField();
+		this.panelParametrosVersaoGsan = new VBox();
+		this.panelParametrosVersaoGsan.getChildren().add(labelTextoVersaoGsan);
+		this.panelParametrosVersaoGsan.getChildren().add(this.linkVersaoGsan);
+		this.panelParametrosVersaoGsan.setVisible(false);
+		framePrincipal.getChildren().add(this.panelParametrosVersaoGsan);
+		
+		this.linkVersaoMobile = new TextField();
+		this.panelParametrosVersaoMobile = new VBox();
+		this.panelParametrosVersaoMobile.getChildren().add(labelTextoVersaoMobile);
+		this.panelParametrosVersaoMobile.getChildren().add(this.linkVersaoMobile);
+		this.panelParametrosVersaoMobile.setVisible(false);
+		framePrincipal.getChildren().add(this.panelParametrosVersaoMobile);
 		
 		boxOpcoes.getChildren().add(labelOpcoes);
 		boxOpcoes.getChildren().addAll(this.gerarOpcoesEmail());
@@ -209,6 +227,7 @@ public class FramePrincipalJfx {
 			botao.setId(temp.getId().toString());
 			botao.setPadding(new Insets(0,10,0,10));
 			botoesProduto.add(botao);
+			botao.setOnAction(new ParametrosEmailRadioButtonHandler());
 		}
 		
 		return botoesProduto;
@@ -316,6 +335,25 @@ public class FramePrincipalJfx {
 					panelVersaoCasadaMobile.setVisible(!panelVersaoCasadaMobile.isVisible());
 					break;
 				}
+			}
+		}
+	};
+	
+	private  class ParametrosEmailRadioButtonHandler implements EventHandler<ActionEvent> {
+		@Override
+		public void handle(ActionEvent event) {
+			RadioButton selecionado = (RadioButton) event.getTarget();
+			
+			if(selecionado != null) {
+				Integer idProduto = new Integer(selecionado.getId());
+				
+				if(ProdutosConsenso.isVersaoGsan(idProduto)) {
+					panelParametrosVersaoGsan.setVisible(true);
+					panelParametrosVersaoMobile.setVisible(false);
+				} else if(ProdutosConsenso.isVersaoMobile(idProduto)) {
+					panelParametrosVersaoMobile.setVisible(true);
+					panelParametrosVersaoGsan.setVisible(false);
+				}	
 			}
 		}
 	};

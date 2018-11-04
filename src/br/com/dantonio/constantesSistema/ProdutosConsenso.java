@@ -15,7 +15,8 @@ public enum ProdutosConsenso {
 	GSANEOS(2,"GSANEOS", "Execução de Ordem de Serviço"),
 	GSANAC(3,"GSANAC", "Atualização Cadastral"),
 	GSAN(4,"GSAN", "Gestão de Saneamento Básico"),
-	MANAM(5,"MANAM", "MANAM");
+	MANAM(5,"MANAM", "MANAM"),
+	GSAN_MUNICIPAL(6,"GSAN - MUNICIPAL", "Gestão de Saneamento Básico - Municipal");
 	
 	private Integer id;
 	private String nomeAppAbreviado;
@@ -92,5 +93,38 @@ public enum ProdutosConsenso {
 				.orElseThrow(() -> new IllegalArgumentException());
 		
 		return temp;
+	}
+
+	/**
+	 * Verifica se o id informado pertence a uma versao de um produto mobile.
+	 * 
+	 * @param id - id informado.
+	 * @return true se for um produto mobile, false caso contrario.
+	 */
+	public static boolean isVersaoMobile(Integer id) {
+		boolean isVersaoMobile = false;
+
+		if (id.equals(GSANAC.getId()) || id.equals(GSANAS.getId()) || id.equals(GSANAS.getId())
+				|| id.equals(GSANEOS.getId())) {
+			isVersaoMobile = true;
+		}
+
+		return isVersaoMobile;
+	}
+
+	/**
+	 * Verifica se o id informado pertence a uma versao de um produto Gsan.
+	 * 
+	 * @param id - id informado.
+	 * @return true se for um produto Gsan, false caso contrario.
+	 */
+	public static boolean isVersaoGsan(Integer id) {
+		boolean isVersaoGsan = false;
+
+		if (id.equals(GSAN.getId()) || id.equals(GSAN_MUNICIPAL.getId()) || id.equals(MANAM.getId())) {
+			isVersaoGsan = true;
+		}
+
+		return isVersaoGsan;
 	}
 }
