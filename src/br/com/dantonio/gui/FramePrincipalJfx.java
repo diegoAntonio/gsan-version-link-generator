@@ -149,10 +149,12 @@ public class FramePrincipalJfx {
 		HBox boxOpcoes = new HBox();
 		this.linkScripts = new TextField();		
 		
+		//RadioButtons com os produtos.
 		boxBotoes.getChildren().add(labelBotoes);
 		boxBotoes.getChildren().addAll(this.gerarRadioButtonsTiposProdutos());
 		framePrincipal.getChildren().add(boxBotoes);
 		
+		//Painel com o link do Gsan
 		this.linkVersaoGsan = new TextField();
 		this.panelParametrosVersaoGsan = new VBox();
 		this.panelParametrosVersaoGsan.getChildren().add(labelTextoVersaoGsan);
@@ -160,6 +162,7 @@ public class FramePrincipalJfx {
 		this.panelParametrosVersaoGsan.setVisible(false);
 		framePrincipal.getChildren().add(this.panelParametrosVersaoGsan);
 		
+		//Painel com o link da versao Mobile
 		this.linkVersaoMobile = new TextField();
 		this.panelParametrosVersaoMobile = new VBox();
 		this.panelParametrosVersaoMobile.getChildren().add(labelTextoVersaoMobile);
@@ -167,19 +170,21 @@ public class FramePrincipalJfx {
 		this.panelParametrosVersaoMobile.setVisible(false);
 		framePrincipal.getChildren().add(this.panelParametrosVersaoMobile);
 		
+		//Lista de Checkbox com as opcoes de versao disponivel
 		boxOpcoes.getChildren().add(labelOpcoes);
 		boxOpcoes.getChildren().addAll(this.gerarOpcoesEmail());
 		framePrincipal.getChildren().add(boxOpcoes);
 		
+		//Painel com o link para a versao que contenha Scripts.
 		this.panelVersaoScript = new VBox();
 		this.panelVersaoScript.getChildren().add(labelScript);
 		this.panelVersaoScript.setVisible(false);
 		this.panelVersaoScript.getChildren().add(this.linkScripts);
 		framePrincipal.getChildren().add(this.panelVersaoScript);
 		
+		//Painel com os possiveis produtos mobile.
 		this.panelVersaoCasadaMobile = new VBox();
 		this.iniciarArrayVersoesMobileCasadas();
-		
 		this.panelVersaoCasadaMobile.getChildren().add(labelVersaoCasadaISC);
 		this.panelVersaoCasadaMobile.getChildren().add(this.linkVersoesMobileCasada[0]);
 		this.panelVersaoCasadaMobile.getChildren().add(labelVersaoCasadaGsanas);
@@ -191,7 +196,9 @@ public class FramePrincipalJfx {
 		this.panelVersaoCasadaMobile.setVisible(false);
 		framePrincipal.getChildren().add(this.panelVersaoCasadaMobile);
 		
+		
 		abaTextoEmail.setContent(framePrincipal);
+		
 		return abaTextoEmail;
 	}
 

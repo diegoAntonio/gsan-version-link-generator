@@ -105,7 +105,7 @@ public enum ProdutosConsenso {
 		boolean isVersaoMobile = false;
 
 		if (id.equals(GSANAC.getId()) || id.equals(GSANAS.getId()) || id.equals(GSANAS.getId())
-				|| id.equals(GSANEOS.getId())) {
+				|| id.equals(GSANEOS.getId()) || id.equals(ISC.getId())) {
 			isVersaoMobile = true;
 		}
 
