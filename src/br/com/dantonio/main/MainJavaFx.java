@@ -21,11 +21,11 @@ import javafx.stage.Stage;
 public class MainJavaFx extends Application {
 
 	public static void main(String[] args) {
-		//launch(args);
-		System.out.println("Antes Envio");
-		testeEnvioEmailDeVersaoSorocaba();
-		System.out.println("Depois Envio");
-		System.exit(0);
+		launch(args);
+//		System.out.println("Antes Envio");
+//		testeEnvioEmailDeVersaoSorocaba();
+//		System.out.println("Depois Envio");
+//		System.exit(0);
 	}
 
 	@Override

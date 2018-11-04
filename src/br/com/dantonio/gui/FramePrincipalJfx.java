@@ -38,12 +38,15 @@ public class FramePrincipalJfx {
 	private Stage primaryStage;
 	private TextField inputLink;
 	private TextField resultadoLink;
+	private TextField linkScripts;
+	private TextField linkVersaoMobile;
+	private TextField[] linkVersoesMobileCasada;
 	private TextArea resultadoEmails;
 	private ToggleGroup tipoVersao;
 	private ToggleGroup opcoesVersao;
-	private FlowPane testeEsconde;
-	private String linkScripts;
-	private String linkVersaoMobile;
+	private FlowPane panelVersaoScript;
+	private FlowPane panelVersaoCasadaMobile;
+	private boolean isVersaoEmergencial;
 	private File releaseNotes;
 	
 	
@@ -61,14 +64,12 @@ public class FramePrincipalJfx {
 	        StackPane root = new StackPane();
 	        root.getChildren().add(this.gerarPainelDeAbas());
 	        primaryStage.setScene(new Scene(root, 300, 250));
-	        
-		
 	}
 	
 	private TabPane gerarPainelDeAbas() {
 		TabPane painel = new TabPane();
 		painel.getTabs().add(this.gerarAbaEmailClientes());
-		painel.getTabs().add(this.gerarAbaTextoEmail());
+		painel.getTabs().add(this.gerarAbaTipoEmail());
 		painel.getTabs().add(this.gerarAbaEnvioEmail());
 		
 		return painel;
@@ -130,14 +131,19 @@ public class FramePrincipalJfx {
 		return abaEmailsClientes;
 	}
 
-	private Tab gerarAbaTextoEmail() {
+	private Tab gerarAbaTipoEmail() {
 		Tab abaTextoEmail = this.gerarAba("Tipo do Email");
 		VBox framePrincipal = this.gerarFramePrincipal();
 		HBox boxBotoes = new HBox();
 		Label labelBotoes = new Label("Escolha o Produto:");
 		Label labelOpcoes = new Label("Escolha as Opções:");
-		Label labelTeste = new Label("Isso vai sumir");		
+		Label labelScript = new Label("Informe o link da versão:");
+		Label labelVersaoCasadaISC = new Label("Link Versão ISC:");
+		Label labelVersaoCasadaGsaneos = new Label("Link Versão Gsaneos:");
+		Label labelVersaoCasadaGsanas = new Label("Link Versão Gsanas:");
+		Label labelVersaoCasadaAC = new Label("Link Versão Atualização Cadastral:");
 		HBox boxOpcoes = new HBox();
+		this.linkScripts = new TextField();
 		
 		
 		boxBotoes.getChildren().add(labelBotoes);
@@ -148,10 +154,25 @@ public class FramePrincipalJfx {
 		boxOpcoes.getChildren().addAll(this.gerarOpcoesEmail());
 		framePrincipal.getChildren().add(boxOpcoes);
 		
-		this.testeEsconde = new FlowPane();
-		this.testeEsconde.getChildren().add(labelTeste);
-		this.testeEsconde.setVisible(false);
-		framePrincipal.getChildren().add(this.testeEsconde);
+		this.panelVersaoScript = new FlowPane();
+		this.panelVersaoScript.getChildren().add(labelScript);
+		this.panelVersaoScript.setVisible(false);
+		this.panelVersaoScript.getChildren().add(this.linkScripts);
+		framePrincipal.getChildren().add(this.panelVersaoScript);
+		
+		this.panelVersaoCasadaMobile = new FlowPane();
+		this.iniciarArrayVersoesMobileCasadas();
+		
+		this.panelVersaoCasadaMobile.getChildren().add(labelVersaoCasadaISC);
+		this.panelVersaoCasadaMobile.getChildren().add(this.linkVersoesMobileCasada[0]);
+		this.panelVersaoCasadaMobile.getChildren().add(labelVersaoCasadaGsanas);
+		this.panelVersaoCasadaMobile.getChildren().add(this.linkVersoesMobileCasada[1]);
+		this.panelVersaoCasadaMobile.getChildren().add(labelVersaoCasadaGsaneos);
+		this.panelVersaoCasadaMobile.getChildren().add(this.linkVersoesMobileCasada[2]);
+		this.panelVersaoCasadaMobile.getChildren().add(labelVersaoCasadaAC);
+		this.panelVersaoCasadaMobile.getChildren().add(this.linkVersoesMobileCasada[3]);
+		this.panelVersaoCasadaMobile.setVisible(false);
+		framePrincipal.getChildren().add(this.panelVersaoCasadaMobile);
 		
 		abaTextoEmail.setContent(framePrincipal);
 		return abaTextoEmail;
@@ -222,6 +243,14 @@ public class FramePrincipalJfx {
 		return frameGerado;
 	}
 	
+	private void iniciarArrayVersoesMobileCasadas() {
+		this.linkVersoesMobileCasada = new TextField[4];
+		
+		for (int i = 0; i < linkVersoesMobileCasada.length; i++) {
+			this.linkVersoesMobileCasada[i] = new TextField();
+		}
+	}
+	
 	private class RadioButtonHandler implements EventHandler<ActionEvent>{
 
 		@Override
@@ -271,27 +300,25 @@ public class FramePrincipalJfx {
 	};
 	
 	private class CheckboxHandler implements EventHandler<ActionEvent> {
-
 		@Override
 		public void handle(ActionEvent arg0) {
 			CheckBox checkboxSelecionado = (CheckBox) arg0.getTarget();
-			
-			if(checkboxSelecionado != null){
+
+			if (checkboxSelecionado != null) {
+				System.out.println("MAOE!");
 				Integer idSelecionado = new Integer(checkboxSelecionado.getId());
-				
-				switch(idSelecionado) {
-				//PossuiScripts
+
+				switch (idSelecionado) {
+				// PossuiScripts
 				case 1:
-					testeEsconde.setVisible(!testeEsconde.isVisible());
-				break;
-				//Versao CASADA/ISC
+					panelVersaoScript.setVisible(!panelVersaoScript.isVisible());
+					break;
+				// Versao CASADA/MOBILE
 				case 2:
-					
-				break;
+					panelVersaoCasadaMobile.setVisible(!panelVersaoCasadaMobile.isVisible());
+					break;
 				}
 			}
-			
 		}
-	
 	};
 }
