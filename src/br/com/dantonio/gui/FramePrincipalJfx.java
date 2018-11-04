@@ -44,9 +44,8 @@ public class FramePrincipalJfx {
 	private TextArea resultadoEmails;
 	private ToggleGroup tipoVersao;
 	private ToggleGroup opcoesVersao;
-	private FlowPane panelVersaoScript;
-	private FlowPane panelVersaoCasadaMobile;
-	private boolean isVersaoEmergencial;
+	private VBox panelVersaoScript;
+	private VBox panelVersaoCasadaMobile;
 	private File releaseNotes;
 	
 	
@@ -154,13 +153,13 @@ public class FramePrincipalJfx {
 		boxOpcoes.getChildren().addAll(this.gerarOpcoesEmail());
 		framePrincipal.getChildren().add(boxOpcoes);
 		
-		this.panelVersaoScript = new FlowPane();
+		this.panelVersaoScript = new VBox();
 		this.panelVersaoScript.getChildren().add(labelScript);
 		this.panelVersaoScript.setVisible(false);
 		this.panelVersaoScript.getChildren().add(this.linkScripts);
 		framePrincipal.getChildren().add(this.panelVersaoScript);
 		
-		this.panelVersaoCasadaMobile = new FlowPane();
+		this.panelVersaoCasadaMobile = new VBox();
 		this.iniciarArrayVersoesMobileCasadas();
 		
 		this.panelVersaoCasadaMobile.getChildren().add(labelVersaoCasadaISC);
@@ -305,7 +304,6 @@ public class FramePrincipalJfx {
 			CheckBox checkboxSelecionado = (CheckBox) arg0.getTarget();
 
 			if (checkboxSelecionado != null) {
-				System.out.println("MAOE!");
 				Integer idSelecionado = new Integer(checkboxSelecionado.getId());
 
 				switch (idSelecionado) {
