@@ -16,7 +16,7 @@ public enum EmailsClientes {
 	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br,gsanhelp@deso-se.com.br,brunomenezes@deso-se.com.br"), 
 	CAERD(Constantes.CAERD,"CAERD","jander@caerd-ro.com.br"), 
 	MANAM(Constantes.MANAM,"MANAM", "estevao.carvalho@manausambiental.com.br, luana.magalhaes@procenge.com.br,sandy.soares@procenge.com.br"), 
-	SOROCABA(Constantes.SOROCABA,"SOROCABA", "Alexandre.Venturine@procenge.com.br,guilherme.oliveira@procenge.com.br,joaomarcos@saaesorocaba.sp.gov.br,fabiocacace@saaesorocaba.sp.gov.br"), 
+	SOROCABA(Constantes.SOROCABA,"SOROCABA", "joaomarcos@saaesorocaba.sp.gov.br,fabiocacace@saaesorocaba.sp.gov.br,guilherme.oliveira@procenge.com.br,operacaoal@procenge.com.br"), 
 	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br,Erick@cagepa.pb.gov.br,ILKASOUSA@cagepa.pb.gov.br,isaias@cagepa.pb.gov.br,ricardo@cagepa.pb.gov.br"),
 	OperacaoProcenge(Constantes.OPERACAO_PROCENGE,"OP. PROCENGE","operacaoal@procenge.com.br"),
 	CLIENTES_FTP(Constantes.CLIENTES_FTP, "CLIENTES_3.0_FTP",""),
