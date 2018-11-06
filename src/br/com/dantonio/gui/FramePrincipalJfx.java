@@ -4,24 +4,25 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.dantonio.constantesSistema.Constantes;
-import br.com.dantonio.constantesSistema.OpcoesVersao;
-import br.com.dantonio.constantesSistema.ProdutosConsenso;
-import br.com.dantonio.converter.LinkConverter;
-import br.com.dantonio.email.EmailsClientes;
+import com.sun.scenario.effect.Effect.AccelType;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -33,6 +34,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import br.com.dantonio.constantesSistema.Constantes;
+import br.com.dantonio.constantesSistema.OpcoesVersao;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
+import br.com.dantonio.converter.LinkConverter;
+import br.com.dantonio.email.EmailsClientes;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
@@ -42,6 +48,9 @@ public class FramePrincipalJfx {
 	private TextField linkVersaoMobile;
 	private TextField linkVersaoGsan;
 	private TextField[] linkVersoesMobileCasada;
+	private TextField emailEnvio;
+	private Alert mensagemsErro;
+	private PasswordField senhaEmailEnvio;
 	private TextArea resultadoEmails;
 	private ToggleGroup tipoVersao;
 	private ToggleGroup opcoesVersao;
@@ -205,7 +214,22 @@ public class FramePrincipalJfx {
 	private Tab gerarAbaEnvioEmail() {
 		Tab abaTextoEmail = this.gerarAba("Envio Email");
 		VBox framePrincipal = this.gerarFramePrincipal();
+		Label labelExplicacao = new Label("Informe email/senha para envio da versão:");
+		Label labelEmail = new Label("Email:");
+		Label labelSenha = new Label("Senha:");
+		Button botaoEnvio = new Button("Enviar Versão");
 		
+		this.emailEnvio = new TextField();
+		this.senhaEmailEnvio = new PasswordField();
+		botaoEnvio.setOnAction(new BotaoEnvioHandler());
+		
+		framePrincipal.getChildren().add(labelExplicacao);
+		framePrincipal.getChildren().add(labelEmail);
+		framePrincipal.getChildren().add(this.emailEnvio);
+		framePrincipal.getChildren().add(labelSenha);
+		framePrincipal.getChildren().add(this.senhaEmailEnvio);
+		framePrincipal.getChildren().add(botaoEnvio);
+
 		abaTextoEmail.setContent(framePrincipal);
 		return abaTextoEmail;
 	}
@@ -363,5 +387,19 @@ public class FramePrincipalJfx {
 				}	
 			}
 		}
+	};
+	
+	
+	private class BotaoEnvioHandler implements EventHandler<ActionEvent> {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			mensagemsErro = new Alert(AlertType.ERROR);
+			mensagemsErro.hide();
+			
+			mensagemsErro.setContentText("MAOE!");
+			mensagemsErro.show();
+		}
+		
 	};
 }
