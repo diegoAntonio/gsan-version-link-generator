@@ -10,7 +10,7 @@ public enum EmailsClientes {
 	
 	EMPRESAS_3_0(Constantes.TODAS_EMPRESAS ,"TODAS_EMPRESAS_3_0", ""), 
 	CAERN(Constantes.CAERN,"CAERN", "aalcides@caern.com.br,jcardoso@caern.com.br,rodolfo@caern.com.br,rodrigoaraujo@caern.com.br,ricardodias@caern.com.br,marciogomes@caern.com.br,suportecaern@gmail.com,suportegsi@caern.com.br,joaomaynard@hotmail.com,ricardo.rochadias@gmail.com,carloscamara@caern.com.br,suportegti@caern.com.br,tiagocorcelli@gmail.com,ceac13@gmail.com,saskya@caern.com.br"), 
-	CASAL(Constantes.CASAL,"CASAL", "diogo.fonseca@casal.al.gov.br, cleiton.hardy@casal.al.gov.br, suporte.getin@casal.al.gov.br,mercia.macario@casal.al.gov.br"), 
+	CASAL(Constantes.CASAL,"CASAL", "cleiton.hardy@casal.al.gov.br, deborah.tayse@procenge.com.br, diogo.fonseca@casal.al.gov.br, mercia.macario@casal.al.gov.br, thiago.lima@casal.al.gov.br"), 
 	CAERR(Constantes.CAERR,"CAERR", "laurencelamare@gmail.com,tony@caer.com.br,wagmedrado@gmail.com"), 
 	SAAE_JUA(Constantes.SAAE_JUA, "SAAE-JUAZEIRO", "hegira.saae@gmail.com,ti@saaejuazeiro.com.br"), 
 	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br,gsanhelp@deso-se.com.br,brunomenezes@deso-se.com.br"), 
@@ -18,7 +18,7 @@ public enum EmailsClientes {
 	MANAM(Constantes.MANAM,"MANAM", "estevao.carvalho@manausambiental.com.br, luana.magalhaes@procenge.com.br,sandy.soares@procenge.com.br"), 
 	SOROCABA(Constantes.SOROCABA,"SOROCABA", "joaomarcos@saaesorocaba.sp.gov.br,fabiocacace@saaesorocaba.sp.gov.br,guilherme.oliveira@procenge.com.br,operacaoal@procenge.com.br"), 
 	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br,Erick@cagepa.pb.gov.br,ILKASOUSA@cagepa.pb.gov.br,isaias@cagepa.pb.gov.br,ricardo@cagepa.pb.gov.br"),
-	OperacaoProcenge(Constantes.OPERACAO_PROCENGE,"OP. PROCENGE","operacaoal@procenge.com.br"),
+	OPERACAO_PROCENGE(Constantes.OPERACAO_PROCENGE,"OP. PROCENGE","operacaoal@procenge.com.br"),
 	CLIENTES_FTP(Constantes.CLIENTES_FTP, "CLIENTES_3.0_FTP",""),
 	CLIENTES_JENKINS(Constantes.CLIENTES_JENKINS, "CLIENTES_3.0_Jenkins","");
 
