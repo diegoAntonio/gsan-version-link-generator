@@ -1,10 +1,7 @@
 package br.com.dantonio.gui;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.sun.scenario.effect.Effect.AccelType;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +19,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -39,6 +35,7 @@ import br.com.dantonio.constantesSistema.OpcoesVersao;
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.converter.LinkConverter;
 import br.com.dantonio.email.EmailsClientes;
+import br.com.dantonio.helpers.HelperEnvioEmail;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
@@ -47,6 +44,7 @@ public class FramePrincipalJfx {
 	private TextField linkScripts;
 	private TextField linkVersaoMobile;
 	private TextField linkVersaoGsan;
+	private TextField caminhoArquivoReleaseNotes;
 	private TextField[] linkVersoesMobileCasada;
 	private TextField emailEnvio;
 	private Alert mensagemsErro;
@@ -58,7 +56,6 @@ public class FramePrincipalJfx {
 	private VBox panelVersaoCasadaMobile;
 	private VBox panelParametrosVersaoGsan;
 	private VBox panelParametrosVersaoMobile;
-	private File releaseNotes;
 	
 	
 	public FramePrincipalJfx(Stage primaryStage) {
@@ -394,11 +391,11 @@ public class FramePrincipalJfx {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			mensagemsErro = new Alert(AlertType.ERROR);
-			mensagemsErro.hide();
-			
-			mensagemsErro.setContentText("MAOE!");
-			mensagemsErro.show();
+			HelperEnvioEmail helper = new HelperEnvioEmail(inputLink,
+					resultadoLink, linkScripts, linkVersaoMobile,
+					linkVersaoGsan, resultadoEmails,
+					caminhoArquivoReleaseNotes, linkVersoesMobileCasada,
+					tipoVersao, opcoesVersao);
 		}
 		
 	};
