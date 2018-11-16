@@ -1,5 +1,7 @@
 package br.com.dantonio.constantesSistema;
 
+import java.util.Arrays;
+
 /**
  *  Classe que modela as op&ccedil;&otilde;es de envio de email
  *  que ser&atilde;o disponibilizadas pelo programa.
@@ -34,5 +36,13 @@ public enum OpcoesVersao {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public static OpcoesVersao getByStringId(String codigoOpcao) {
+		int id = Integer.parseInt(codigoOpcao);
+		OpcoesVersao opcao = Arrays.asList(OpcoesVersao.values()).stream().filter(s-> s.getId() == id).findFirst()
+				.orElseThrow(() -> new IllegalArgumentException());
+		
+		return opcao;
 	}
 }

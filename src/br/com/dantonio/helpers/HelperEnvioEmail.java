@@ -1,5 +1,7 @@
 package br.com.dantonio.helpers;
 
+import br.com.dantonio.constantesSistema.OpcoesVersao;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -22,14 +24,14 @@ public class HelperEnvioEmail {
 	private TextField caminhoArquivoReleaseNotes;
 	private TextField[] linkVersoesMobileCasada;
 	private ToggleGroup tipoVersao;
-	private ToggleGroup opcoesVersao;
+	private CheckBox[] opcoesVersao;
 	
 	public HelperEnvioEmail(TextField inputLink, TextField resultadoLink,
 			TextField linkScripts, TextField linkVersaoMobile,
 			TextField linkVersaoGsan, TextArea resultadoEmails,
 			TextField caminhoArquivoReleaseNotes,
 			TextField[] linkVersoesMobileCasada, ToggleGroup tipoVersao,
-			ToggleGroup opcoesVersao) {
+			CheckBox[] opcoesVersao) {
 		super();
 		this.inputLink = inputLink;
 		this.resultadoLink = resultadoLink;
@@ -115,11 +117,23 @@ public class HelperEnvioEmail {
 		this.tipoVersao = tipoVersao;
 	}
 
-	public ToggleGroup getOpcoesVersao() {
+	public CheckBox[] getOpcoesVersao() {
 		return opcoesVersao;
 	}
 
-	public void setOpcoesVersao(ToggleGroup opcoesVersao) {
+	public void setOpcoesVersao(CheckBox[] opcoesVersao) {
 		this.opcoesVersao = opcoesVersao;
+	}
+	
+	public void testarCheckboxPreenchidos() {
+		for (CheckBox check : this.opcoesVersao) {
+			if(check.selectedProperty() != null && Boolean.TRUE.equals(check.selectedProperty().get())){
+				StringBuilder text = new StringBuilder();
+				OpcoesVersao test = OpcoesVersao.getByStringId(check.getId());
+				text.append(test.getDescricao());
+				text.append(" - SELECIONADO");
+				System.out.println(text.toString());
+			}
+		}
 	}
 }

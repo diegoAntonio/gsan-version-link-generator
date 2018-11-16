@@ -1,5 +1,6 @@
 package br.com.dantonio.gui;
 
+import java.awt.Checkbox;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class FramePrincipalJfx {
 	private VBox panelVersaoCasadaMobile;
 	private VBox panelParametrosVersaoGsan;
 	private VBox panelParametrosVersaoMobile;
-	
+	private CheckBox[] checkboxlst;
 	
 	public FramePrincipalJfx(Stage primaryStage) {
 		super();
@@ -263,6 +264,8 @@ public class FramePrincipalJfx {
 	
 	private List<CheckBox> gerarOpcoesEmail() {
 		List<CheckBox> listaChecks = new ArrayList<CheckBox>();
+		int index = 0;
+		this.checkboxlst = new CheckBox[OpcoesVersao.values().length];
 		
 		for (OpcoesVersao temp : OpcoesVersao.values()) {
 			CheckBox checkbox = new CheckBox(temp.getDescricao());
@@ -270,6 +273,8 @@ public class FramePrincipalJfx {
 			checkbox.setPadding(new Insets(0,10,0,10));
 			checkbox.setOnAction(new CheckboxHandler());
 			listaChecks.add(checkbox);
+			this.checkboxlst[index] = checkbox;
+			index++;
 		}
 		
 		return listaChecks;
@@ -388,14 +393,15 @@ public class FramePrincipalJfx {
 	
 	
 	private class BotaoEnvioHandler implements EventHandler<ActionEvent> {
-
 		@Override
 		public void handle(ActionEvent arg0) {
 			HelperEnvioEmail helper = new HelperEnvioEmail(inputLink,
 					resultadoLink, linkScripts, linkVersaoMobile,
 					linkVersaoGsan, resultadoEmails,
 					caminhoArquivoReleaseNotes, linkVersoesMobileCasada,
-					tipoVersao, opcoesVersao);
+					tipoVersao, checkboxlst);
+			
+			helper.testarCheckboxPreenchidos();
 		}
 		
 	};
