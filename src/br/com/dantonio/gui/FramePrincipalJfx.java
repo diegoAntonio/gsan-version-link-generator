@@ -1,6 +1,5 @@
 package br.com.dantonio.gui;
 
-import java.awt.Checkbox;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +35,7 @@ import br.com.dantonio.constantesSistema.OpcoesVersao;
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.converter.LinkConverter;
 import br.com.dantonio.email.EmailsClientes;
+import br.com.dantonio.emailController.EmailController;
 import br.com.dantonio.helpers.HelperEnvioEmail;
 
 public class FramePrincipalJfx {
@@ -52,7 +52,6 @@ public class FramePrincipalJfx {
 	private PasswordField senhaEmailEnvio;
 	private TextArea resultadoEmails;
 	private ToggleGroup tipoVersao;
-	private ToggleGroup opcoesVersao;
 	private VBox panelVersaoScript;
 	private VBox panelVersaoCasadaMobile;
 	private VBox panelParametrosVersaoGsan;
@@ -401,8 +400,17 @@ public class FramePrincipalJfx {
 					caminhoArquivoReleaseNotes, linkVersoesMobileCasada,
 					tipoVersao, checkboxlst);
 			
-			helper.testarCheckboxPreenchidos();
+			try{
+				EmailController.enviarEmailVersao(helper);
+				
+				mensagemsErro = new Alert(AlertType.INFORMATION);
+				mensagemsErro.setTitle("Sucesso");
+				mensagemsErro.setContentText("Versão disponibilizada com sucesso!");
+			}catch (Exception e) {
+				mensagemsErro = new  Alert(AlertType.ERROR);
+				mensagemsErro.setTitle("Beth fez MERDA!");
+				mensagemsErro.setContentText(e.getMessage());
+			}
 		}
-		
 	};
 }

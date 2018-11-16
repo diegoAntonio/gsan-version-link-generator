@@ -1,6 +1,5 @@
 package br.com.dantonio.textoEmail.decorators;
 
-import br.com.dantonio.constantesSistema.Constantes;
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
