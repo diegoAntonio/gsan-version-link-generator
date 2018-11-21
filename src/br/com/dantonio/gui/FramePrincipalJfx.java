@@ -46,6 +46,7 @@ public class FramePrincipalJfx {
 	private TextField linkVersaoMobile;
 	private TextField linkVersaoGsan;
 	private TextField caminhoArquivoReleaseNotes;
+	private TextField nomeVersao;
 	private TextField[] linkVersoesMobileCasada;
 	private TextField emailEnvio;
 	private Alert mensagemsErro;
@@ -214,12 +215,16 @@ public class FramePrincipalJfx {
 		Label labelExplicacao = new Label("Informe email/senha para envio da versão:");
 		Label labelEmail = new Label("Email:");
 		Label labelSenha = new Label("Senha:");
+		Label labelNomeVersao = new Label("Numero da Versão");
 		Button botaoEnvio = new Button("Enviar Versão");
 		
 		this.emailEnvio = new TextField();
 		this.senhaEmailEnvio = new PasswordField();
+		this.nomeVersao = new TextField();
 		botaoEnvio.setOnAction(new BotaoEnvioHandler());
 		
+		framePrincipal.getChildren().add(labelNomeVersao);
+		framePrincipal.getChildren().add(this.nomeVersao);
 		framePrincipal.getChildren().add(labelExplicacao);
 		framePrincipal.getChildren().add(labelEmail);
 		framePrincipal.getChildren().add(this.emailEnvio);
@@ -400,16 +405,22 @@ public class FramePrincipalJfx {
 					caminhoArquivoReleaseNotes, linkVersoesMobileCasada,
 					tipoVersao, checkboxlst);
 			
+			if(mensagemsErro != null) {
+				mensagemsErro.hide();
+			}
+			
 			try{
 				EmailController.enviarEmailVersao(helper);
 				
 				mensagemsErro = new Alert(AlertType.INFORMATION);
 				mensagemsErro.setTitle("Sucesso");
 				mensagemsErro.setContentText("Versão disponibilizada com sucesso!");
-			}catch (Exception e) {
+				mensagemsErro.show();
+			}catch (IllegalArgumentException e) {
 				mensagemsErro = new  Alert(AlertType.ERROR);
 				mensagemsErro.setTitle("Beth fez MERDA!");
 				mensagemsErro.setContentText(e.getMessage());
+				mensagemsErro.show();
 			}
 		}
 	};

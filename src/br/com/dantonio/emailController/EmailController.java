@@ -1,6 +1,11 @@
 package br.com.dantonio.emailController;
 
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.helpers.HelperEnvioEmail;
+import br.com.dantonio.textoEmail.baseClasses.Email;
+import br.com.dantonio.validation.ValidadorRegras;
 
 /** 
  * Classe que funciona como um controlador validando regra de
@@ -22,15 +27,24 @@ public class EmailController {
 	 * parametro informados nas 3 abas.
 	 */
 	public static void enviarEmailVersao(HelperEnvioEmail helper) {
-		//Detectar os tipos de versao que serao disponibilizados
+		Email emailVersao;
+		ValidadorRegras.verificarPreenchimentoVersao(helper.getTipoVersao());
 		
-		//Validar a versao de acordo com o tipo informado
-		
-		//Checar se eh teste ou nao.
-		
-		//Caso esteja ok, validar se foi informado destinatarios, release notes e credenciais
-		// do email de envio
+		emailVersao = gerarEmailVersao(helper);
 
 	}
+
+	private static Email gerarEmailVersao(HelperEnvioEmail helper) {
+		RadioButton versao = (RadioButton) helper.getTipoVersao().getSelectedToggle();
+		Email email = null;
+		Integer id = Integer.parseInt(versao.getId());
+		
+		
+		
+		
+		return email;
+	}
+	
+	
 
 }
