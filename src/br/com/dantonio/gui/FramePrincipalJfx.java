@@ -276,6 +276,11 @@ public class FramePrincipalJfx {
 			checkbox.setId(temp.getId().toString());
 			checkbox.setPadding(new Insets(0,10,0,10));
 			checkbox.setOnAction(new CheckboxHandler());
+			
+			if(index == OpcoesVersao.EMERGENCIAL.getId().intValue()) {
+				checkbox.setDisable(true);
+			}
+			
 			listaChecks.add(checkbox);
 			this.checkboxlst[index] = checkbox;
 			index++;
