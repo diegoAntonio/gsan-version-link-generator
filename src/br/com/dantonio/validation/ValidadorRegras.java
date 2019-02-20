@@ -1,11 +1,11 @@
 package br.com.dantonio.validation;
 
-import java.awt.TextArea;
-import java.io.File;
-
-import br.com.dantonio.util.Util;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import br.com.dantonio.helpers.HelperEnvioEmail;
+import br.com.dantonio.util.Util;
 
 /**
  * Classe que far&aacute; as valida&ccedil;&otilde;es de regra de negocio para
@@ -16,36 +16,6 @@ import javafx.scene.control.ToggleGroup;
  */
 public class ValidadorRegras {
 
-	public static void validarEmailsClientes(TextArea area) {
-		if (Util.isObjetoNulo(area) || Util.isTextoNuloOuBranco(area.getText())) {
-			throw new IllegalArgumentException(
-					"Selecione o(s) Cliente(s) que recebera(ao) a versao!");
-		}
-	}
-
-	public static void validarLinkDaVersao(TextField link) {
-		if (Util.isObjetoNulo(link) || Util.isTextoNuloOuBranco(link.getText())) {
-			throw new IllegalArgumentException(
-					"Informe o link para download da versao!");
-		}
-	}
-
-	public static void validarParametrosVersaoGsan() {
-
-	}
-
-	public static void validarParametrosVersaoMobile() {
-
-	}
-
-	public static void validarReleaseNotes(File release) {
-		if (Util.isObjetoNulo(release)) {
-			throw new IllegalArgumentException(
-					"Adicione o Release Notes da Versao!");
-		}
-
-	}
-
 	public static void verificarPreenchimentoVersao(ToggleGroup toggleGroup) {
 		if (Util.isObjetoNulo(toggleGroup.getSelectedToggle())) {
 			throw new IllegalArgumentException(
@@ -53,7 +23,57 @@ public class ValidadorRegras {
 		}
 	}
 
-	public static void verificarLoginSenhaEmail(TextField login, TextField senha) {
+	public static void validarParametrosVersaoGsan(HelperEnvioEmail helper) {
+		CheckBox[] opcoesVersao = helper.getOpcoesVersao();
+		validarNumeroVersao(helper);
+		validarEmailsClientes(helper.getResultadoEmails());
+		validarLinkDaVersao(helper.getLinkVersaoGsan());
+		verificarLoginSenhaEmail(helper.getLoginEmail(), helper.getSenhaEmail());
+		
+		if(!Util.isObjetoNulo(opcoesVersao) && opcoesVersao[1].isSelected()){
+			verificarLinkScriptsVersao(helper);
+		}
+		
+		if(!Util.isObjetoNulo(opcoesVersao) && opcoesVersao[2].isSelected()){
+			verificarVersaoCasadaMobile(helper);
+		}
+
+	}
+
+	public static void validarParametrosVersaoMobile(HelperEnvioEmail helper) {
+		validarNumeroVersao(helper);
+		validarEmailsClientes(helper.getResultadoEmails());
+		validarLinkDaVersao(helper.getLinkVersaoGsan());
+		verificarLoginSenhaEmail(helper.getLoginEmail(), helper.getSenhaEmail());
+	}
+
+	private static void validarEmailsClientes(TextArea area) {
+		if (Util.isObjetoNulo(area) || Util.isTextoNuloOuBranco(area.getText())) {
+			throw new IllegalArgumentException(
+					"Selecione o(s) Cliente(s) que recebera(ao) a versao!");
+		}
+	}
+
+	private static void validarLinkDaVersao(TextField link) {
+		if (Util.isObjetoNulo(link) || Util.isTextoNuloOuBranco(link.getText())) {
+			throw new IllegalArgumentException(
+					"Informe o link para download da versao!");
+		}
+	}
+	
+	//TODO:Release Notes
+	// private static void validarReleaseNotes(TextField caminhoRelease) {
+	// File release = null;
+	//
+	// if (Util.isObjetoNulo(release)) {
+	// throw new IllegalArgumentException(
+	// "Adicione o Release Notes da Versao!");
+	// }
+	//
+	// }
+
+	private static void verificarLoginSenhaEmail(TextField login,
+			TextField senha) {
 		boolean isLoginSenhaValidos = true;
 		StringBuilder mensagemErro = new StringBuilder();
 
@@ -70,22 +90,57 @@ public class ValidadorRegras {
 					.append(" Informe email/senha para poder enviar a versao!");
 		}
 
+		if (!isLoginSenhaValidos) {
+			throw new IllegalArgumentException(mensagemErro.toString());
+		}
+
 	}
 
-	// TODO:Fazer as seguintes validacoes
-	/*
-	 * Link da versao (x)
-	 * 
-	 * Lista de Emails (X)
-	 * 
-	 * Parametros Versao Gsan
-	 * 
-	 * Parametros Versao Mobile
-	 * 
-	 * Numero da versao (x)
-	 * 
-	 * Email/Senha (x)
-	 * 
-	 * ReleaseNotes (x)
-	 */
+	private static void validarNumeroVersao(HelperEnvioEmail helper) {
+		if (Util.isObjetoNulo(helper.getNomeVersao())
+				|| Util.isTextoNuloOuBranco(helper.getNomeVersao().getText())) {
+			throw new IllegalArgumentException("Informe o numero da versao!");
+		}
+	}
+
+	private static void verificarLinkScriptsVersao(HelperEnvioEmail helper) {
+		if (Util.isObjetoNulo(helper.getLinkScripts())
+				|| Util.isTextoNuloOuBranco(helper.getLinkScripts().getText())) {
+			throw new IllegalArgumentException("Informe o link dos Scripts!");
+		}
+	}
+
+	private static void verificarVersaoCasadaMobile(HelperEnvioEmail helper) {
+		boolean linkIscEmBanco = false;
+		boolean linkGsanasEmBranco = false;
+		boolean linkGsaneosEmBranco = false;
+		boolean linkGsanacEmBranco = false;
+		TextField[] links = helper.getLinkVersoesMobileCasada();
+
+		if (Util.isObjetoNulo(links) || Util.isObjetoNulo(links[0])
+				|| Util.isTextoNuloOuBranco(links[0].getText())) {
+			linkIscEmBanco = true;
+		}
+
+		if (Util.isObjetoNulo(links) || Util.isObjetoNulo(links[1])
+				|| Util.isTextoNuloOuBranco(links[1].getText())) {
+			linkGsanasEmBranco = true;
+		}
+
+		if (Util.isObjetoNulo(links) || Util.isObjetoNulo(links[2])
+				|| Util.isTextoNuloOuBranco(links[2].getText())) {
+			linkGsaneosEmBranco = true;
+		}
+
+		if (Util.isObjetoNulo(links) || Util.isObjetoNulo(links[3])
+				|| Util.isTextoNuloOuBranco(links[3].getText())) {
+			linkGsanacEmBranco = true;
+		}
+
+		if (linkIscEmBanco && linkGsaneosEmBranco && linkGsanasEmBranco
+				&& linkGsanacEmBranco) {
+			throw new IllegalArgumentException(
+					"Informe o link para download da apk desejada!");
+		}
+	}
 }

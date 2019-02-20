@@ -1,7 +1,6 @@
 package br.com.dantonio.emailController;
 
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.helpers.HelperEnvioEmail;
 import br.com.dantonio.textoEmail.baseClasses.Email;
@@ -28,9 +27,23 @@ public class EmailController {
 	 */
 	public static void enviarEmailVersao(HelperEnvioEmail helper) {
 		Email emailVersao;
+		Integer idTipoVersao = null;
+		RadioButton versao = null;
+		
 		ValidadorRegras.verificarPreenchimentoVersao(helper.getTipoVersao());
+		versao = (RadioButton) helper.getTipoVersao().getSelectedToggle();
+		idTipoVersao = new Integer(versao.getId());
+		
+		if (idTipoVersao.equals(ProdutosConsenso.GSAN.getId())
+				|| idTipoVersao.equals(ProdutosConsenso.GSAN_MUNICIPAL.getId())) {
+			ValidadorRegras.validarParametrosVersaoGsan(helper);
+		} else {
+			ValidadorRegras.validarParametrosVersaoMobile(helper);
+		}
 		
 		emailVersao = gerarEmailVersao(helper);
+		
+		//TODO: chamar o service que manda o email gerado.
 
 	}
 
@@ -38,7 +51,6 @@ public class EmailController {
 		RadioButton versao = (RadioButton) helper.getTipoVersao().getSelectedToggle();
 		Email email = null;
 		Integer id = Integer.parseInt(versao.getId());
-		
 		
 		
 		

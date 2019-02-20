@@ -45,7 +45,6 @@ public class FramePrincipalJfx {
 	private TextField linkScripts;
 	private TextField linkVersaoMobile;
 	private TextField linkVersaoGsan;
-	private TextField caminhoArquivoReleaseNotes;
 	private TextField nomeVersao;
 	private TextField[] linkVersoesMobileCasada;
 	private TextField emailEnvio;
@@ -406,9 +405,8 @@ public class FramePrincipalJfx {
 		public void handle(ActionEvent arg0) {
 			HelperEnvioEmail helper = new HelperEnvioEmail(inputLink,
 					resultadoLink, linkScripts, linkVersaoMobile,
-					linkVersaoGsan, resultadoEmails,
-					caminhoArquivoReleaseNotes, linkVersoesMobileCasada,
-					tipoVersao, checkboxlst);
+					linkVersaoGsan, resultadoEmails,linkVersoesMobileCasada,
+					tipoVersao, checkboxlst, nomeVersao);
 			
 			if(mensagemsErro != null) {
 				mensagemsErro.hide();

@@ -20,18 +20,24 @@ public class HelperEnvioEmail {
 	private TextField linkScripts;
 	private TextField linkVersaoMobile;
 	private TextField linkVersaoGsan;
+	private TextField nomeVersao;
+	private TextField loginEmail;
+	private TextField senhaEmail;
 	private TextArea resultadoEmails;
-	private TextField caminhoArquivoReleaseNotes;
 	private TextField[] linkVersoesMobileCasada;
 	private ToggleGroup tipoVersao;
 	private CheckBox[] opcoesVersao;
 	
+	public HelperEnvioEmail() {
+		super();
+	}
+
+	//TODO: Refazer o construtor no fim.
 	public HelperEnvioEmail(TextField inputLink, TextField resultadoLink,
 			TextField linkScripts, TextField linkVersaoMobile,
 			TextField linkVersaoGsan, TextArea resultadoEmails,
-			TextField caminhoArquivoReleaseNotes,
 			TextField[] linkVersoesMobileCasada, ToggleGroup tipoVersao,
-			CheckBox[] opcoesVersao) {
+			CheckBox[] opcoesVersao, TextField nomeVersao) {
 		super();
 		this.inputLink = inputLink;
 		this.resultadoLink = resultadoLink;
@@ -39,10 +45,10 @@ public class HelperEnvioEmail {
 		this.linkVersaoMobile = linkVersaoMobile;
 		this.linkVersaoGsan = linkVersaoGsan;
 		this.resultadoEmails = resultadoEmails;
-		this.caminhoArquivoReleaseNotes = caminhoArquivoReleaseNotes;
 		this.linkVersoesMobileCasada = linkVersoesMobileCasada;
 		this.tipoVersao = tipoVersao;
 		this.opcoesVersao = opcoesVersao;
+		this.nomeVersao = nomeVersao;
 	}
 
 	public TextField getInputLink() {
@@ -93,14 +99,6 @@ public class HelperEnvioEmail {
 		this.resultadoEmails = resultadoEmails;
 	}
 
-	public TextField getCaminhoArquivoReleaseNotes() {
-		return caminhoArquivoReleaseNotes;
-	}
-
-	public void setCaminhoArquivoReleaseNotes(TextField caminhoArquivoReleaseNotes) {
-		this.caminhoArquivoReleaseNotes = caminhoArquivoReleaseNotes;
-	}
-
 	public TextField[] getLinkVersoesMobileCasada() {
 		return linkVersoesMobileCasada;
 	}
@@ -135,5 +133,29 @@ public class HelperEnvioEmail {
 				System.out.println(text.toString());
 			}
 		}
+	}
+
+	public TextField getNomeVersao() {
+		return nomeVersao;
+	}
+
+	public void setNomeVersao(TextField nomeVersao) {
+		this.nomeVersao = nomeVersao;
+	}
+
+	public TextField getLoginEmail() {
+		return loginEmail;
+	}
+
+	public void setLoginEmail(TextField loginEmail) {
+		this.loginEmail = loginEmail;
+	}
+
+	public TextField getSenhaEmail() {
+		return senhaEmail;
+	}
+
+	public void setSenhaEmail(TextField senhaEmail) {
+		this.senhaEmail = senhaEmail;
 	}
 }
