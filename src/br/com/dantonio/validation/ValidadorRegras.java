@@ -29,6 +29,7 @@ public class ValidadorRegras {
 		validarEmailsClientes(helper.getResultadoEmails());
 		validarLinkDaVersao(helper.getLinkVersaoGsan());
 		verificarLoginSenhaEmail(helper.getLoginEmail(), helper.getSenhaEmail());
+		validarReleaseNotes(helper);
 		
 		if(!Util.isObjetoNulo(opcoesVersao) && opcoesVersao[1].isSelected()){
 			verificarLinkScriptsVersao(helper);
@@ -45,6 +46,12 @@ public class ValidadorRegras {
 		validarEmailsClientes(helper.getResultadoEmails());
 		validarLinkDaVersao(helper.getLinkVersaoGsan());
 		verificarLoginSenhaEmail(helper.getLoginEmail(), helper.getSenhaEmail());
+		validarReleaseNotes(helper);
+		
+		if(Util.isObjetoNulo(helper.getLinkVersaoMobile()) || Util.isTextoNuloOuBranco(helper.getLinkVersaoMobile().getText())) {
+			throw new IllegalArgumentException(
+					"Informe o link para download da APK!");
+		}
 	}
 
 	private static void validarEmailsClientes(TextArea area) {
@@ -61,17 +68,6 @@ public class ValidadorRegras {
 		}
 	}
 	
-	//TODO:Release Notes
-	// private static void validarReleaseNotes(TextField caminhoRelease) {
-	// File release = null;
-	//
-	// if (Util.isObjetoNulo(release)) {
-	// throw new IllegalArgumentException(
-	// "Adicione o Release Notes da Versao!");
-	// }
-	//
-	// }
-
 	private static void verificarLoginSenhaEmail(TextField login,
 			TextField senha) {
 		boolean isLoginSenhaValidos = true;
@@ -141,6 +137,13 @@ public class ValidadorRegras {
 				&& linkGsanacEmBranco) {
 			throw new IllegalArgumentException(
 					"Informe o link para download da apk desejada!");
+		}
+	}
+	
+	private static void validarReleaseNotes(HelperEnvioEmail helper) {
+		if(Util.isObjetoNulo(helper.getReleaseNotes())) {
+			throw new IllegalArgumentException(
+					"Adicione o Release Notes da Versao!");
 		}
 	}
 }

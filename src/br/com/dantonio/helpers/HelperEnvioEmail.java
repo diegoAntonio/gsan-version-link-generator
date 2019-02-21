@@ -1,10 +1,12 @@
 package br.com.dantonio.helpers;
 
-import br.com.dantonio.constantesSistema.OpcoesVersao;
+import java.io.File;
+
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import br.com.dantonio.constantesSistema.OpcoesVersao;
 
 /**
  *  Classe auxiliar que ajudara na passagem/validacao
@@ -27,6 +29,7 @@ public class HelperEnvioEmail {
 	private TextField[] linkVersoesMobileCasada;
 	private ToggleGroup tipoVersao;
 	private CheckBox[] opcoesVersao;
+	private File releaseNotes;
 	
 	public HelperEnvioEmail() {
 		super();
@@ -157,5 +160,13 @@ public class HelperEnvioEmail {
 
 	public void setSenhaEmail(TextField senhaEmail) {
 		this.senhaEmail = senhaEmail;
+	}
+
+	public File getReleaseNotes() {
+		return releaseNotes;
+	}
+
+	public void setReleaseNotes(File releaseNotes) {
+		this.releaseNotes = releaseNotes;
 	}
 }

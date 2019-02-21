@@ -8,6 +8,7 @@ package br.com.dantonio.builder;
  * @since 09-09-2018
  *
  */
+//TODO:Transformar num builder de verdade.
 public class ConstrutorEmail {
 	StringBuilder assunto;
 	StringBuilder corpoDotexto;

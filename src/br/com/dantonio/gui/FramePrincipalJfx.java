@@ -1,5 +1,6 @@
 package br.com.dantonio.gui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import br.com.dantonio.constantesSistema.Constantes;
 import br.com.dantonio.constantesSistema.OpcoesVersao;
@@ -57,6 +59,7 @@ public class FramePrincipalJfx {
 	private VBox panelParametrosVersaoGsan;
 	private VBox panelParametrosVersaoMobile;
 	private CheckBox[] checkboxlst;
+	private File releaseNotes;
 	
 	public FramePrincipalJfx(Stage primaryStage) {
 		super();
@@ -216,11 +219,13 @@ public class FramePrincipalJfx {
 		Label labelSenha = new Label("Senha:");
 		Label labelNomeVersao = new Label("Numero da Versão");
 		Button botaoEnvio = new Button("Enviar Versão");
+		Button botaoReleaseNotes = new Button("Carregar o Release Notes");
 		
 		this.emailEnvio = new TextField();
 		this.senhaEmailEnvio = new PasswordField();
 		this.nomeVersao = new TextField();
 		botaoEnvio.setOnAction(new BotaoEnvioHandler());
+		botaoReleaseNotes.setOnAction(new BotaoReleaseHandler());
 		
 		framePrincipal.getChildren().add(labelNomeVersao);
 		framePrincipal.getChildren().add(this.nomeVersao);
@@ -229,6 +234,7 @@ public class FramePrincipalJfx {
 		framePrincipal.getChildren().add(this.emailEnvio);
 		framePrincipal.getChildren().add(labelSenha);
 		framePrincipal.getChildren().add(this.senhaEmailEnvio);
+		framePrincipal.getChildren().add(botaoReleaseNotes);
 		framePrincipal.getChildren().add(botaoEnvio);
 
 		abaTextoEmail.setContent(framePrincipal);
@@ -399,6 +405,17 @@ public class FramePrincipalJfx {
 		}
 	};
 	
+	private class BotaoReleaseHandler implements EventHandler<ActionEvent> {
+		@Override
+		public void handle(ActionEvent arg0) {
+			FileChooser escolhedor = new FileChooser();
+
+			escolhedor.getExtensionFilters().addAll(
+					new FileChooser.ExtensionFilter("PDF", "*.pdf"));
+			
+			releaseNotes = escolhedor.showOpenDialog(primaryStage);
+		}
+	};
 	
 	private class BotaoEnvioHandler implements EventHandler<ActionEvent> {
 		@Override
@@ -408,6 +425,7 @@ public class FramePrincipalJfx {
 					linkVersaoGsan, resultadoEmails,linkVersoesMobileCasada,
 					tipoVersao, checkboxlst, nomeVersao);
 			
+			helper.setReleaseNotes(releaseNotes);
 			if(mensagemsErro != null) {
 				mensagemsErro.hide();
 			}
@@ -427,4 +445,5 @@ public class FramePrincipalJfx {
 			}
 		}
 	};
+	
 }
