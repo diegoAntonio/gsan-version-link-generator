@@ -16,7 +16,6 @@ import br.com.dantonio.validation.ValidadorRegras;
  */
 public class EmailController {
 	
-	
 	/**
 	 *  M&eacute;todo central respons&aacute;vel por fazer a
 	 *  cria&ccedil;&atilde;o, valida&ccedil;&atilde;o 
@@ -34,13 +33,14 @@ public class EmailController {
 		versao = (RadioButton) helper.getTipoVersao().getSelectedToggle();
 		idTipoVersao = new Integer(versao.getId());
 		
-		if (idTipoVersao.equals(ProdutosConsenso.GSAN.getId())
-				|| idTipoVersao.equals(ProdutosConsenso.GSAN_MUNICIPAL.getId())) {
+		if (ProdutosConsenso.isVersaoGsan(idTipoVersao)) {
 			ValidadorRegras.validarParametrosVersaoGsan(helper);
-		} else {
+		} else if (ProdutosConsenso.isVersaoMobile(idTipoVersao)) {
 			ValidadorRegras.validarParametrosVersaoMobile(helper);
+		} else {
+			throw new IllegalArgumentException("Erro versao desconhecida!");
 		}
-		
+
 		emailVersao = gerarEmailVersao(helper);
 		
 		//TODO: chamar o service que manda o email gerado.
@@ -56,7 +56,4 @@ public class EmailController {
 		
 		return email;
 	}
-	
-	
-
 }

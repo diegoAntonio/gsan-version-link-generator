@@ -87,7 +87,7 @@ public enum ProdutosConsenso {
 	 * @return {@link ProdutosConsenso}.
 	 * @throws IllegalArgumentException - Caso o codigo do produto informado nao exista.
 	 */
-	private static ProdutosConsenso getById(Integer id) {
+	public static ProdutosConsenso getById(Integer id) {
 		ProdutosConsenso temp = Arrays.asList(ProdutosConsenso.values()).stream()
 				.filter(p -> p.getId().intValue() == id.intValue()).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException());
@@ -126,5 +126,5 @@ public enum ProdutosConsenso {
 		}
 
 		return isVersaoGsan;
-	}
+	}	
 }
