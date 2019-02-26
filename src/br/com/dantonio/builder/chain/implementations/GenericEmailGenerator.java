@@ -16,7 +16,6 @@ import br.com.dantonio.textoEmail.baseClasses.Email;
  */
 public abstract class GenericEmailGenerator implements EmailGenerator {
 	protected GenericEmailGenerator next;
-	protected Email emailGerado;
 	protected ProdutosConsenso produtoAlvo;
 
 	public GenericEmailGenerator(GenericEmailGenerator next) {

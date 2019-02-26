@@ -12,9 +12,9 @@ import br.com.dantonio.textoEmail.baseClasses.EmailVersao3_0;
  * @since 25/02/2019
  *
  */
-public class VersaoGsanChain extends GenericEmailGenerator {
+public class VersaoEstadualChain extends GenericEmailGenerator {
 
-	public VersaoGsanChain(GenericEmailGenerator next) {
+	public VersaoEstadualChain(GenericEmailGenerator next) {
 		super(next);
 		this.produtoAlvo = ProdutosConsenso.GSAN;
 	}
