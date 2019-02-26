@@ -12,7 +12,7 @@ import java.util.Arrays;
 public enum OpcoesVersao {
 	EMERGENCIAL(0,"Emergencial"),
 	SCRIPTS(1,"Versão Possui Scripts"),
-	CASADA_ISC(2, "Versão Casada com ISC");
+	CASADA_MOBILE(2, "Versão Casada com Mobile");
 	
 	private Integer id;
 	private String descricao;

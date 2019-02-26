@@ -1,5 +1,6 @@
 package br.com.dantonio.builder.chain.implementations;
 
+import javafx.scene.control.CheckBox;
 import br.com.dantonio.builder.chain.interfaces.EmailOpcoesGerenator;
 import br.com.dantonio.constantesSistema.OpcoesVersao;
 import br.com.dantonio.helpers.HelperEnvioEmail;
@@ -43,8 +44,23 @@ public abstract class GenericEmailOpcaoGenerator implements
 	protected abstract Email criarEmailComOpcoes(HelperEnvioEmail helper,
 			Email emailConstruido);
 
+	/**
+	 *  Verifica se a op&ccedil;&atilde;o selecionada na tela &eacute; atendida
+	 *  por esta Classe.
+	 *  
+	 * @param helper - {@link HelperEnvioEmail} contendo os par&acirc;metros selecionados na tela.
+	 * @return <code>true</code> se a op&ccedil;&atilde;o  for gerada pore esta unidade e <code>false</code>
+	 * caso contr&aacute;rio.
+	 */
 	protected boolean verificarAplicacaoOpcao(HelperEnvioEmail helper) {
 		boolean aplicarOpcao = false;
+		CheckBox[] listaOpcoes = helper.getOpcoesVersao();
+		
+		for (CheckBox checkBox : listaOpcoes) {
+			aplicarOpcao = this.opcao.equals(OpcoesVersao.getByStringId(checkBox.getId()));
+			
+			if(aplicarOpcao) break;
+		}
 		
 		return aplicarOpcao;
 	}
