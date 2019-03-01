@@ -6,7 +6,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import br.com.dantonio.constantesSistema.OpcoesVersao;
 
 /**
  *  Classe auxiliar que ajudara na passagem/validacao
@@ -124,18 +123,6 @@ public class HelperEnvioEmail {
 
 	public void setOpcoesVersao(CheckBox[] opcoesVersao) {
 		this.opcoesVersao = opcoesVersao;
-	}
-	
-	public void testarCheckboxPreenchidos() {
-		for (CheckBox check : this.opcoesVersao) {
-			if(check.selectedProperty() != null && Boolean.TRUE.equals(check.selectedProperty().get())){
-				StringBuilder text = new StringBuilder();
-				OpcoesVersao test = OpcoesVersao.getByStringId(check.getId());
-				text.append(test.getDescricao());
-				text.append(" - SELECIONADO");
-				System.out.println(text.toString());
-			}
-		}
 	}
 
 	public TextField getNomeVersao() {

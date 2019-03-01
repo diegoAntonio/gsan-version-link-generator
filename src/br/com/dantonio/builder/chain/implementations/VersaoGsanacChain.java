@@ -1,6 +1,7 @@
 package br.com.dantonio.builder.chain.implementations;
 
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
+import br.com.dantonio.email.EmailsClientes;
 import br.com.dantonio.helpers.HelperEnvioEmail;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.textoEmail.baseClasses.EmailVersaoMobile;
@@ -21,14 +22,17 @@ public class VersaoGsanacChain extends GenericEmailGenerator {
 		this.produtoAlvo = ProdutosConsenso.GSANAC;
 	}
 
-	//TODO: resolver problema da empresa-alvo.
 	@Override
 	protected Email gerarEmailVersao(HelperEnvioEmail helper) {
-		EmailVersaoMobile email = new EmailVersaoMobile(helper.getNomeVersao()
-				.getText(), helper.getLinkVersaoMobile().getText(),
-				ProdutosConsenso.GSANAS.getNomeAppAbreviado(), "", "",
+		EmailVersaoMobile email = new EmailVersaoMobile(
+				helper.getNomeVersao().getText(),
+				helper.getLinkVersaoMobile().getText(),
+				ProdutosConsenso.GSANAS.getNomeAppAbreviado(),
+				"",
+				EmailsClientes.getEmpresaPorListaClientes(
+						helper.getResultadoEmails().getText()).getNomeEmpresa(),
 				ProdutosConsenso.GSANAS.getId());
-		
+
 		return email;
 	}
 

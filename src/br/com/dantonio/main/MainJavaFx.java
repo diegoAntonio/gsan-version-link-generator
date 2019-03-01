@@ -26,6 +26,7 @@ public class MainJavaFx extends Application {
 //		testeEnvioEmailDeVersaoSorocaba();
 //		System.out.println("Depois Envio");
 //		System.exit(0);
+
 	}
 
 	@Override
@@ -227,5 +228,22 @@ public class MainJavaFx extends Application {
 		EmailService servico = new EmailService("daf@a.recife.ifpe.edu.br", "0Blackops1");
 		
 		servico.enviarEmailVersao("dantonio808@gmail.com", email.gerarEmailVersao(), releaseNotes);//("dantonio808@gmail.com", decorador2.gerarEmailVersao(), ;
+	}
+	
+	private static void testeConsultaEmail() {
+		EmailsClientes cliente = EmailsClientes.getEmpresaPorListaClientes(EmailsClientes.CAERN.getListaEmails());
+		System.out.println("O cliente selecionado e: " + cliente.getNomeEmpresa());
+		
+		 cliente = EmailsClientes.getEmpresaPorListaClientes(EmailsClientes.CAERD.getListaEmails());
+		System.out.println("O cliente selecionado e: " + cliente.getNomeEmpresa());
+		
+		 cliente = EmailsClientes.getEmpresaPorListaClientes(EmailsClientes.CASAL.getListaEmails());
+		System.out.println("O cliente selecionado e: " + cliente.getNomeEmpresa());
+		
+		 cliente = EmailsClientes.getEmpresaPorListaClientes(EmailsClientes.SOROCABA.getListaEmails());
+		System.out.println("O cliente selecionado e: " + cliente.getNomeEmpresa());
+		
+		 cliente = EmailsClientes.getEmpresaPorListaClientes(EmailsClientes.CAERR.getListaEmails());
+		System.out.println("O cliente selecionado e: " + cliente.getNomeEmpresa());
 	}
 }

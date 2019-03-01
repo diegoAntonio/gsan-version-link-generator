@@ -2,6 +2,7 @@ package br.com.dantonio.email;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.com.dantonio.constantesSistema.Constantes;
@@ -147,6 +148,19 @@ public enum EmailsClientes {
 		}
 		
 		return listaEmails.toString();
+	}
+	
+	/** Retorna a lista de emails de todos os clientes da versao 3.0 que recebem
+	 *  a versao pelo JENKINS.
+	 *  
+	 * @return {@link String} contendo todos os emails.
+	 */
+	public static EmailsClientes getEmpresaPorListaClientes(String listaEmails) {		
+		EmailsClientes cliente = Arrays.asList(EmailsClientes.values()).stream()
+				.filter(s -> s.getListaEmails().equalsIgnoreCase(listaEmails)).findFirst()
+				.orElseThrow(() -> new IllegalArgumentException());
+		
+		return cliente;
 	}
 
 	public String getNomeEmpresa() {
