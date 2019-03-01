@@ -16,7 +16,7 @@ import br.com.dantonio.textoEmail.decorators.Emergencial;
  */
 public class VersaoEmergencialChain extends GenericEmailOpcaoGenerator {
 
-	public VersaoEmergencialChain(GenericEmailGenerator next) {
+	public VersaoEmergencialChain(GenericEmailOpcaoGenerator next) {
 		super(next);
 		this.opcao = OpcoesVersao.EMERGENCIAL;
 	}

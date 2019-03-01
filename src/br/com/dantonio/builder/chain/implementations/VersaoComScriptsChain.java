@@ -14,9 +14,9 @@ import br.com.dantonio.textoEmail.decorators.Scripts;
  * @since 26/02/2019
  *
  */
-public class VersaoComScripts extends GenericEmailOpcaoGenerator {
+public class VersaoComScriptsChain extends GenericEmailOpcaoGenerator {
 
-	public VersaoComScripts(GenericEmailGenerator next) {
+	public VersaoComScriptsChain(GenericEmailOpcaoGenerator next) {
 		super(next);
 		this.opcao = OpcoesVersao.SCRIPTS;
 	}

@@ -17,9 +17,9 @@ import br.com.dantonio.util.Util;
  * @since 26/02/2019
  *
  */
-public class VersaoCasadaMobile extends GenericEmailOpcaoGenerator {
+public class VersaoCasadaMobileChain extends GenericEmailOpcaoGenerator {
 
-	public VersaoCasadaMobile(GenericEmailGenerator next) {
+	public VersaoCasadaMobileChain(GenericEmailOpcaoGenerator next) {
 		super(next);
 		this.opcao = OpcoesVersao.CASADA_MOBILE;
 	}
@@ -34,15 +34,16 @@ public class VersaoCasadaMobile extends GenericEmailOpcaoGenerator {
 	}
 
 	private Integer obterCodigoDoProduto(TextField[] textFields) {
-		int posicao = 0;
+		int posicao = 1;
 		Integer codigo = null;
-
+		
 		for (TextField textField : textFields) {
-			posicao++;
+			
 			if (!Util.isObjetoNulo(textField)
 					&& !Util.isTextoNuloOuBranco(textField.getText())) {
 				break;
 			}
+			posicao++;
 		}
 
 		switch (posicao) {

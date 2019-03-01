@@ -16,10 +16,10 @@ import br.com.dantonio.textoEmail.baseClasses.Email;
  */
 public abstract class GenericEmailOpcaoGenerator implements
 		EmailOpcoesGerenator {
-	protected GenericEmailGenerator next;
+	protected GenericEmailOpcaoGenerator next;
 	protected OpcoesVersao opcao;
 
-	public GenericEmailOpcaoGenerator(GenericEmailGenerator next) {
+	public GenericEmailOpcaoGenerator(GenericEmailOpcaoGenerator next) {
 		super();
 		this.next = next;
 	}
@@ -32,7 +32,7 @@ public abstract class GenericEmailOpcaoGenerator implements
 		if (this.verificarAplicacaoOpcao(helper)) {
 			emailGerado = this.criarEmailComOpcoes(helper, emailConstruido);
 		} else if (this.next != null) {
-			emailGerado = this.next.avaliarGeracaoEmail(helper);
+			emailGerado = this.next.avaliarGeracaoEmail(helper,emailConstruido);
 		} else {
 			throw new IllegalArgumentException(
 					"Erro, Opcao Informada ao filtro nao existe!");
