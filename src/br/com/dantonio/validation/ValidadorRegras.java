@@ -44,7 +44,7 @@ public class ValidadorRegras {
 	public static void validarParametrosVersaoMobile(HelperEnvioEmail helper) {
 		validarNumeroVersao(helper);
 		validarEmailsClientes(helper.getResultadoEmails());
-		validarLinkDaVersao(helper.getLinkVersaoGsan());
+		validarLinkDaVersao(helper.getLinkVersaoMobile());
 		verificarLoginSenhaEmail(helper.getLoginEmail(), helper.getSenhaEmail());
 		validarReleaseNotes(helper);
 		

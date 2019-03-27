@@ -16,11 +16,10 @@ import javafx.scene.control.ToggleGroup;
  *
  */
 public class HelperEnvioEmail {
-	private TextField inputLink;
-	private TextField resultadoLink;
 	private TextField linkScripts;
 	private TextField linkVersaoMobile;
 	private TextField linkVersaoGsan;
+	private TextField linkFuncionalidades;
 	private TextField nomeVersao;
 	private TextField loginEmail;
 	private TextField senhaEmail;
@@ -34,39 +33,25 @@ public class HelperEnvioEmail {
 		super();
 	}
 
-	//TODO: Refazer o construtor no fim.
-	public HelperEnvioEmail(TextField inputLink, TextField resultadoLink,
-			TextField linkScripts, TextField linkVersaoMobile,
-			TextField linkVersaoGsan, TextArea resultadoEmails,
-			TextField[] linkVersoesMobileCasada, ToggleGroup tipoVersao,
-			CheckBox[] opcoesVersao, TextField nomeVersao) {
+
+	public HelperEnvioEmail(TextField linkScripts, TextField linkVersaoMobile,
+			TextField linkVersaoGsan, TextField linkFuncionalidades,
+			TextField nomeVersao, TextField loginEmail, TextField senhaEmail,
+			TextArea resultadoEmails, TextField[] linkVersoesMobileCasada,
+			ToggleGroup tipoVersao, CheckBox[] opcoesVersao, File releaseNotes) {
 		super();
-		this.inputLink = inputLink;
-		this.resultadoLink = resultadoLink;
 		this.linkScripts = linkScripts;
 		this.linkVersaoMobile = linkVersaoMobile;
 		this.linkVersaoGsan = linkVersaoGsan;
+		this.linkFuncionalidades = linkFuncionalidades;
+		this.nomeVersao = nomeVersao;
+		this.loginEmail = loginEmail;
+		this.senhaEmail = senhaEmail;
 		this.resultadoEmails = resultadoEmails;
 		this.linkVersoesMobileCasada = linkVersoesMobileCasada;
 		this.tipoVersao = tipoVersao;
 		this.opcoesVersao = opcoesVersao;
-		this.nomeVersao = nomeVersao;
-	}
-
-	public TextField getInputLink() {
-		return inputLink;
-	}
-
-	public void setInputLink(TextField inputLink) {
-		this.inputLink = inputLink;
-	}
-
-	public TextField getResultadoLink() {
-		return resultadoLink;
-	}
-
-	public void setResultadoLink(TextField resultadoLink) {
-		this.resultadoLink = resultadoLink;
+		this.releaseNotes = releaseNotes;
 	}
 
 	public TextField getLinkScripts() {
@@ -155,5 +140,15 @@ public class HelperEnvioEmail {
 
 	public void setReleaseNotes(File releaseNotes) {
 		this.releaseNotes = releaseNotes;
+	}
+
+
+	public TextField getLinkFuncionalidades() {
+		return linkFuncionalidades;
+	}
+
+
+	public void setLinkFuncionalidades(TextField linkFuncionalidades) {
+		this.linkFuncionalidades = linkFuncionalidades;
 	}
 }

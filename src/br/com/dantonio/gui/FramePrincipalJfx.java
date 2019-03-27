@@ -25,7 +25,6 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -35,18 +34,16 @@ import javafx.stage.Stage;
 import br.com.dantonio.constantesSistema.Constantes;
 import br.com.dantonio.constantesSistema.OpcoesVersao;
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
-import br.com.dantonio.converter.LinkConverter;
 import br.com.dantonio.email.EmailsClientes;
 import br.com.dantonio.emailController.EmailController;
 import br.com.dantonio.helpers.HelperEnvioEmail;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
-	private TextField inputLink;
-	private TextField resultadoLink;
 	private TextField linkScripts;
 	private TextField linkVersaoMobile;
 	private TextField linkVersaoGsan;
+	private TextField linkFuncionalidades;
 	private TextField nomeVersao;
 	private TextField[] linkVersoesMobileCasada;
 	private TextField emailEnvio;
@@ -101,37 +98,22 @@ public class FramePrincipalJfx {
 	private Tab gerarAbaEmailClientes() {
 		Tab abaEmailsClientes;
 		VBox frame;
-		Label labelLink;
-		Label labelResultadoLink;
 		Label labelListaEmails;
-		Button botaoGerarLink;
+		Label labelRadioButtons;
 		ToggleGroup grupoRadio;
-		FlowPane frameRadioButtons;
+		VBox frameRadioButtons;
 		
 		frame = this.gerarFramePrincipal();
 		abaEmailsClientes = this.gerarAba("Emails dos Clientes");
-		botaoGerarLink = new Button("Gerar Link da Versão");
-		
-		//Link Interno FTP
-		labelLink = new Label("Link Interno FTP:");
-		this.inputLink = new TextField();
-		botaoGerarLink.setOnAction(new ButtonHandler());
-		frame.getChildren().addAll(labelLink,this.inputLink);
-		frame.getChildren().addAll(botaoGerarLink);
-		
-		//Resultado Link da Versao FTP
-		labelResultadoLink = new Label("Resultado link da versão: ");
-		this.resultadoLink = new TextField();
-		this.resultadoLink.setEditable(false);
-		frame.getChildren().addAll(labelResultadoLink,this.resultadoLink);
 		
 		//Lista de emails
-		frameRadioButtons = new FlowPane();
-		frameRadioButtons.setHgap(20);
+		frameRadioButtons = new VBox();
 		grupoRadio = new ToggleGroup();
 		this.resultadoEmails = new TextArea();
-		this.resultadoEmails.setEditable(false);
+		this.resultadoEmails.setEditable(true);
 		this.resultadoEmails.setWrapText(true);
+		labelRadioButtons = new Label("Escolha a Empresa: ");
+		frameRadioButtons.getChildren().addAll(labelRadioButtons);
 		frameRadioButtons.getChildren().addAll(this.gerarRadioButtonsEmails(grupoRadio));
 		frame.getChildren().add(frameRadioButtons);
 		labelListaEmails = new Label("Lista Emails: ");
@@ -352,18 +334,6 @@ public class FramePrincipalJfx {
 		
 	};
 	
-	private class ButtonHandler implements EventHandler<ActionEvent> {
-
-		@Override
-		public void handle(ActionEvent arg0) {
-			resultadoLink.setText(" ");
-			if(inputLink != null && !inputLink.getText().trim().isEmpty()){
-				resultadoLink.setText(LinkConverter.formatarLinkExternoFTP(inputLink.getText().trim()));
-			}
-		}
-		
-	};
-	
 	private class CheckboxHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
@@ -420,10 +390,11 @@ public class FramePrincipalJfx {
 	private class BotaoEnvioHandler implements EventHandler<ActionEvent> {
 		@Override
 		public void handle(ActionEvent arg0) {
-			HelperEnvioEmail helper = new HelperEnvioEmail(inputLink,
-					resultadoLink, linkScripts, linkVersaoMobile,
-					linkVersaoGsan, resultadoEmails,linkVersoesMobileCasada,
-					tipoVersao, checkboxlst, nomeVersao);
+			HelperEnvioEmail helper = new HelperEnvioEmail(linkScripts,
+					linkVersaoMobile, linkVersaoGsan, linkFuncionalidades,
+					nomeVersao, emailEnvio, senhaEmailEnvio, resultadoEmails,
+					linkVersoesMobileCasada, tipoVersao, checkboxlst,
+					releaseNotes);
 			
 			helper.setReleaseNotes(releaseNotes);
 			if(mensagemsErro != null) {
@@ -439,7 +410,7 @@ public class FramePrincipalJfx {
 				mensagemsErro.show();
 			}catch (IllegalArgumentException e) {
 				mensagemsErro = new  Alert(AlertType.ERROR);
-				mensagemsErro.setTitle("Beth fez MERDA!");
+				mensagemsErro.setTitle("Erro!");
 				mensagemsErro.setContentText(e.getMessage());
 				mensagemsErro.show();
 			}
