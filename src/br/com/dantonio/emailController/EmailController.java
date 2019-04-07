@@ -1,10 +1,12 @@
 package br.com.dantonio.emailController;
 
-import javafx.scene.control.RadioButton;
+import br.com.dantonio.builder.ConstrutorEmail;
 import br.com.dantonio.constantesSistema.ProdutosConsenso;
+import br.com.dantonio.emailService.EmailService;
 import br.com.dantonio.helpers.HelperEnvioEmail;
 import br.com.dantonio.textoEmail.baseClasses.Email;
 import br.com.dantonio.validation.ValidadorRegras;
+import javafx.scene.control.RadioButton;
 
 /** 
  * Classe que funciona como um controlador validando regra de
@@ -28,6 +30,8 @@ public class EmailController {
 		Email emailVersao;
 		Integer idTipoVersao = null;
 		RadioButton versao = null;
+		EmailService service;
+		ConstrutorEmail builder = new ConstrutorEmail();
 		
 		ValidadorRegras.verificarPreenchimentoVersao(helper.getTipoVersao());
 		versao = (RadioButton) helper.getTipoVersao().getSelectedToggle();
@@ -41,19 +45,10 @@ public class EmailController {
 			throw new IllegalArgumentException("Erro versao desconhecida!");
 		}
 
-		emailVersao = gerarEmailVersao(helper);
+		emailVersao = builder.criarEmailVersao(helper);
 		
-		//TODO: chamar o service que manda o email gerado.
-
-	}
-
-	private static Email gerarEmailVersao(HelperEnvioEmail helper) {
-		RadioButton versao = (RadioButton) helper.getTipoVersao().getSelectedToggle();
-		Email email = null;
-		Integer id = Integer.parseInt(versao.getId());
-		
-		
-		
-		return email;
+		service = new EmailService(helper.getLoginEmail().getText(), helper.getSenhaEmail().getText());
+		service.enviarEmailVersao(helper.getResultadoEmails().getText(), emailVersao.gerarEmailVersao(),
+				helper.getReleaseNotes());
 	}
 }

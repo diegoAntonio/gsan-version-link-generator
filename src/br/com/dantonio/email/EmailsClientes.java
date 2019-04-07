@@ -2,7 +2,6 @@ package br.com.dantonio.email;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.com.dantonio.constantesSistema.Constantes;
@@ -21,7 +20,8 @@ public enum EmailsClientes {
 	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br,Erick@cagepa.pb.gov.br,ILKASOUSA@cagepa.pb.gov.br,isaias@cagepa.pb.gov.br,ricardo@cagepa.pb.gov.br"),
 	OPERACAO_PROCENGE(Constantes.OPERACAO_PROCENGE,"OP. PROCENGE","operacaoal@procenge.com.br"),
 	CLIENTES_FTP(Constantes.CLIENTES_FTP, "CLIENTES_3.0_FTP",""),
-	CLIENTES_JENKINS(Constantes.CLIENTES_JENKINS, "CLIENTES_3.0_Jenkins","");
+	CLIENTES_JENKINS(Constantes.CLIENTES_JENKINS, "CLIENTES_3.0_Jenkins",""),
+	TESTE(Constantes.TESTE, "Teste","dantonio808@gmail.com");
 
 	private int idCliente;
 	private String nomeEmpresa;

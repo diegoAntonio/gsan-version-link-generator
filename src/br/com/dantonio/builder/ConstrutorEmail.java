@@ -1,6 +1,5 @@
 package br.com.dantonio.builder;
 
-import javafx.scene.control.RadioButton;
 import br.com.dantonio.builder.chain.implementations.GenericEmailGenerator;
 import br.com.dantonio.builder.chain.implementations.GenericEmailOpcaoGenerator;
 import br.com.dantonio.builder.chain.implementations.VersaoCasadaMobileChain;
@@ -10,9 +9,9 @@ import br.com.dantonio.builder.chain.implementations.VersaoGsanacChain;
 import br.com.dantonio.builder.chain.implementations.VersaoGsaneosChain;
 import br.com.dantonio.builder.chain.implementations.VersaoIscChain;
 import br.com.dantonio.builder.chain.implementations.VersaoMunicipalChain;
-import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.helpers.HelperEnvioEmail;
 import br.com.dantonio.textoEmail.baseClasses.Email;
+import javafx.scene.control.CheckBox;
 
 /**
  * Classe que e responsavel por Construir o texto dos 
@@ -42,8 +41,25 @@ public class ConstrutorEmail {
 		Email emailGerado = null;
 		
 		emailGerado = this.chainEmails.avaliarGeracaoEmail(helper);
-		emailGerado = this.chainOpcoes.avaliarGeracaoEmail(helper, emailGerado);
+		
+		if(this.verificarOpcionaisEmail(helper)) {
+			emailGerado = this.chainOpcoes.avaliarGeracaoEmail(helper, emailGerado);
+		}
 		
 		return emailGerado;
+	}
+	
+	
+	private boolean verificarOpcionaisEmail(HelperEnvioEmail helper) {
+		boolean temOpcional = false;
+		CheckBox[] opcoesVersao = helper.getOpcoesVersao();
+		
+		for (CheckBox checkBox : opcoesVersao) {
+			temOpcional = checkBox.isSelected();
+			
+			if(temOpcional) break;
+		}
+		
+		return temOpcional;
 	}
 }

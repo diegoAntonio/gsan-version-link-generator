@@ -57,6 +57,7 @@ public class FramePrincipalJfx {
 	private VBox panelParametrosVersaoMobile;
 	private CheckBox[] checkboxlst;
 	private File releaseNotes;
+	private CheckBox adicaoRelease;
 	
 	public FramePrincipalJfx(Stage primaryStage) {
 		super();
@@ -130,7 +131,7 @@ public class FramePrincipalJfx {
 		HBox boxBotoes = new HBox();
 		Label labelBotoes = new Label("Escolha o Produto:");
 		Label labelOpcoes = new Label("Escolha as Opções:");
-		Label labelScript = new Label("Informe o link da versão:");
+		Label labelScript = new Label("Informe o link dos Scripts:");
 		Label labelVersaoCasadaISC = new Label("Link Versão ISC:");
 		Label labelVersaoCasadaGsaneos = new Label("Link Versão Gsaneos:");
 		Label labelVersaoCasadaGsanas = new Label("Link Versão Gsanas:");
@@ -202,10 +203,13 @@ public class FramePrincipalJfx {
 		Label labelNomeVersao = new Label("Numero da Versão");
 		Button botaoEnvio = new Button("Enviar Versão");
 		Button botaoReleaseNotes = new Button("Carregar o Release Notes");
-		
+	
 		this.emailEnvio = new TextField();
 		this.senhaEmailEnvio = new PasswordField();
 		this.nomeVersao = new TextField();
+		this.adicaoRelease = new CheckBox("Release Adicionado");
+		this.adicaoRelease.setSelected(false);
+		this.adicaoRelease.setDisable(true);
 		botaoEnvio.setOnAction(new BotaoEnvioHandler());
 		botaoReleaseNotes.setOnAction(new BotaoReleaseHandler());
 		
@@ -217,6 +221,7 @@ public class FramePrincipalJfx {
 		framePrincipal.getChildren().add(labelSenha);
 		framePrincipal.getChildren().add(this.senhaEmailEnvio);
 		framePrincipal.getChildren().add(botaoReleaseNotes);
+		framePrincipal.getChildren().add(this.adicaoRelease);
 		framePrincipal.getChildren().add(botaoEnvio);
 
 		abaTextoEmail.setContent(framePrincipal);
@@ -384,6 +389,10 @@ public class FramePrincipalJfx {
 					new FileChooser.ExtensionFilter("PDF", "*.pdf"));
 			
 			releaseNotes = escolhedor.showOpenDialog(primaryStage);
+			
+			if(releaseNotes !=null) {
+				adicaoRelease.setSelected(true);
+			}
 		}
 	};
 	
@@ -409,6 +418,7 @@ public class FramePrincipalJfx {
 				mensagemsErro.setContentText("Versão disponibilizada com sucesso!");
 				mensagemsErro.show();
 			}catch (IllegalArgumentException e) {
+				e.printStackTrace();
 				mensagemsErro = new  Alert(AlertType.ERROR);
 				mensagemsErro.setTitle("Erro!");
 				mensagemsErro.setContentText(e.getMessage());

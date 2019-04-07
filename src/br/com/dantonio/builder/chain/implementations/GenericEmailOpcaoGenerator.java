@@ -57,9 +57,11 @@ public abstract class GenericEmailOpcaoGenerator implements
 		CheckBox[] listaOpcoes = helper.getOpcoesVersao();
 		
 		for (CheckBox checkBox : listaOpcoes) {
-			aplicarOpcao = this.opcao.equals(OpcoesVersao.getByStringId(checkBox.getId()));
-			
-			if(aplicarOpcao) break;
+			if(this.opcao.equals(OpcoesVersao.getByStringId(checkBox.getId()))) {
+				aplicarOpcao = checkBox.isSelected();
+				
+				if(aplicarOpcao) break;
+			}
 		}
 		
 		return aplicarOpcao;
