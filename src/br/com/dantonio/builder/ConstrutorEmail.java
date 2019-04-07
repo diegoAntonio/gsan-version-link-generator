@@ -43,7 +43,13 @@ public class ConstrutorEmail {
 		emailGerado = this.chainEmails.avaliarGeracaoEmail(helper);
 		
 		if(this.verificarOpcionaisEmail(helper)) {
-			emailGerado = this.chainOpcoes.avaliarGeracaoEmail(helper, emailGerado);
+			int index = 0;
+			int total = this.contarQuantidadeDeOpcionais(helper);
+			
+			do {
+				emailGerado = this.chainOpcoes.avaliarGeracaoEmail(helper, emailGerado);
+				index+=1;
+			} while(index < total);
 		}
 		
 		return emailGerado;
@@ -61,5 +67,18 @@ public class ConstrutorEmail {
 		}
 		
 		return temOpcional;
+	}
+	
+	private Integer contarQuantidadeDeOpcionais(HelperEnvioEmail helper) {
+		int total = 0;
+		CheckBox[] opcoesVersao = helper.getOpcoesVersao();
+		
+		for (CheckBox checkBox : opcoesVersao) {
+			if (checkBox.isSelected()) {
+				total += 1;
+			}
+		}
+		
+		return total;
 	}
 }

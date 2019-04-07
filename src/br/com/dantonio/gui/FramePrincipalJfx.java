@@ -417,7 +417,7 @@ public class FramePrincipalJfx {
 				mensagemsErro.setTitle("Sucesso");
 				mensagemsErro.setContentText("Versão disponibilizada com sucesso!");
 				mensagemsErro.show();
-			}catch (IllegalArgumentException e) {
+			}catch (Exception e) {
 				e.printStackTrace();
 				mensagemsErro = new  Alert(AlertType.ERROR);
 				mensagemsErro.setTitle("Erro!");

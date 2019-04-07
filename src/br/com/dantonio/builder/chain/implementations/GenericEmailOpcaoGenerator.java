@@ -60,7 +60,10 @@ public abstract class GenericEmailOpcaoGenerator implements
 			if(this.opcao.equals(OpcoesVersao.getByStringId(checkBox.getId()))) {
 				aplicarOpcao = checkBox.isSelected();
 				
-				if(aplicarOpcao) break;
+				if(aplicarOpcao) { 
+					checkBox.setSelected(false);
+					break;
+				}
 			}
 		}
 		
