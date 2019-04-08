@@ -25,10 +25,10 @@ public class VersaoCasadaMobileChain extends GenericEmailOpcaoGenerator {
 	}
 
 	@Override
-	protected Email criarEmailComOpcoes(HelperEnvioEmail helper,
-			Email emailConstruido) {
+	protected Email criarEmailComOpcoes(HelperEnvioEmail helper, Email emailConstruido) {
 		EmailDecorator email = new VersaoCasada(emailConstruido,
-				this.obterCodigoDoProduto(helper.getLinkVersoesMobileCasada()));
+				this.obterCodigoDoProduto(helper.getLinkVersoesMobileCasada()), 
+				this.obterLinkVersaoMobile(helper));
 
 		return email;
 	}
@@ -36,11 +36,11 @@ public class VersaoCasadaMobileChain extends GenericEmailOpcaoGenerator {
 	private Integer obterCodigoDoProduto(TextField[] textFields) {
 		int posicao = 1;
 		Integer codigo = null;
-		
+
 		for (TextField textField : textFields) {
-			
-			if (!Util.isObjetoNulo(textField)
-					&& !Util.isTextoNuloOuBranco(textField.getText())) {
+
+			if (!Util.isObjetoNulo(textField) && 
+				!Util.isTextoNuloOuBranco(textField.getText())) {
 				break;
 			}
 			posicao++;
@@ -69,5 +69,20 @@ public class VersaoCasadaMobileChain extends GenericEmailOpcaoGenerator {
 		}
 
 		return codigo;
+	}
+
+	private String obterLinkVersaoMobile(HelperEnvioEmail helper) {
+		String link = null;
+		TextField[] links = helper.getLinkVersoesMobileCasada();
+
+		for (TextField textField : links) {
+			if (!Util.isObjetoNulo(textField) && 
+				!Util.isTextoNuloOuBranco(textField.getText())) {
+				link = textField.getText();
+				break;
+			}
+		}
+
+		return link;
 	}
 }

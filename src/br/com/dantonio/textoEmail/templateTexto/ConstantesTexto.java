@@ -19,6 +19,7 @@ public class ConstantesTexto {
 	public static String REGEX_NOME_VERSAO = "%NAME_Version%";
 	public static String REGEX_SCRIPT_VERSAO = "%Link_Script_Version%";
 	public static String REGEX_NOME_PRODUTO_MOBILE = "%Name_Product_Mobile%";
+	public static String REGEX_LINK_DOWNLOAD_MOBILE_CASADA = "%Link_APK_Casada%";
 	
 	private static String inicializarValorCorpoEmailVersao3_0() {
 		StringBuilder sb = new StringBuilder();
@@ -117,16 +118,21 @@ public class ConstantesTexto {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("</br><b><p><font color=\"red\">Atenção</font>:");
-		sb.append(" Em anexo estão as apk(s) do ");
+		sb.append(" Segue o link para download das apk(s) do ");
 		sb.append(gerarRegexNomeProdutoMobile());
 		sb.append(" que deve ser disponibilizada ");
 		sb.append("<font color=\"red\">CASADA</font>");
 		sb.append(" com a versão do GSAN ");
 		sb.append("ocasionando erro em caso do procedimento não ser feito. ");
 		sb.append("</p></b> </br>");
+		sb.append("<a href=\"");
+		sb.append(gerarRegexDownloadApkVersaoCasada());
+		sb.append(" \"> ");
+		sb.append(gerarRegexNomeProdutoMobile());
+		sb.append("</a></p><br/>");
 		return sb.toString();
 	}
-	
+
 	private static String inicializarValorCorpoEmailVersaoMunicipal() {
 		StringBuilder sb = new StringBuilder();
 		
@@ -160,5 +166,9 @@ public class ConstantesTexto {
 	
 	private static String gerarRegexNomeProdutoMobile() {
 		return "%Name_Product_Mobile%";
+	}
+	
+	private static String gerarRegexDownloadApkVersaoCasada() {
+		return "%Link_APK_Casada%";
 	}
 }

@@ -153,7 +153,7 @@ public class MainJavaFx extends Application {
 		EmailDecorator decorator;
 		
 		email = new EmailVersao3_0(nomeVersao, linkVersao, produto, "");
-		decorator = new VersaoCasada(email, produtoMobile);
+		decorator = new VersaoCasada(email, produtoMobile,linkVersao);
 		
 		
 		for (String temp : decorator.gerarEmailVersao()) {
@@ -176,7 +176,7 @@ public class MainJavaFx extends Application {
 		
 		email = new EmailVersao3_0(nomeVersao, linkVersao, produto, linkScripts);
 		scripts = new Scripts(email);
-		decorator = new VersaoCasada(scripts, produtoMobile);
+		decorator = new VersaoCasada(scripts, produtoMobile, linkVersao);
 		
 		
 		for (String temp : decorator.gerarEmailVersao()) {
@@ -209,7 +209,7 @@ public class MainJavaFx extends Application {
 		
 		Email email = new EmailVersao3_0(nomeVersao, linkVersao, produto, linkScripts);
 		EmailDecorator decorator1 = new Scripts(email);
-		EmailDecorator decorador2 = new VersaoCasada(decorator1, ProdutosConsenso.ISC.getId());
+		EmailDecorator decorador2 = new VersaoCasada(decorator1, ProdutosConsenso.ISC.getId(),linkVersao);
 		
 		EmailService servico = new EmailService("daf@a.recife.ifpe.edu.br", "0Blackops1");
 		

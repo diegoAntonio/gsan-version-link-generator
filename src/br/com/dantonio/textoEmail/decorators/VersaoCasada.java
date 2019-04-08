@@ -14,13 +14,15 @@ import br.com.dantonio.textoEmail.templateTexto.ConstantesTexto;
  */
 public class VersaoCasada extends EmailDecorator {
 	private String nomeProdutoMobile;
+	private String linkApkCasada;
 
-	public VersaoCasada(Email email, Integer codigoProdutoMobile) {
+	public VersaoCasada(Email email, Integer codigoProdutoMobile, String linkApkCasada) {
 		super(email);
 		this.linkScripts = email.getLinkScripts();
 		this.linkVersao = email.getLinkVersao();
 		this.versao = email.getVersao();
 		this.nomeProdutoMobile = ProdutosConsenso.getNomeProdutoAbreviado(codigoProdutoMobile);
+		this.linkApkCasada = linkApkCasada;
 	}
 
 	@Override
@@ -32,6 +34,8 @@ public class VersaoCasada extends EmailDecorator {
 		
 		textoVersaoCasada = textoVersaoCasada.replaceAll(ConstantesTexto.REGEX_NOME_PRODUTO_MOBILE,
 				this.nomeProdutoMobile);
+		textoVersaoCasada = textoVersaoCasada.replaceAll(ConstantesTexto.REGEX_LINK_DOWNLOAD_MOBILE_CASADA,
+				this.linkApkCasada);		
 		
 		sb.append("<br/>");
 		sb.append(textoVersaoCasada);
