@@ -5,6 +5,7 @@ import br.com.dantonio.constantesSistema.ProdutosConsenso;
 import br.com.dantonio.emailService.EmailService;
 import br.com.dantonio.helpers.HelperEnvioEmail;
 import br.com.dantonio.textoEmail.baseClasses.Email;
+import br.com.dantonio.util.ProgressoEnvioEmail;
 import br.com.dantonio.validation.ValidadorRegras;
 import javafx.scene.control.RadioButton;
 
@@ -36,7 +37,7 @@ public class EmailController {
 		ValidadorRegras.verificarPreenchimentoVersao(helper.getTipoVersao());
 		versao = (RadioButton) helper.getTipoVersao().getSelectedToggle();
 		idTipoVersao = new Integer(versao.getId());
-		
+		ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(50);
 		if (ProdutosConsenso.isVersaoGsan(idTipoVersao)) {
 			ValidadorRegras.validarParametrosVersaoGsan(helper);
 		} else if (ProdutosConsenso.isVersaoMobile(idTipoVersao)) {
@@ -46,7 +47,7 @@ public class EmailController {
 		}
 
 		emailVersao = builder.criarEmailVersao(helper);
-		
+		ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(70);
 		service = new EmailService(helper.getLoginEmail().getText(), helper.getSenhaEmail().getText());
 		service.enviarEmailVersao(helper.getResultadoEmails().getText(), emailVersao.gerarEmailVersao(),
 				helper.getReleaseNotes());

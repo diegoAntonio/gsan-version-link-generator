@@ -42,7 +42,7 @@ public class ConstantesTexto {
 	
 	private static String inicializaValorCorpoEmailVersaoMobile() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("<p>Foi liberado hoje uma versão ");
+		sb.append("<p>Foi liberado hoje uma versão do produto ");
 		sb.append(gerarRegexNomeProdutoMobile());
 		sb.append(" ");
 		sb.append(gerarRegexNomeVersao());

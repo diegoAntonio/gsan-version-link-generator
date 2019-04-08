@@ -26,11 +26,11 @@ public class VersaoGsaneosChain extends GenericEmailGenerator {
 		EmailVersaoMobile email = new EmailVersaoMobile(
 				helper.getNomeVersao().getText(),
 				helper.getLinkVersaoMobile().getText(),
-				ProdutosConsenso.GSANAS.getNomeAppAbreviado(),
+				ProdutosConsenso.GSANEOS.getNomeAppAbreviado(),
 				"",
 				EmailsClientes.getEmpresaPorListaClientes(
 						helper.getResultadoEmails().getText()).getNomeEmpresa(),
-				ProdutosConsenso.GSANAS.getId());
+				ProdutosConsenso.GSANEOS.getId());
 
 		return email;
 	}

@@ -4,6 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.dantonio.constantesSistema.Constantes;
+import br.com.dantonio.constantesSistema.OpcoesVersao;
+import br.com.dantonio.constantesSistema.ProdutosConsenso;
+import br.com.dantonio.email.EmailsClientes;
+import br.com.dantonio.emailController.EmailController;
+import br.com.dantonio.helpers.HelperEnvioEmail;
+import br.com.dantonio.util.ProgressoEnvioEmail;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -31,12 +38,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import br.com.dantonio.constantesSistema.Constantes;
-import br.com.dantonio.constantesSistema.OpcoesVersao;
-import br.com.dantonio.constantesSistema.ProdutosConsenso;
-import br.com.dantonio.email.EmailsClientes;
-import br.com.dantonio.emailController.EmailController;
-import br.com.dantonio.helpers.HelperEnvioEmail;
 
 public class FramePrincipalJfx {
 	private Stage primaryStage;
@@ -58,6 +59,7 @@ public class FramePrincipalJfx {
 	private CheckBox[] checkboxlst;
 	private File releaseNotes;
 	private CheckBox adicaoRelease;
+	private Button botaoEnvio;
 	
 	public FramePrincipalJfx(Stage primaryStage) {
 		super();
@@ -201,7 +203,7 @@ public class FramePrincipalJfx {
 		Label labelEmail = new Label("Email:");
 		Label labelSenha = new Label("Senha:");
 		Label labelNomeVersao = new Label("Numero da Versão");
-		Button botaoEnvio = new Button("Enviar Versão");
+		botaoEnvio = new Button("Enviar Versão");
 		Button botaoReleaseNotes = new Button("Carregar o Release Notes");
 	
 		this.emailEnvio = new TextField();
@@ -223,7 +225,8 @@ public class FramePrincipalJfx {
 		framePrincipal.getChildren().add(botaoReleaseNotes);
 		framePrincipal.getChildren().add(this.adicaoRelease);
 		framePrincipal.getChildren().add(botaoEnvio);
-
+		framePrincipal.getChildren().add(ProgressoEnvioEmail.getInstance().getBarraProgresso());
+		
 		abaTextoEmail.setContent(framePrincipal);
 		return abaTextoEmail;
 	}
@@ -404,24 +407,29 @@ public class FramePrincipalJfx {
 					nomeVersao, emailEnvio, senhaEmailEnvio, resultadoEmails,
 					linkVersoesMobileCasada, tipoVersao, checkboxlst,
 					releaseNotes);
-			
-			helper.setReleaseNotes(releaseNotes);
+
+			ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(0);
+			botaoEnvio.setDisable(true);
 			if(mensagemsErro != null) {
 				mensagemsErro.hide();
 			}
 			
 			try{
+				ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(20);
 				EmailController.enviarEmailVersao(helper);
 				
 				mensagemsErro = new Alert(AlertType.INFORMATION);
 				mensagemsErro.setTitle("Sucesso");
 				mensagemsErro.setContentText("Versão disponibilizada com sucesso!");
+				ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(100);
+				botaoEnvio.setDisable(false);
 				mensagemsErro.show();
 			}catch (Exception e) {
 				e.printStackTrace();
 				mensagemsErro = new  Alert(AlertType.ERROR);
 				mensagemsErro.setTitle("Erro!");
 				mensagemsErro.setContentText(e.getMessage());
+				botaoEnvio.setDisable(false);
 				mensagemsErro.show();
 			}
 		}

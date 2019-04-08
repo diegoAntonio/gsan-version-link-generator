@@ -19,9 +19,8 @@ public enum EmailsClientes {
 	SOROCABA(Constantes.SOROCABA,"SOROCABA", "joaomarcos@saaesorocaba.sp.gov.br,fabiocacace@saaesorocaba.sp.gov.br,guilherme.oliveira@procenge.com.br,operacaoal@procenge.com.br"), 
 	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br,Erick@cagepa.pb.gov.br,ILKASOUSA@cagepa.pb.gov.br,isaias@cagepa.pb.gov.br,ricardo@cagepa.pb.gov.br"),
 	OPERACAO_PROCENGE(Constantes.OPERACAO_PROCENGE,"OP. PROCENGE","operacaoal@procenge.com.br"),
-	CLIENTES_FTP(Constantes.CLIENTES_FTP, "CLIENTES_3.0_FTP",""),
-	CLIENTES_JENKINS(Constantes.CLIENTES_JENKINS, "CLIENTES_3.0_Jenkins",""),
-	TESTE(Constantes.TESTE, "Teste","dantonio808@gmail.com");
+	CLIENTES_FTP(Constantes.CLIENTES_FTP, "Clientes da estadual que recebem o arquivo .rar",""),
+	CLIENTES_JENKINS(Constantes.CLIENTES_JENKINS, "Clientes da estadual que recebem o arquivo .ear","");
 
 	private int idCliente;
 	private String nomeEmpresa;
