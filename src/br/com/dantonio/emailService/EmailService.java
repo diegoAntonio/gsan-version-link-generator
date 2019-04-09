@@ -60,7 +60,7 @@ public class EmailService {
 		try {
 			Message message = new MimeMessage(sessao);
 			  message.setFrom(new InternetAddress(usuario));
-			  message.setRecipients(Message.RecipientType.TO,
+			  message.setRecipients(Message.RecipientType.BCC,
 		                InternetAddress.parse(destinatarios));
 			  
 			message.setSubject(conteudoEmail[posicaoAssunto]);
