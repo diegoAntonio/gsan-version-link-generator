@@ -26,6 +26,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -56,7 +57,7 @@ public class FramePrincipalJfx {
 	private VBox panelVersaoCasadaMobile;
 	private VBox panelParametrosVersaoGsan;
 	private VBox panelParametrosVersaoMobile;
-	private CheckBox[] checkboxlst;
+	private CheckBox[] listaDeOpcionaisVersao;
 	private File releaseNotes;
 	private CheckBox adicaoRelease;
 	private Button botaoEnvio;
@@ -264,7 +265,7 @@ public class FramePrincipalJfx {
 	private List<CheckBox> gerarOpcoesEmail() {
 		List<CheckBox> listaChecks = new ArrayList<CheckBox>();
 		int index = 0;
-		this.checkboxlst = new CheckBox[OpcoesVersao.values().length];
+		this.listaDeOpcionaisVersao = new CheckBox[OpcoesVersao.values().length];
 		
 		for (OpcoesVersao temp : OpcoesVersao.values()) {
 			CheckBox checkbox = new CheckBox(temp.getDescricao());
@@ -277,7 +278,7 @@ public class FramePrincipalJfx {
 			}
 			
 			listaChecks.add(checkbox);
-			this.checkboxlst[index] = checkbox;
+			this.listaDeOpcionaisVersao[index] = checkbox;
 			index++;
 		}
 		
@@ -304,6 +305,38 @@ public class FramePrincipalJfx {
 		for (int i = 0; i < linkVersoesMobileCasada.length; i++) {
 			this.linkVersoesMobileCasada[i] = new TextField();
 		}
+	}
+	
+	private void limparCampos() {
+		List<Toggle> radioList = null;
+		this.resultadoEmails.setText("");
+		this.nomeVersao.setText("");
+		this.emailEnvio.setText("");
+		this.senhaEmailEnvio.setText("");
+		this.linkVersaoGsan.setText("");
+		this.linkScripts.setText("");
+		this.linkVersaoMobile.setText("");
+		this.releaseNotes = null;
+		this.adicaoRelease.setSelected(false);
+		
+		for (TextField atual : linkVersoesMobileCasada) {
+			atual.setText("");
+		}
+		
+		for (CheckBox atual : this.listaDeOpcionaisVersao) {
+			atual.setSelected(false);
+		}
+		
+		radioList = this.tipoVersao.getToggles();
+		
+		for (Toggle toggle : radioList) {
+			toggle.setSelected(false);
+		}
+		
+		this.panelParametrosVersaoGsan.setVisible(false);
+		this.panelParametrosVersaoMobile.setVisible(false);
+		this.panelVersaoCasadaMobile.setVisible(false);
+		this.panelVersaoScript.setVisible(false);
 	}
 	
 	private class RadioButtonHandler implements EventHandler<ActionEvent>{
@@ -405,7 +438,7 @@ public class FramePrincipalJfx {
 			HelperEnvioEmail helper = new HelperEnvioEmail(linkScripts,
 					linkVersaoMobile, linkVersaoGsan, linkFuncionalidades,
 					nomeVersao, emailEnvio, senhaEmailEnvio, resultadoEmails,
-					linkVersoesMobileCasada, tipoVersao, checkboxlst,
+					linkVersoesMobileCasada, tipoVersao, listaDeOpcionaisVersao,
 					releaseNotes);
 
 			ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(0);
@@ -423,6 +456,7 @@ public class FramePrincipalJfx {
 				mensagemsErro.setContentText("Versão disponibilizada com sucesso!");
 				ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(100);
 				botaoEnvio.setDisable(false);
+				limparCampos();
 				mensagemsErro.show();
 			}catch (Exception e) {
 				e.printStackTrace();
