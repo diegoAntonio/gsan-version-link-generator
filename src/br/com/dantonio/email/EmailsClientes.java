@@ -108,7 +108,8 @@ public enum EmailsClientes {
 				&& s.getIdCliente() != Constantes.CAGEPA 
 				&& s.getIdCliente() != Constantes.OPERACAO_PROCENGE
 				&& s.getIdCliente() != Constantes.CLIENTES_FTP
-				&& s.getIdCliente() != Constantes.CLIENTES_JENKINS)
+				&& s.getIdCliente() != Constantes.CLIENTES_JENKINS
+				&& s.getIdCliente() != Constantes.SAAE_JUA)
 				.collect(Collectors.toList());
 		
 		for (EmailsClientes emailsClientes : clientesGsan) {
