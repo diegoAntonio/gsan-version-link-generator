@@ -19,9 +19,10 @@ public class Constantes {
 	public static int SOROCABA = 9;
 	public static int CAGEPA = 10;
 	public static int OPERACAO_PROCENGE = 11;
-	public static int CLIENTES_FTP = 12;
-	public static int CLIENTES_JENKINS = 13;
-	public static int TESTE = 14;
+	public static int DAERP = 12;
+	public static int CLIENTES_FTP = 13;
+	public static int CLIENTES_JENKINS = 14;
+	public static int TESTE = 15;
 	
 	/* Links externos */
 	public static String LINK_EXTERNO_JENKINS = "http://jenkins.consensotec.com.br/";
