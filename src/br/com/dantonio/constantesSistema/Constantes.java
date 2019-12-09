@@ -15,7 +15,7 @@ public class Constantes {
 	public static int DAAE = 5;
 	public static int DESO = 6;
 	public static int CAERD = 7;
-	public static int MANAM = 8;
+	public static int MANAM = 8;//SEM USO
 	public static int SOROCABA = 9;
 	public static int CAGEPA = 10;
 	public static int OPERACAO_PROCENGE = 11;
