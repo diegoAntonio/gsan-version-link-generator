@@ -345,27 +345,28 @@ public class FramePrincipalJfx {
 		public void handle(ActionEvent event) {
 			RadioButton escolhido = (RadioButton) event.getTarget();
 			resultadoEmails.setText(" ");
+			final int clientes_estadual_ftp = EmailsClientes.CLIENTES_FTP.getIdCliente();
+			final int clientes_gsan = EmailsClientes.EMPRESAS_3_0.getIdCliente();
+			final int clientes_estadual_jenkins = EmailsClientes.CLIENTES_JENKINS.getIdCliente();
+			final int clientes_municipal_ftp = EmailsClientes.CLIENTES_MUNICIPAL_FTP.getIdCliente();
+			final int clientes_municipal_jenkins = EmailsClientes.CLIENTES_MUNICIPAL_JENKINS.getIdCliente();
 			
 			if (escolhido != null) {
 				Integer valor = new Integer(escolhido.getId());
 				String emails = "";
-
-				switch (valor.intValue()) {
-				case 0:
+				
+				if(valor.intValue() == clientes_gsan){
 					emails = EmailsClientes.getEmailClientesGsan();
-					break;
-
-				case 12:
+				} else if(valor.intValue() == clientes_estadual_ftp) {
 					emails = EmailsClientes.getEmailsClientesFTP();
-					break;
-
-				case 13:
+				} else if(valor.intValue() == clientes_estadual_jenkins) {
 					emails = EmailsClientes.getEmailsClientesJenkins();
-					break;
-
-				default:
+				} else if(valor.intValue() == clientes_municipal_jenkins) {
+					emails = EmailsClientes.getEmailsClientesMunicipalJenkins();
+				} else if(valor.intValue() == clientes_municipal_ftp) {
+					emails = EmailsClientes.getEmailsClientesMunicipalFTP();
+				} else {
 					emails = EmailsClientes.getEmailClientes(valor.intValue());
-					break;
 				}
 				
 				resultadoEmails.setText(emails);
