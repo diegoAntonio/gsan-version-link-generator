@@ -53,6 +53,7 @@ public class FramePrincipalJfx {
 	private PasswordField senhaEmailEnvio;
 	private TextArea resultadoEmails;
 	private ToggleGroup tipoVersao;
+	private ToggleGroup empresas;
 	private VBox panelVersaoScript;
 	private VBox panelVersaoCasadaMobile;
 	private VBox panelParametrosVersaoGsan;
@@ -104,7 +105,6 @@ public class FramePrincipalJfx {
 		VBox frame;
 		Label labelListaEmails;
 		Label labelRadioButtons;
-		ToggleGroup grupoRadio;
 		VBox frameRadioButtons;
 		
 		frame = this.gerarFramePrincipal();
@@ -112,13 +112,13 @@ public class FramePrincipalJfx {
 		
 		//Lista de emails
 		frameRadioButtons = new VBox();
-		grupoRadio = new ToggleGroup();
+		this.empresas = new ToggleGroup();
 		this.resultadoEmails = new TextArea();
 		this.resultadoEmails.setEditable(true);
 		this.resultadoEmails.setWrapText(true);
 		labelRadioButtons = new Label("Escolha a Empresa: ");
 		frameRadioButtons.getChildren().addAll(labelRadioButtons);
-		frameRadioButtons.getChildren().addAll(this.gerarRadioButtonsEmails(grupoRadio));
+		frameRadioButtons.getChildren().addAll(this.gerarRadioButtonsEmails());
 		frame.getChildren().add(frameRadioButtons);
 		labelListaEmails = new Label("Lista Emails: ");
 		frame.getChildren().addAll(labelListaEmails, this.resultadoEmails);
@@ -232,13 +232,13 @@ public class FramePrincipalJfx {
 		return abaTextoEmail;
 	}
 	
-	private List<RadioButton> gerarRadioButtonsEmails(ToggleGroup grupo){
+	private List<RadioButton> gerarRadioButtonsEmails(){
 		List<RadioButton> emails = new ArrayList<RadioButton>();
 		
 		for (EmailsClientes email : EmailsClientes.values()) {
 			RadioButton temp = new RadioButton(email.getNomeEmpresa());
 			temp.setOnAction(new RadioButtonHandler());
-			temp.setToggleGroup(grupo);
+			temp.setToggleGroup(this.empresas);
 			temp.setId(String.valueOf(email.getIdCliente()));
 			emails.add(temp);
 		}
@@ -439,8 +439,8 @@ public class FramePrincipalJfx {
 			HelperEnvioEmail helper = new HelperEnvioEmail(linkScripts,
 					linkVersaoMobile, linkVersaoGsan, linkFuncionalidades,
 					nomeVersao, emailEnvio, senhaEmailEnvio, resultadoEmails,
-					linkVersoesMobileCasada, tipoVersao, listaDeOpcionaisVersao,
-					releaseNotes);
+					linkVersoesMobileCasada, tipoVersao, empresas,
+					listaDeOpcionaisVersao, releaseNotes);
 
 			ProgressoEnvioEmail.getInstance().getBarraProgresso().setProgress(0);
 			botaoEnvio.setDisable(true);

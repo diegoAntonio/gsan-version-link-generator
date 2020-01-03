@@ -70,8 +70,18 @@ public class EmailVersaoMobile extends Email {
 	protected String alterarConstantesTexto(String textoVersao) {
 		String texto = super.alterarConstantesTexto(textoVersao);
 		StringBuilder textoAlterado = new StringBuilder();
+		StringBuilder textoLink = new StringBuilder();
 		
-		textoAlterado.append(texto.replaceAll(ConstantesTexto.REGEX_NOME_PRODUTO_MOBILE, this.nomeProdutoExtenso));
+		textoLink.append(" Versão ");
+		textoLink.append(this.nomeProdutoAbreviado);
+		textoLink.append(" - ");
+		textoLink.append(this.nomeEmpresa);
+		textoLink.append(" - ");
+		textoLink.append(this.versao);
+		
+		textoAlterado.append(texto.replaceAll(ConstantesTexto.REGEX_NOME_PRODUTO_MOBILE, this.nomeProdutoExtenso)
+								  .replaceAll(ConstantesTexto.REGEX_LINK_VERSAO, this.linkVersao)
+								  .replaceAll(ConstantesTexto.REGEX_TEXTO_LINK_DOWNLOAD_MOBILE, textoLink.toString()));
 		
 		return textoAlterado.toString();
 	}

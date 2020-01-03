@@ -30,6 +30,7 @@ public class ValidadorRegras {
 		validarLinkDaVersao(helper.getLinkVersaoGsan());
 		verificarLoginSenhaEmail(helper.getLoginEmail(), helper.getSenhaEmail());
 		validarReleaseNotes(helper);
+		validarEmpresaEscolhida(helper);
 		
 		if(!Util.isObjetoNulo(opcoesVersao) && opcoesVersao[1].isSelected()){
 			verificarLinkScriptsVersao(helper);
@@ -47,6 +48,7 @@ public class ValidadorRegras {
 		validarLinkDaVersao(helper.getLinkVersaoMobile());
 		verificarLoginSenhaEmail(helper.getLoginEmail(), helper.getSenhaEmail());
 		validarReleaseNotes(helper);
+		validarEmpresaEscolhida(helper);
 		
 		if(Util.isObjetoNulo(helper.getLinkVersaoMobile()) || Util.isTextoNuloOuBranco(helper.getLinkVersaoMobile().getText())) {
 			throw new IllegalArgumentException(
@@ -144,6 +146,13 @@ public class ValidadorRegras {
 		if(Util.isObjetoNulo(helper.getReleaseNotes())) {
 			throw new IllegalArgumentException(
 					"Adicione o Release Notes da Versao!");
+		}
+	}
+	
+	private static void validarEmpresaEscolhida(HelperEnvioEmail helper) {
+		if(Util.isObjetoNulo(helper.getEmpresa()) || Util.isObjetoNulo(helper.getEmpresa().getSelectedToggle())) {
+			throw new IllegalArgumentException(
+					"Informe a empresa!");
 		}
 	}
 }

@@ -20,6 +20,7 @@ public class ConstantesTexto {
 	public static String REGEX_SCRIPT_VERSAO = "%Link_Script_Version%";
 	public static String REGEX_NOME_PRODUTO_MOBILE = "%Name_Product_Mobile%";
 	public static String REGEX_LINK_DOWNLOAD_MOBILE_CASADA = "%Link_APK_Casada%";
+	public static String REGEX_TEXTO_LINK_DOWNLOAD_MOBILE = "%Texto_link_APK%";
 	
 	private static String inicializarValorCorpoEmailVersao3_0() {
 		StringBuilder sb = new StringBuilder();
@@ -51,7 +52,11 @@ public class ConstantesTexto {
 		sb.append("que representa todas as alterações atendidas nessa versão. ");
 		sb.append("</p> ");
 		sb.append("<br/><p> ");
+		sb.append("<a href=\"");
 		sb.append(gerarRegexLinkVersao());
+		sb.append(" \"> ");
+		sb.append(gerarRegexTextoDownloadAPK());
+		sb.append(" </a>");
 		sb.append("</p>");
 		
 		
@@ -170,5 +175,9 @@ public class ConstantesTexto {
 	
 	private static String gerarRegexDownloadApkVersaoCasada() {
 		return "%Link_APK_Casada%";
+	}
+	
+	private static String gerarRegexTextoDownloadAPK() {
+		return "%Texto_link_APK%";
 	}
 }

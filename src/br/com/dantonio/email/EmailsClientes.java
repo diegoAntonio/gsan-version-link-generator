@@ -14,7 +14,7 @@ public enum EmailsClientes {
 	CAERR(Constantes.CAERR,"CAERR", "laurencelamare@gmail.com, tony@caer.com.br, wagmedrado@gmail.com"), 
 	SAAE_JUA(Constantes.SAAE_JUA, "SAAE-JUAZEIRO", "hegira.saae@gmail.com, ti@saaejuazeiro.com.br"), 
 	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br, gsanhelp@deso-se.com.br, brunomenezes@deso-se.com.br"), 
-	DAAE(Constantes.DAAE,"ARARAQUARA", "gti@daaeararaquara.com.br"), 
+	DAAE(Constantes.DAAE,"DAAE-ARARAQUARA", "gti@daaeararaquara.com.br"), 
 	CAERD(Constantes.CAERD,"CAERD","jander@caerd-ro.com.br, erovay@caerd-ro.com.br"), 
 	SOROCABA(Constantes.SOROCABA,"SOROCABA", "joaomarcos@saaesorocaba.sp.gov.br, fabiocacace@saaesorocaba.sp.gov.br, guilherme.oliveira@procenge.com.br, sandrieligaloni@saaesorocaba.sp.gov.br"), 
 	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br, Erick@cagepa.pb.gov.br, ILKASOUSA@cagepa.pb.gov.br, isaias@cagepa.pb.gov.br, ricardo@cagepa.pb.gov.br"),
@@ -221,6 +221,14 @@ public enum EmailsClientes {
 				.orElseThrow(() -> new IllegalArgumentException());
 		
 		return cliente;
+	}
+	
+	public static EmailsClientes getEmpresaById(Integer id) {
+		EmailsClientes empresa = Arrays.asList(EmailsClientes.values()).stream()
+				.filter(s -> s.getIdCliente() == id.intValue()).findFirst()
+				.orElseThrow(() -> new IllegalArgumentException());
+		
+		return empresa;
 	}
 
 	public String getNomeEmpresa() {

@@ -26,11 +26,32 @@ public class HelperEnvioEmail {
 	private TextArea resultadoEmails;
 	private TextField[] linkVersoesMobileCasada;
 	private ToggleGroup tipoVersao;
+	private ToggleGroup empresa;
 	private CheckBox[] opcoesVersao;
 	private File releaseNotes;
 	
 	public HelperEnvioEmail() {
 		super();
+	}
+
+	public HelperEnvioEmail(TextField linkScripts, TextField linkVersaoMobile, TextField linkVersaoGsan,
+			TextField linkFuncionalidades, TextField nomeVersao, TextField loginEmail, TextField senhaEmail,
+			TextArea resultadoEmails, TextField[] linkVersoesMobileCasada, ToggleGroup tipoVersao, ToggleGroup empresa,
+			CheckBox[] opcoesVersao, File releaseNotes) {
+		super();
+		this.linkScripts = linkScripts;
+		this.linkVersaoMobile = linkVersaoMobile;
+		this.linkVersaoGsan = linkVersaoGsan;
+		this.linkFuncionalidades = linkFuncionalidades;
+		this.nomeVersao = nomeVersao;
+		this.loginEmail = loginEmail;
+		this.senhaEmail = senhaEmail;
+		this.resultadoEmails = resultadoEmails;
+		this.linkVersoesMobileCasada = linkVersoesMobileCasada;
+		this.tipoVersao = tipoVersao;
+		this.empresa = empresa;
+		this.opcoesVersao = opcoesVersao;
+		this.releaseNotes = releaseNotes;
 	}
 
 
@@ -150,5 +171,15 @@ public class HelperEnvioEmail {
 
 	public void setLinkFuncionalidades(TextField linkFuncionalidades) {
 		this.linkFuncionalidades = linkFuncionalidades;
+	}
+
+
+	public ToggleGroup getEmpresa() {
+		return empresa;
+	}
+
+
+	public void setEmpresa(ToggleGroup empresa) {
+		this.empresa = empresa;
 	}
 }
