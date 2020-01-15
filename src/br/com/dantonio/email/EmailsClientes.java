@@ -11,7 +11,7 @@ public enum EmailsClientes {
 	EMPRESAS_3_0(Constantes.TODAS_EMPRESAS ,"TODAS_EMPRESAS_3_0", ""), 
 	CAERN(Constantes.CAERN,"CAERN", "aalcides@caern.com.br, jcardoso@caern.com.br, rodolfo@caern.com.br, rodrigoaraujo@caern.com.br, marciogomes@caern.com.br, suportecaern@gmail.com, suportegsi@caern.com.br, joaomaynard@hotmail.com, suportegti@caern.com.br, tiagocorcelli@gmail.com, usco@caern.com.br"), 
 	CASAL(Constantes.CASAL,"CASAL", "cleiton.hardy@casal.al.gov.br, deborah.tayse@procenge.com.br, diogo.fonseca@casal.al.gov.br, mercia.macario@casal.al.gov.br, thiago.lima@casal.al.gov.br"), 
-	CAERR(Constantes.CAERR,"CAERR", "laurencelamare@gmail.com, tony@caer.com.br, wagmedrado@gmail.com"), 
+	CAERR(Constantes.CAERR,"CAERR", "laurencelamare@gmail.com, tony@caer.com.br, wagmedrado@gmail.com, gsansuporte@caer.com.br"), 
 	SAAE_JUA(Constantes.SAAE_JUA, "SAAE-JUAZEIRO", "hegira.saae@gmail.com, ti@saaejuazeiro.com.br"), 
 	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br, gsanhelp@deso-se.com.br, brunomenezes@deso-se.com.br"), 
 	DAAE(Constantes.DAAE,"DAAE-ARARAQUARA", "gti@daaeararaquara.com.br"), 
@@ -192,6 +192,8 @@ public enum EmailsClientes {
 			listaEmails.append(emailsClientes.getListaEmails());
 			listaEmails.append(", \n");
 		}
+		
+		listaEmails.append(EmailsClientes.OPERACAO_PROCENGE.getListaEmails());
 		
 		return listaEmails.toString();
 	}

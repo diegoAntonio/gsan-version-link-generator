@@ -30,7 +30,7 @@ public class VersaoIscChain extends GenericEmailGenerator {
 				this.produtoAlvo.getNomeAppExtenso(), //Nome do Aplicativo
 				"", //Link dos Scripts
 				EmailsClientes.getEmpresaById(Integer.parseInt(((RadioButton) helper.getEmpresa().getSelectedToggle()).getId())).getNomeEmpresa(),//Nome Empresa - WTF
-				ProdutosConsenso.ISC.getId());//Codigo do Produto
+				this.produtoAlvo.getId());//Codigo do Produto
 
 		return email;
 	}
