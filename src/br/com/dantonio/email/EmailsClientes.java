@@ -10,10 +10,10 @@ public enum EmailsClientes {
 	
 	EMPRESAS_3_0(Constantes.TODAS_EMPRESAS ,"TODAS_EMPRESAS_3_0", ""), 
 	CAERN(Constantes.CAERN,"CAERN", "aalcides@caern.com.br, jcardoso@caern.com.br, rodolfo@caern.com.br, rodrigoaraujo@caern.com.br, marciogomes@caern.com.br, suportecaern@gmail.com, suportegsi@caern.com.br, joaomaynard@hotmail.com, suportegti@caern.com.br, tiagocorcelli@gmail.com, usco@caern.com.br"), 
-	CASAL(Constantes.CASAL,"CASAL", "cleiton.hardy@casal.al.gov.br, deborah.tayse@procenge.com.br, diogo.fonseca@casal.al.gov.br, mercia.macario@casal.al.gov.br, thiago.lima@casal.al.gov.br"), 
+	CASAL(Constantes.CASAL,"CASAL", "deborah.tayse@procenge.com.br, mercia.macario@casal.al.gov.br, pedro.bezerra@casal.al.gov.br, inaldo.lourenco@casal.al.gov.br"), 
 	CAERR(Constantes.CAERR,"CAERR", "laurencelamare@gmail.com, tony@caer.com.br, wagmedrado@gmail.com, gsansuporte@caer.com.br"), 
 	SAAE_JUA(Constantes.SAAE_JUA, "SAAE-JUAZEIRO", "hegira.saae@gmail.com, ti@saaejuazeiro.com.br"), 
-	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br, gsanhelp@deso-se.com.br, brunomenezes@deso-se.com.br"), 
+	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br, gsanhelp@deso-se.com.br, brunomenezes@deso-se.com.br, ronaldojunior@deso-se.com.br"), 
 	DAAE(Constantes.DAAE,"DAAE-ARARAQUARA", "gti@daaeararaquara.com.br"), 
 	CAERD(Constantes.CAERD,"CAERD","jander@caerd-ro.com.br, erovay@caerd-ro.com.br"), 
 	SOROCABA(Constantes.SOROCABA,"SOROCABA", "joaomarcos@saaesorocaba.sp.gov.br, fabiocacace@saaesorocaba.sp.gov.br, guilherme.oliveira@procenge.com.br, sandrieligaloni@saaesorocaba.sp.gov.br"), 
