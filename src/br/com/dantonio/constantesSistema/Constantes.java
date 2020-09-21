@@ -15,7 +15,7 @@ public class Constantes {
 	public static int DAAE = 5;
 	public static int DESO = 6;
 	public static int CAERD = 7;
-	public static int MANAM = 8;//SEM USO
+	public static int TESTE = 8;//SEM USO
 	public static int SOROCABA = 9;
 	public static int CAGEPA = 10;
 	public static int OPERACAO_PROCENGE = 11;
@@ -39,4 +39,12 @@ public class Constantes {
 	
 	public static String EMAIL_GRUPO_GSAN = "grupogsan@consensotec.com.br";
 	
+	/**
+	 * Variavel usada para fazer aparecer a empresa "teste" usada
+	 * para testar a aplicacao em desenvolvimento.
+	 */
+	public static Integer DEBBUGER = 2;
+	
+	public static Integer SIM = 1;
+	public static Integer NAO = 2;
 }

@@ -6,6 +6,7 @@ import br.com.dantonio.builder.chain.implementations.VersaoCasadaMobileChain;
 import br.com.dantonio.builder.chain.implementations.VersaoComScriptsChain;
 import br.com.dantonio.builder.chain.implementations.VersaoEstadualChain;
 import br.com.dantonio.builder.chain.implementations.VersaoGsanacChain;
+import br.com.dantonio.builder.chain.implementations.VersaoGsanasChain;
 import br.com.dantonio.builder.chain.implementations.VersaoGsaneosChain;
 import br.com.dantonio.builder.chain.implementations.VersaoIscChain;
 import br.com.dantonio.builder.chain.implementations.VersaoMunicipalChain;
@@ -28,7 +29,8 @@ public class ConstrutorEmail {
 	public ConstrutorEmail() {
 		VersaoGsanacChain gsanac = new VersaoGsanacChain(null);
 		VersaoGsaneosChain gsaneos = new VersaoGsaneosChain(gsanac);
-		VersaoIscChain isc = new VersaoIscChain(gsaneos);
+		VersaoGsanasChain gsanas = new VersaoGsanasChain(gsaneos);
+		VersaoIscChain isc = new VersaoIscChain(gsanas);
 		VersaoMunicipalChain municipal = new VersaoMunicipalChain(isc);
 		this.chainEmails = new VersaoEstadualChain(municipal);
 		

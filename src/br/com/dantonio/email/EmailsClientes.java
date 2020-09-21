@@ -16,6 +16,7 @@ public enum EmailsClientes {
 	DESO(Constantes.DESO,"DESO", "joaoas@deso-se.com.br, gsanhelp@deso-se.com.br, brunomenezes@deso-se.com.br, ronaldojunior@deso-se.com.br"), 
 	DAAE(Constantes.DAAE,"DAAE-ARARAQUARA", "gti@daaeararaquara.com.br"), 
 	CAERD(Constantes.CAERD,"CAERD","jander@caerd-ro.com.br, erovay@caerd-ro.com.br"), 
+	TESTE(Constantes.TESTE, "TESTE", ""),
 	SOROCABA(Constantes.SOROCABA,"SOROCABA", "joaomarcos@saaesorocaba.sp.gov.br, fabiocacace@saaesorocaba.sp.gov.br, guilherme.oliveira@procenge.com.br, sandrieligaloni@saaesorocaba.sp.gov.br"), 
 	CAGEPA(Constantes.CAGEPA,"CAGEPA", "eduardo@cagepa.pb.gov.br,cpinto@cagepa.pb.gov.br, Erick@cagepa.pb.gov.br, ILKASOUSA@cagepa.pb.gov.br, isaias@cagepa.pb.gov.br, ricardo@cagepa.pb.gov.br"),
 	OPERACAO_PROCENGE(Constantes.OPERACAO_PROCENGE,"OP. PROCENGE","operacaoal@procenge.com.br"),
@@ -86,7 +87,7 @@ public enum EmailsClientes {
 	public static String getEmailClientesGsan() {
 		StringBuilder listaEmails = new StringBuilder();
 		List<EmailsClientes> clientesGsan = Arrays.asList(EmailsClientes.values()).stream()
-				.filter(s -> s.getIdCliente() != Constantes.MANAM && s.getIdCliente() != Constantes.SOROCABA
+				.filter(s -> s.getIdCliente() != Constantes.TESTE && s.getIdCliente() != Constantes.SOROCABA
 				&& s.getIdCliente() != Constantes.TODAS_EMPRESAS
 				&& s.getIdCliente() != Constantes.CLIENTES_FTP
 				&& s.getIdCliente() != Constantes.CLIENTES_JENKINS
@@ -115,7 +116,7 @@ public enum EmailsClientes {
 		StringBuilder listaEmails = new StringBuilder();
 		
 		List<EmailsClientes> clientesGsan = Arrays.asList(EmailsClientes.values()).stream()
-				.filter(s -> s.getIdCliente() != Constantes.MANAM 
+				.filter(s -> s.getIdCliente() != Constantes.TESTE 
 				&& s.getIdCliente() != Constantes.SOROCABA
 				&& s.getIdCliente() != Constantes.TODAS_EMPRESAS 
 				&& s.getIdCliente() != Constantes.CASAL
@@ -150,7 +151,7 @@ public enum EmailsClientes {
 		StringBuilder listaEmails = new StringBuilder();
 		
 		List<EmailsClientes> clientesGsan = Arrays.asList(EmailsClientes.values()).stream()
-				.filter(s -> s.getIdCliente() != Constantes.MANAM 
+				.filter(s -> s.getIdCliente() != Constantes.TESTE 
 				&& s.getIdCliente() != Constantes.SOROCABA
 				&& s.getIdCliente() != Constantes.TODAS_EMPRESAS 
 				&& s.getIdCliente() != Constantes.CAERN
@@ -217,7 +218,12 @@ public enum EmailsClientes {
 	 *  
 	 * @return {@link String} contendo todos os emails.
 	 */
-	public static EmailsClientes getEmpresaPorListaClientes(String listaEmails) {		
+	public static EmailsClientes getEmpresaPorListaClientes(String listaEmails) {
+		
+		if(Constantes.DEBBUGER.equals(Constantes.SIM)) {
+			return EmailsClientes.TESTE;
+		}
+		
 		EmailsClientes cliente = Arrays.asList(EmailsClientes.values()).stream()
 				.filter(s -> s.getListaEmails().equalsIgnoreCase(listaEmails)).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException());

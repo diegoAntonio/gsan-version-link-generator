@@ -236,10 +236,16 @@ public class FramePrincipalJfx {
 		List<RadioButton> emails = new ArrayList<RadioButton>();
 		
 		for (EmailsClientes email : EmailsClientes.values()) {
+			
+			if(email.getIdCliente() == Constantes.TESTE 
+			   && Constantes.DEBBUGER.equals(Constantes.NAO))
+				continue;
+			
 			RadioButton temp = new RadioButton(email.getNomeEmpresa());
 			temp.setOnAction(new RadioButtonHandler());
 			temp.setToggleGroup(this.empresas);
 			temp.setId(String.valueOf(email.getIdCliente()));
+			
 			emails.add(temp);
 		}
 		
@@ -251,6 +257,9 @@ public class FramePrincipalJfx {
 		this.tipoVersao = new ToggleGroup();
 		
 		for (ProdutosConsenso temp: ProdutosConsenso.values()) {
+			
+			if(temp.getId().equals(ProdutosConsenso.MANAM.getId())) continue;
+			
 			RadioButton botao = new RadioButton(temp.getNomeAppAbreviado());
 			botao.setToggleGroup(this.tipoVersao);
 			botao.setId(temp.getId().toString());
